@@ -19,6 +19,9 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_margin="8dp"
+
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
         >
         <ImageButton
             android:layout_width="wrap_content"
@@ -26,6 +29,9 @@
             android:src="@drawable/ic_send_money"
             android:id="@+id/itemIcon"
             android:background="?selectableItemBackgroundBorderless"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             />
         <TextView
             android:layout_width="match_parent"
@@ -37,6 +43,9 @@
             android:minLines="2"
             android:maxLines="2"
             android:textSize="12sp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             />
     </LinearLayout>
 <!--</android.support.v7.widget.CardView>-->

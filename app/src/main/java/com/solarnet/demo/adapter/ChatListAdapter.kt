@@ -43,7 +43,7 @@ class ChatListAdapter(context : Context, data : List<ChatList>) :
         holder.text.text = item.contact
         holder.smallText.text = item.message
         holder.cardView.setOnClickListener{v ->
-            Toast.makeText(mContext, "On click: $item.text", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(mContext, "On click: $item.text", Toast.LENGTH_SHORT).show()
         }
     }
 

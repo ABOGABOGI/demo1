@@ -1,6 +1,8 @@
 package com.solarnet.demo.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -8,7 +10,9 @@ import com.solarnet.demo.data.GridItem
 import android.widget.TextView
 import android.view.LayoutInflater
 import android.widget.ImageView
+import android.widget.Toast
 import com.solarnet.demo.R
+import com.solarnet.demo.activity.payment.SendMoneyActivity
 
 
 class PaymentGridViewAdapter : BaseAdapter {
@@ -34,7 +38,21 @@ class PaymentGridViewAdapter : BaseAdapter {
         icon?.setImageResource(item.iconResource)
         text?.text = item.text
 
+        view.tag = item.iconResource
+        view.setOnClickListener{v ->
+            val iconRes = v.tag as Int
+            startActivity(iconRes)
+        }
+
         return view!!
+    }
+
+    private fun startActivity(iconRes : Int) {
+        when (iconRes) {
+            R.drawable.ic_send_money -> {
+                mContext.startActivity(Intent(mContext, SendMoneyActivity::class.java))
+            }
+        }
     }
 
     override fun getItem(position: Int): GridItem {

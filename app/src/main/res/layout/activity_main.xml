@@ -7,10 +7,124 @@
     tools:context=".MainActivity">
 
 
-
+    <!-- Main content -->
     <include layout="@layout/content_main" />
 
+    <!-- NavBar wannabe -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_height"
+        android:orientation="vertical"
+        android:id="@+id/navigationLayout"
+        >
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header_nav"
+            android:paddingTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="8dp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cardProfile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/profile_default"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@color/border"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                />
+
+            <ImageView
+                android:id="@+id/imageLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                app:srcCompat="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/textPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/imageLogo"
+                android:layout_alignRight="@id/imageLogo"
+                android:layout_below="@id/imageLogo"
+                android:layout_marginTop="4dp"
+                android:text="Payment"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardProfile"
+                android:minWidth="80dp"
+                android:src="@drawable/ic_nav_payment_24dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginLeft="8dp"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/buttonPayment"
+                android:layout_below="@+id/cardProfile"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:minWidth="80dp"
+                android:src="@drawable/ic_nav_chat_24dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonStory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/buttonPayment"
+                android:layout_below="@+id/cardProfile"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:minWidth="80dp"
+                android:src="@drawable/ic_nav_story_24dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginRight="8dp"
+                />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_border_height"
+            android:layout_below="@id/buttonPayment"
+            android:background="@drawable/nav_border"
+            android:id="@+id/navigationBorder"
+            android:visibility="visible"
+            />
+
+    </LinearLayout>
+
+    <!-- Popup layout after floating action button clicked -->
     <io.codetail.widget.RevealFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -152,6 +266,7 @@
 
     </io.codetail.widget.RevealFrameLayout>
 
+    <!-- Floating button -->
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -164,123 +279,4 @@
         android:layout_margin="@dimen/fab_margin"
         />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|center"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@android:drawable/ic_menu_manage"-->
-        <!--android:visibility="gone"-->
-        <!--/>-->
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_height"
-        android:orientation="vertical"
-        android:id="@+id/navigationLayout"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:paddingTop="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="8dp"
-            >
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/cardProfile"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_margin="8dp"
-                        android:src="@drawable/profile_default"
-                        app:civ_border_width="4dp"
-                        app:civ_border_color="@color/border"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        />
-
-                    <ImageView
-                        android:id="@+id/imageLogo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_margin="8dp"
-                        app:srcCompat="@drawable/logo" />
-
-                    <TextView
-                        android:id="@+id/textPage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/imageLogo"
-                        android:layout_alignRight="@id/imageLogo"
-                        android:layout_below="@id/imageLogo"
-                        android:layout_marginTop="4dp"
-                        android:text="Payment"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        />
-
-                    <ImageButton
-                        android:id="@+id/buttonPayment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/cardProfile"
-                        android:minWidth="80dp"
-                        android:src="@drawable/ic_nav_payment_24dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        />
-
-                    <ImageButton
-                        android:id="@+id/buttonChat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/buttonPayment"
-                        android:layout_below="@+id/cardProfile"
-                        android:layout_centerHorizontal="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:minWidth="80dp"
-                        android:src="@drawable/ic_nav_chat_24dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        />
-
-                    <ImageButton
-                        android:id="@+id/buttonStory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@+id/buttonPayment"
-                        android:layout_below="@+id/cardProfile"
-                        android:layout_centerHorizontal="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:minWidth="80dp"
-                        android:src="@drawable/ic_nav_story_24dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"/>
-
-
-                </RelativeLayout>
-
-                <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/nav_border_height"
-                android:layout_below="@id/buttonPayment"
-                android:background="@drawable/nav_border"
-                android:id="@+id/navigationBorder"
-                />
-        </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

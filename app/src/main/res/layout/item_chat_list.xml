@@ -35,10 +35,22 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/itemTimeText"
+                android:text="TODAY"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="@dimen/small_text_chat"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="@dimen/item_margin_chatlist"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/itemText"
                 android:text="Title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/itemIcon"
+                app:layout_constraintRight_toLeftOf="@id/itemTimeText"
                 app:layout_constraintRight_toRightOf="parent"
                 android:textSize="@dimen/text_chat"
                 android:textColor="@android:color/black"

@@ -3,6 +3,7 @@ package com.solarnet.demo
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -25,6 +26,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
+import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
 
 
@@ -154,6 +156,7 @@ class MainActivity : AppCompatActivity() {
             showPopUp(fab, false)
             fab.collapse()
         }
+
     }
 
     private fun showPopUp(sourceView : View, show : Boolean) {
@@ -211,19 +214,19 @@ class MainActivity : AppCompatActivity() {
         if (enablePayment) {
             buttonPayment.setColorFilter(Color.WHITE)
         } else {
-            buttonPayment.setColorFilter(Color.GRAY)
+            buttonPayment.setColorFilter(resources.getColor(R.color.softPurple))
         }
 
         if (enableChat) {
             buttonChat.setColorFilter(Color.WHITE)
         } else {
-            buttonChat.setColorFilter(Color.GRAY)
+            buttonChat.setColorFilter(resources.getColor(R.color.softPurple))
         }
 
         if (enableStory) {
             buttonStory.setColorFilter(Color.WHITE)
         } else {
-            buttonStory.setColorFilter(Color.GRAY)
+            buttonStory.setColorFilter(resources.getColor(R.color.softPurple))
         }
     }
 }

@@ -16,4 +16,11 @@
     <string name="create_product">Create Product</string>
     <string name="new_agent">Agent Registration</string>
     <string name="top_up">Top Up</string>
+    <string name="view_all">VIEW ALL " >"</string>
+
+    <string name="title_activity_send_money">Send Money</string>
+    <string name="recipient">Send Money to</string>
+    <string name="send_money_amoung">Send Money amount</string>
+    <string name="hint_recipient">Tap to Select demo app Contact</string>
+    <string name="remaining_balance">Remaining Balance</string>
 </resources>

@@ -6,4 +6,6 @@
 
     <color name="border">#3541A5</color>
     <color name="white">#FFFFFF</color>
+    <color name="backgroundPayment">#e5f0ff</color>
+    <color name="softPurple">#852881</color>
 </resources>

@@ -1,10 +1,14 @@
 package com.solarnet.demo.fragment
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.InvalidationTracker
 import android.support.v4.app.Fragment
 import android.widget.TextView
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
@@ -17,14 +21,24 @@ import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.PaymentGridAdapter
 import com.solarnet.demo.adapter.PaymentGridViewAdapter
+import com.solarnet.demo.adapter.TrxListAdapter
 import com.solarnet.demo.data.GridItem
+import com.solarnet.demo.data.trx.Trx
+import com.solarnet.demo.data.trx.TrxViewModel
+import com.solarnet.demo.data.trx.TrxViewModelFactory
+import com.solarnet.demo.design.NoScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_payment.*
+import java.util.*
 
 
 class PaymentFragment : Fragment() {
     private val NUM_COLUMNS = 4
+    private val LIMIT_TRX = 5
     private lateinit var recyclerView : RecyclerView
     private var mOnScrollListener : MainActivity.OnScrollListener? = null
+    private var mTrxViewModel : TrxViewModel? = null
+    private lateinit var mTrxListAdapter : TrxListAdapter
+
     // Store instance variables based on arguments passed
     // newInstance constructor for creating fragment with arguments
     companion object {
@@ -55,19 +69,41 @@ class PaymentFragment : Fragment() {
         data.add(GridItem(R.drawable.ic_product, context!!.resources.getString(R.string.create_product)))
         data.add(GridItem(R.drawable.ic_agent, context!!.resources.getString(R.string.new_agent)))
 
-
 //        recyclerView.adapter = PaymentGridAdapter(data)
         var adapter = PaymentGridViewAdapter(context!!, data)
         val gridView = view.findViewById<GridView>(R.id.gridView)
         gridView.numColumns = NUM_COLUMNS
         gridView.adapter = adapter
 
-        //setGridViewHeightBasedOnChildren(gridView, NUM_COLUMNS)
+        setGridViewHeightBasedOnChildren(gridView, NUM_COLUMNS)
 
         var scrollView = view as NestedScrollView
         scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
-            v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            _, _, scrollY, _, oldScrollY ->
             mOnScrollListener?.onScrollChange(scrollY, scrollY - oldScrollY)
+        })
+
+        var trx = ArrayList<Trx>()
+        mTrxListAdapter = TrxListAdapter(context!!, trx)
+        var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val lm = NoScrollLinearLayoutManager(context!!,
+                LinearLayoutManager.VERTICAL, false)
+//        val lm = LinearLayoutManager(context!!)
+//        lm.isAutoMeasureEnabled = true
+        recyclerView.layoutManager = lm
+        recyclerView.isNestedScrollingEnabled = false
+        recyclerView.adapter = mTrxListAdapter
+
+        mTrxViewModel =  ViewModelProviders.of(this,
+                TrxViewModelFactory(activity!!.application, LIMIT_TRX))
+                .get(TrxViewModel::class.java)
+        mTrxViewModel?.getAllTransactions()?.observe(this, Observer<List<Trx>> {allTrx ->
+            if (allTrx != null) {
+                mTrxListAdapter.setItems(allTrx!!)
+            } else {
+                mTrxListAdapter.setItems(ArrayList<Trx>())
+            }
+            mTrxListAdapter.notifyDataSetChanged()
         })
 
         return view
@@ -78,20 +114,14 @@ class PaymentFragment : Fragment() {
                 ?: // pre-condition
                 return
 
-        var totalHeight = 0
         val items = listAdapter.count
-        var rows = 0
 
         val listItem = listAdapter.getView(0, null, gridView)
         listItem.measure(0, 0)
-        totalHeight = listItem.measuredHeight
-
-        var x = 1f
-        if (items > columns) {
-            x = (items / columns).toFloat()
-            rows = (x + 1).toInt()
-            totalHeight *= rows
-        }
+        var totalHeight = listItem.measuredHeight +
+                resources.getDimensionPixelSize(R.dimen.item_grid_vspacing)
+        val rows = Math.ceil(items.toDouble() / columns.toDouble()).toInt()
+        totalHeight *= rows
 
         val params = gridView.layoutParams
         params.height = totalHeight

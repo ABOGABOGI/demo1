@@ -1,11 +1,19 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="nav_height">134dp</dimen>
-    <dimen name="nav_border_height">16dp</dimen>
+    <dimen name="nav_height">136dp</dimen>
+    <dimen name="nav_border_height">8dp</dimen>
     <dimen name="corner_button">12dp</dimen>
 
     <dimen name="text_chat">18sp</dimen>
     <dimen name="small_text_chat">14sp</dimen>
 
-    <dimen name="item_margin_chatlist">8dp</dimen>
+    <dimen name="item_grid_vspacing">8dp</dimen>
+    <dimen name="item_margin_chatlist">16dp</dimen>
+    <dimen name="item_margin_trxlist">16dp</dimen>
+    <dimen name="item_trxlist_text_vspacing">8dp</dimen>
+
+    <dimen name="activity_padding">8dp</dimen>
+
+    <dimen name="activity_view_vspacing">8dp</dimen>
+    <dimen name="activity_view_double_vspacing">16dp</dimen>
 </resources>
