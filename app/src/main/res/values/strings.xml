@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Demo</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_payment">Payment</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_story">Stories</string>
+
+    <string name="send_money">Send Money</string>
+    <string name="cellular">Pulsa/Data Seluler</string>
+    <string name="pln">PLN Token</string>
+    <string name="invoice">Create Invoice</string>
+    <string name="top_up">Top Up</string>
+</resources>
