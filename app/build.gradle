@@ -4,6 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -35,4 +41,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true
+    }
+
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

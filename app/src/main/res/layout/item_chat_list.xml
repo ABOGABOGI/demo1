@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardElevation="0dp"
+
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/item_margin_chatlist"
+        android:paddingLeft="@dimen/item_margin_chatlist"
+        android:paddingTop="@dimen/item_margin_chatlist"
+        >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/itemIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/profile_default"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/itemBorder"
+                android:layout_marginRight="@dimen/item_margin_chatlist"
+                android:layout_marginBottom="@dimen/item_margin_chatlist"
+                app:civ_border_color="@android:color/darker_gray"
+                app:civ_border_width="1dp"
+                app:civ_border_overlay="true"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemText"
+                android:text="Title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/itemIcon"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="@dimen/text_chat"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/item_margin_chatlist"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemSmallText"
+                android:gravity="bottom"
+                android:text="Subtitle"
+                android:textSize="@dimen/small_text_chat"
+                app:layout_constraintTop_toBottomOf="@id/itemText"
+                app:layout_constraintBottom_toTopOf="@id/itemBorder"
+                app:layout_constraintLeft_toLeftOf="@id/itemText"
+                app:layout_constraintRight_toRightOf="@id/itemText"
+                android:layout_marginBottom="@dimen/item_margin_chatlist"
+                />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:id="@+id/itemBorder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/itemText"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@android:color/holo_purple"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

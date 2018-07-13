@@ -10,5 +10,10 @@
     <string name="cellular">Pulsa/Data Seluler</string>
     <string name="pln">PLN Token</string>
     <string name="invoice">Create Invoice</string>
+    <string name="transfer_to_bank">Withdraw to Bank</string>
+    <string name="scan_qr">Scan to Pay</string>
+    <string name="request_money">Request Money</string>
+    <string name="create_product">Create Product</string>
+    <string name="new_agent">Agent Registration</string>
     <string name="top_up">Top Up</string>
 </resources>

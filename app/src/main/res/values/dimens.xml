@@ -1,3 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="nav_height">134dp</dimen>
+    <dimen name="nav_border_height">16dp</dimen>
+    <dimen name="corner_button">12dp</dimen>
+
+    <dimen name="text_chat">18sp</dimen>
+    <dimen name="small_text_chat">14sp</dimen>
+
+    <dimen name="item_margin_chatlist">8dp</dimen>
 </resources>

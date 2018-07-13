@@ -6,29 +6,281 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
-
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
 
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
+
+    <io.codetail.widget.RevealFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <RelativeLayout
+            android:id="@+id/popup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#d0000000"
+            android:focusable="true"
+            android:clickable="true"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            >
+            <View
+                android:id="@+id/dummy1"
+                android:layout_width="1px"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@android:drawable/ic_menu_search"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:visibility="invisible"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_menu_search"
+                android:layout_toLeftOf="@id/dummy1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabQuote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_quote"
+                android:layout_toRightOf="@id/dummy1"
+                android:layout_marginLeft="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_alignParentBottom="true"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/colorAccent"
+                app:srcCompat="@android:drawable/ic_menu_camera"
+                android:layout_above="@id/fabSearch"
+                android:layout_alignLeft="@id/fabSearch"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/colorAccent"
+                android:src="@drawable/ic_notifications"
+                android:layout_above="@id/fabSearch"
+                android:layout_alignLeft="@id/fabQuote"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@android:color/darker_gray"
+                app:srcCompat="@android:drawable/ic_menu_share"
+                android:layout_above="@id/fabCamera"
+                android:layout_alignLeft="@id/fabCamera"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@android:color/darker_gray"
+                android:src="@drawable/ic_group"
+                android:layout_above="@id/fabCamera"
+                android:layout_alignLeft="@id/fabNotification"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@android:color/darker_gray"
+                android:src="@drawable/ic_more"
+                android:layout_above="@id/fabCamera"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+        </RelativeLayout>
+
+    </io.codetail.widget.RevealFrameLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fab_addButtonColorNormal="#ffffff"
+        app:fab_addButtonColorPressed="#ffffff"
+        app:fab_addButtonPlusIconColor="#ff505050"
+        app:fab_addButtonStrokeVisible="false"
         android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        />
 
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|center"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:srcCompat="@android:drawable/ic_menu_manage"-->
+        <!--android:visibility="gone"-->
+        <!--/>-->
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_height"
+        android:orientation="vertical"
+        android:id="@+id/navigationLayout"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="8dp"
+            >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cardProfile"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/profile_default"
+                        app:civ_border_width="4dp"
+                        app:civ_border_color="@color/border"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                    <ImageView
+                        android:id="@+id/imageLogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/logo" />
+
+                    <TextView
+                        android:id="@+id/textPage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@id/imageLogo"
+                        android:layout_alignRight="@id/imageLogo"
+                        android:layout_below="@id/imageLogo"
+                        android:layout_marginTop="4dp"
+                        android:text="Payment"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/buttonPayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardProfile"
+                        android:minWidth="80dp"
+                        android:src="@drawable/ic_nav_payment_24dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/buttonChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/buttonPayment"
+                        android:layout_below="@+id/cardProfile"
+                        android:layout_centerHorizontal="true"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:minWidth="80dp"
+                        android:src="@drawable/ic_nav_chat_24dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/buttonStory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/buttonPayment"
+                        android:layout_below="@+id/cardProfile"
+                        android:layout_centerHorizontal="true"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:minWidth="80dp"
+                        android:src="@drawable/ic_nav_story_24dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+
+                </RelativeLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_border_height"
+                android:layout_below="@id/buttonPayment"
+                android:background="@drawable/nav_border"
+                android:id="@+id/navigationBorder"
+                />
+        </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
