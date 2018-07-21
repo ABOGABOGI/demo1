@@ -47,9 +47,13 @@ dependencies {
         transitive = true
     }
 
+    //gui
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 
+    //database
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     kapt 'android.arch.persistence.room:compiler:1.1.1'
@@ -58,4 +62,7 @@ dependencies {
     implementation "android.arch.lifecycle:runtime:1.1.1"
     implementation "android.arch.lifecycle:extensions:1.1.1"
     kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    implementation 'com.google.code.gson:gson:2.8.4'
+
 }

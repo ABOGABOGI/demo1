@@ -20,8 +20,8 @@
         android:layout_gravity="center"
         android:layout_margin="8dp"
 
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
         >
         <ImageButton
             android:layout_width="wrap_content"

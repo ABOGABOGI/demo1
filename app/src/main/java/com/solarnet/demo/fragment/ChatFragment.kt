@@ -1,20 +1,15 @@
 package com.solarnet.demo.fragment
 
 import android.support.v4.app.Fragment
-import android.widget.TextView
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.ChatListAdapter
-import com.solarnet.demo.adapter.PaymentGridAdapter
-import com.solarnet.demo.data.GridItem
 import com.solarnet.demo.data.chat.ChatList
 import com.solarnet.demo.design.ItemOffsetDecoration
 

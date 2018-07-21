@@ -2,24 +2,17 @@ package com.solarnet.demo.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.arch.persistence.room.InvalidationTracker
 import android.support.v4.app.Fragment
-import android.widget.TextView
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AbsListView
 import android.widget.GridView
-import android.widget.ScrollView
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
-import com.solarnet.demo.adapter.PaymentGridAdapter
 import com.solarnet.demo.adapter.PaymentGridViewAdapter
 import com.solarnet.demo.adapter.TrxListAdapter
 import com.solarnet.demo.data.GridItem
@@ -27,7 +20,6 @@ import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.trx.TrxViewModel
 import com.solarnet.demo.data.trx.TrxViewModelFactory
 import com.solarnet.demo.design.NoScrollLinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_payment.*
 import java.util.*
 
 
@@ -50,6 +42,7 @@ class PaymentFragment : Fragment() {
     fun setOnScrollListener(onScrollListener: MainActivity.OnScrollListener) {
         mOnScrollListener = onScrollListener
     }
+
     // Inflate the view for the fragment based on layout XML
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -99,7 +92,7 @@ class PaymentFragment : Fragment() {
                 .get(TrxViewModel::class.java)
         mTrxViewModel?.getAllTransactions()?.observe(this, Observer<List<Trx>> {allTrx ->
             if (allTrx != null) {
-                mTrxListAdapter.setItems(allTrx!!)
+                mTrxListAdapter.setItems(allTrx)
             } else {
                 mTrxListAdapter.setItems(ArrayList<Trx>())
             }
@@ -109,7 +102,7 @@ class PaymentFragment : Fragment() {
         return view
     }
 
-    fun setGridViewHeightBasedOnChildren(gridView: GridView, columns: Int) {
+    private fun setGridViewHeightBasedOnChildren(gridView: GridView, columns: Int) {
         val listAdapter = gridView.adapter
                 ?: // pre-condition
                 return

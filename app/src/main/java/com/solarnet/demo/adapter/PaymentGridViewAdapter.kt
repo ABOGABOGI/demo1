@@ -2,7 +2,6 @@ package com.solarnet.demo.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -10,9 +9,8 @@ import com.solarnet.demo.data.GridItem
 import android.widget.TextView
 import android.view.LayoutInflater
 import android.widget.ImageView
-import android.widget.Toast
 import com.solarnet.demo.R
-import com.solarnet.demo.activity.payment.SendMoneyActivity
+import com.solarnet.demo.activity.payment.*
 
 
 class PaymentGridViewAdapter : BaseAdapter {
@@ -33,7 +31,7 @@ class PaymentGridViewAdapter : BaseAdapter {
         }
 
         val icon = view!!.findViewById<ImageView>(R.id.itemIcon)
-        val text = view!!.findViewById<TextView>(R.id.itemText)
+        val text = view.findViewById<TextView>(R.id.itemText)
 
         icon?.setImageResource(item.iconResource)
         text?.text = item.text
@@ -51,6 +49,21 @@ class PaymentGridViewAdapter : BaseAdapter {
         when (iconRes) {
             R.drawable.ic_send_money -> {
                 mContext.startActivity(Intent(mContext, SendMoneyActivity::class.java))
+            }
+            R.drawable.ic_cellular -> {
+                mContext.startActivity(Intent(mContext, CellularActivity::class.java))
+            }
+            R.drawable.ic_pln -> {
+                mContext.startActivity(Intent(mContext, PLNActivity::class.java))
+            }
+            R.drawable.ic_invoice -> {
+                mContext.startActivity(Intent(mContext, InvoiceActivity::class.java))
+            }
+            R.drawable.ic_bank -> {
+                mContext.startActivity(Intent(mContext, WithdrawActivity::class.java))
+            }
+            R.drawable.ic_qr -> {
+                mContext.startActivity(Intent(mContext, QrActivity::class.java))
             }
         }
     }

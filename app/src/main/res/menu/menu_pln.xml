@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.solarnet.demo.MainActivity">
+    tools:context="com.solarnet.demo.activity.payment.PLNActivity">
     <item
-        android:id="@+id/action_next"
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="NEXT"
-        app:showAsAction="ifRoom" />
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>

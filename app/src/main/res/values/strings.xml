@@ -20,7 +20,33 @@
 
     <string name="title_activity_send_money">Send Money</string>
     <string name="recipient">Send Money to</string>
-    <string name="send_money_amoung">Send Money amount</string>
+    <string name="send_money_amount">Send Money amount</string>
     <string name="hint_recipient">Tap to Select demo app Contact</string>
     <string name="remaining_balance">Remaining Balance</string>
+    <string name="title_activity_contact">Contact List</string>
+
+    <string name="title_activity_celullar">Pulsa / Data Seluler</string>
+    <string name="pulsa">Top Up</string>
+    <string name="paket_data">Paket Data</string>
+    <string name="hint_pulsa">Select Top Up Amount</string>
+    <string name="hint_data">Select Data Plan</string>
+    <string name="title_activity_pln">PLN</string>
+    <string name="pln_hint_id">Input PLN Meter Number</string>
+    <string name="name">Name</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="meter_number">PLN Meter Number</string>
+    <string name="title_activity_invoice">Invoice</string>
+
+    <string name="select_bank">Select Bank</string>
+    <string name="bank_account_number">Bank Account Number</string>
+    <string name="hint_bank_account_number">Input Bank Account Number</string>
+    <string name="optional_message">Message (Optional)</string>
+    <string name="hint_optional_message">Input Message (Optional)</string>
+    <string name="title_activity_withdraw">Withdraw to Bank</string>
+    <string name="hint_amount">Input Amount</string>
+    <string name="amount">Amount</string>
+
+    <string name="info_withdraw">Withdraw you app balance to bank account</string>
+    <string name="title_activity_qr">Scan to Pay</string>
+
 </resources>
