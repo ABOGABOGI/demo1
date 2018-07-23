@@ -48,5 +48,17 @@
 
     <string name="info_withdraw">Withdraw you app balance to bank account</string>
     <string name="title_activity_qr">Scan to Pay</string>
+    <string name="item_description">Item Name</string>
+    <string name="item_price">Item Price</string>
+    <string name="title_activity_product">Create Product</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="product_list">Product</string>
+    <string name="bill_list">Bill</string>
+    <string name="add_new_product">Add New Product</string>
+    <string name="invalid_product">Please input item name and item price.</string>
+
+    <string name="title_activity_product_qr">Product QR</string>
+    <string name="save_to_gallery">Save to Gallery</string>
+    <string name="delete_product">Delete Product</string>
 
 </resources>

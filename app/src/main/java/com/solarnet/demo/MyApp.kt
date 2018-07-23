@@ -8,6 +8,7 @@ class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
     private lateinit var mPref: SharedPreferences
     companion object {
+        const val DIR = "demo"
         private lateinit var sInstance: MyApp
         val instance: MyApp get() = sInstance!!
 

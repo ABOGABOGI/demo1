@@ -6,6 +6,84 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.payment.QrActivity"
-    tools:showIn="@layout/activity_qr">
+    tools:showIn="@layout/activity_qr"
+    android:padding="@dimen/activity_padding"
+    android:layout_centerHorizontal="true"
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/text_label1"
+        android:text="@string/item_description"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_label1"
+        android:text="Nasi Goreng Ayam"
+        android:textStyle="bold"
+        android:id="@+id/textDescription"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textDescription"
+        android:id="@+id/text_label2"
+        android:text="@string/item_price"
+        android:textColor="@color/colorPrimary"
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal|bottom"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_label2"
+        android:text="Rp. 10.000"
+        android:textStyle="bold"
+        android:id="@+id/textPrice"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        />
+
+
+    <TextView
+        android:layout_marginTop="@dimen/activity_view_double_vspacing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textPrice"
+        android:id="@+id/text_label4"
+        android:text="@string/remaining_balance"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_label4"
+        android:text="0"
+        android:textStyle="bold"
+        android:id="@+id/textBalance"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        />
 
 </android.support.constraint.ConstraintLayout>

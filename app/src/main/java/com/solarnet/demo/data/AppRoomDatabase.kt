@@ -10,15 +10,18 @@ import android.os.AsyncTask
 import com.solarnet.demo.data.contact.Contact
 import com.solarnet.demo.data.contact.ContactDao
 import com.solarnet.demo.data.converter.TimestampConverter
+import com.solarnet.demo.data.product.Product
+import com.solarnet.demo.data.product.ProductDao
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.trx.TrxDao
 import java.util.*
 
-@Database(entities = [(Trx::class),(Contact::class)], version = 1)
+@Database(entities = [(Trx::class),(Contact::class), (Product::class)], version = 1)
 @TypeConverters(TimestampConverter::class)
 abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun trxDao() : TrxDao
     abstract fun contactDao() : ContactDao
+    abstract fun productDao() : ProductDao
 
     companion object {
         private var INSTANCE : AppRoomDatabase? = null
@@ -51,6 +54,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
 
             private val mTrxDao: TrxDao = db.trxDao()
             private val mContactDao : ContactDao = db.contactDao()
+            private val mProductDao : ProductDao = db.productDao()
 
             override fun doInBackground(vararg params: Void): Void? {
                 mTrxDao.deleteAll()
@@ -73,6 +77,19 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 mContactDao.insert(Contact(null, "Crayon Sinchan", "2"))
                 mContactDao.insert(Contact(null, "Contact Name 1", "3"))
                 mContactDao.insert(Contact(null, "Contact Name 2", "4"))
+
+                mProductDao.deleteAll()
+                mProductDao.insert(Product("BEK001", "Nasi Goreng Ayam", 20000,
+                        System.currentTimeMillis()))
+                mProductDao.insert(Product("BEK002", "Nasi Goreng Kambing", 25000,
+                        System.currentTimeMillis()))
+                mProductDao.insert(Product("BEK003", "Nasi Goreng Seafood", 25000,
+                        System.currentTimeMillis()))
+                mProductDao.insert(Product("BEK004", "Soto Ayam", 18000,
+                        System.currentTimeMillis()))
+                mProductDao.insert(Product("BEK005", "Soto Daging", 22000,
+                        System.currentTimeMillis()))
+
                 return null
             }
         }

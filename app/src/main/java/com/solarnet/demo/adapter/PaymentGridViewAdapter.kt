@@ -65,6 +65,9 @@ class PaymentGridViewAdapter : BaseAdapter {
             R.drawable.ic_qr -> {
                 mContext.startActivity(Intent(mContext, QrActivity::class.java))
             }
+            R.drawable.ic_product -> {
+                mContext.startActivity(Intent(mContext, ProductActivity::class.java))
+            }
         }
     }
 
