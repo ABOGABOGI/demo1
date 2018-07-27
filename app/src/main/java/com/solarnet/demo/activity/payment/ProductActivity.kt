@@ -96,8 +96,15 @@ class ProductActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(container)
 
         fab.setOnClickListener { view ->
-            showAddDialog()
+            when (container.currentItem) {
+                0 -> showAddDialog()
+                1 -> startBillActivity()
+            }
         }
+    }
+
+    private fun startBillActivity() {
+        startActivity(Intent(this, BillActivity::class.java))
     }
 
     private fun showAddDialog() {
@@ -179,7 +186,10 @@ class ProductActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            return when (position) {
+                0 -> PlaceholderFragment.newInstance()
+                else -> PlaceholderFragment2.newInstance()
+            }
         }
 
         override fun getCount(): Int {
@@ -237,12 +247,44 @@ class ProductActivity : AppCompatActivity() {
              * Returns a new instance of this fragment for the given section
              * number.
              */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-                val fragment = PlaceholderFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
+            fun newInstance(): PlaceholderFragment {
+                return PlaceholderFragment()
+            }
+        }
+    }
+
+    class PlaceholderFragment2 : Fragment() {
+
+        private val parent : ProductActivity get() = activity as ProductActivity
+        private lateinit var recyclerView : RecyclerView
+        private lateinit var mAdapter : ProductListAdapter
+
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
+            val rootView = inflater.inflate(R.layout.fragment_product, container, false)
+
+            recyclerView = rootView.findViewById(R.id.recyclerView)
+
+            val linearLayoutManager = LinearLayoutManager(activity!!.baseContext)
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.setHasFixedSize(true)
+
+            return rootView
+        }
+
+        companion object {
+            /**
+             * The fragment argument representing the section number for this
+             * fragment.
+             */
+            private val ARG_SECTION_NUMBER = "section_number"
+
+            /**
+             * Returns a new instance of this fragment for the given section
+             * number.
+             */
+            fun newInstance(): PlaceholderFragment2 {
+                return PlaceholderFragment2()
             }
         }
     }

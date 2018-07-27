@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/item_margin_chatlist"
+            android:paddingLeft="@dimen/item_margin_chatlist"
+            android:paddingTop="@dimen/item_margin_chatlist"
+            android:paddingBottom="@dimen/item_margin_chatlist"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemDescription"
+                android:gravity="bottom|left"
+                android:text="Nasi Goreng"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="@dimen/text_chat"
+                android:minLines="1"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/item_margin_chatlist"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/itemPrice"
+                    android:text="Rp 10.000"
+                    app:layout_constraintTop_toBottomOf="@id/itemDescription"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginLeft="@dimen/item_margin_chatlist"
+                    />
+                <ImageButton
+                    android:id="@+id/buttonAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_add"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <EditText
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editQuantity"
+                    android:text="0"
+                    android:background="@android:color/transparent"
+                    android:textAlignment="center"
+                    app:layout_constraintRight_toLeftOf="@id/buttonAdd"
+                    app:layout_constraintTop_toTopOf="@id/buttonAdd"
+                    app:layout_constraintBottom_toBottomOf="@id/buttonAdd"
+                    android:enabled="false"
+                    android:textColor="@android:color/black"
+                    />
+
+            <ImageButton
+                android:id="@+id/buttonDeduct"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/buttonAdd"
+                app:layout_constraintEnd_toStartOf="@+id/editQuantity"
+                app:layout_constraintRight_toLeftOf="@id/editQuantity"
+                app:layout_constraintTop_toTopOf="@id/buttonAdd"
+                app:srcCompat="@drawable/ic_remove" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

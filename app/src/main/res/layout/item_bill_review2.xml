@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="16dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="16dp">
+    <TextView
+        android:id="@+id/textQuantity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="@dimen/normal_text"
+        android:text=""
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/textTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normal_text"
+        android:text="Rp 100.000"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normal_text"
+        android:text="@string/subtotal"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/textTotal"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        />
+</RelativeLayout>

@@ -31,6 +31,7 @@ class IconListAdapter<Item>(context: Context?,
         if (items != null) return items!!.count()
         return 0
     }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         //Use super class to create the View
         val inflater = context

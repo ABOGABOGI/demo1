@@ -60,5 +60,32 @@
     <string name="title_activity_product_qr">Product QR</string>
     <string name="save_to_gallery">Save to Gallery</string>
     <string name="delete_product">Delete Product</string>
+    <string name="title_activity_bill">Bill</string>
+    <string name="total">Total</string>
+    <string name="tax">Tax</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="qty">Qty</string>
+    <string name="product">Product</string>
+    <string name="bill_id">Bill ID : </string>
+    <string name="title_activity_top_up">Top Up</string>
+    <string name="manual_transfer">Manual Transfer</string>
+    <string name="virtual_account">Virtual Account</string>
+    <string name="top_up_hint">Select top up source</string>
+    <string name="account_holder_name">Account Holder Name</string>
+    <string name="virtual_account_number">Virtual Account Number</string>
 
+    <string name="hint_atm1_bni">
+        1. Masukkan kartu ATM &amp; PIN BNI &lt;br&gt;
+        2. Pilih menu &lt;font color=\'#0000ff\'&gt;MENU LAINNYA &amp;gt; TRANSFER &amp;gt; TABUNGAN &amp;gt; REKENING BNI VIRTUAL ACCOUNT&lt;/font&gt;&lt;br&gt;
+        3. Masukkan nomor rekening BNI VIRTUAL ACCOUNT (12345678)&lt;br&gt;
+        4. Masukkan nominal yang akan ditopup&lt;br&gt;
+        5. Ikuti instruksi untuk menyelesaikan transaksi
+    </string>
+    <string name="hint_atm1_mandiri">
+        1. Masukkan kartu ATM &amp; PIN Bank Mandiri &lt;br&gt;
+        2. Pilih menu &lt;font color=\'#0000ff\'&gt;MENU LAINNYA &amp;gt; TRANSFER &amp;gt; TABUNGAN &amp;gt; REKENING MANDIRI VIRTUAL ACCOUNT&lt;/font&gt;&lt;br&gt;
+        3. Masukkan nomor rekening MANDIRI VIRTUAL ACCOUNT (12345678)&lt;br&gt;
+        4. Masukkan nominal yang akan ditopup&lt;br&gt;
+        5. Ikuti instruksi untuk menyelesaikan transaksi
+    </string>
 </resources>

@@ -7,6 +7,9 @@
     <dimen name="text_chat">18sp</dimen>
     <dimen name="small_text_chat">14sp</dimen>
 
+    <dimen name="normal_text">16sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+
     <dimen name="item_grid_vspacing">8dp</dimen>
     <dimen name="item_margin_chatlist">16dp</dimen>
     <dimen name="item_margin_trxlist">16dp</dimen>

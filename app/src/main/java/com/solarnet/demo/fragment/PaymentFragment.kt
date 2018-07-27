@@ -2,17 +2,21 @@ package com.solarnet.demo.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.GridView
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
+import com.solarnet.demo.activity.payment.TopUpActivity
 import com.solarnet.demo.adapter.PaymentGridViewAdapter
 import com.solarnet.demo.adapter.TrxListAdapter
 import com.solarnet.demo.data.GridItem
@@ -48,10 +52,6 @@ class PaymentFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_payment, container, false)
 
-//        recyclerView = view.findViewById<RecyclerView>(R.id.recylerView)
-//        recyclerView.layoutManager = GridLayoutManager(context, NUM_COLUMNS)
-//        recyclerView.isNestedScrollingEnabled = false
-//        recyclerView.setHasFixedSize(true)
         var data = ArrayList<GridItem>()
         data.add(GridItem(R.drawable.ic_send_money, context!!.resources.getString(R.string.send_money)))
         data.add(GridItem(R.drawable.ic_cellular, context!!.resources.getString(R.string.cellular)))
@@ -98,6 +98,11 @@ class PaymentFragment : Fragment() {
             }
             mTrxListAdapter.notifyDataSetChanged()
         })
+
+        val buttonTopUp : CardView = view.findViewById(R.id.buttonTopUp)
+        buttonTopUp.setOnClickListener{_ ->
+            startActivity(Intent(context, TopUpActivity::class.java))
+        }
 
         return view
     }
