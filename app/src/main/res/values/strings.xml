@@ -74,6 +74,8 @@
     <string name="account_holder_name">Account Holder Name</string>
     <string name="virtual_account_number">Virtual Account Number</string>
 
+    <string name="please_transfer">Please Transfer</string>
+    <string name="before">Before</string>
     <string name="hint_atm1_bni">
         1. Masukkan kartu ATM &amp; PIN BNI &lt;br&gt;
         2. Pilih menu &lt;font color=\'#0000ff\'&gt;MENU LAINNYA &amp;gt; TRANSFER &amp;gt; TABUNGAN &amp;gt; REKENING BNI VIRTUAL ACCOUNT&lt;/font&gt;&lt;br&gt;
@@ -88,4 +90,19 @@
         4. Masukkan nominal yang akan ditopup&lt;br&gt;
         5. Ikuti instruksi untuk menyelesaikan transaksi
     </string>
+    <string name="hint_bank_acc_bca">123-456-789</string>
+    <string name="hint_bank_acc_dummy">12345678</string>
+    <string name="hint_manual1">&lt;b&gt;*Mohon transfer sesuai jumlah yang tertera (tidak lebih atau kurang).&lt;/b&gt;
+        Jumlah transfer telah kami tambahkan dengan &lt;b&gt;%var1%&lt;/b&gt; untuk memperoleh angka unik.
+        Kamu tetap akan menerima jumlah sesuai yang ditransfer.
+    </string>
+
+    <string name="hint_manual2">Saldo kamu akan bertambah beberapa saat setelah transfer berhasil.
+        Transfer melalui bank yang berbeda bisa dikenakan biaya tambahan (biaya transfer antar bank).
+        Transfer setelah pukul &lt;b&gt;21:00 WIB&lt;/b&gt; akan diproses di hari berikutnya.
+    </string>
+
+    <string name="currency">Rp</string>
+    <string name="manual_transfer_amount">Amount (Manual Transfer)</string>
+    <string name="hint_min_topup">Min Rp. 10.000</string>
 </resources>

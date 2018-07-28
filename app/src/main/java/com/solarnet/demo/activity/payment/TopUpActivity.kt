@@ -1,5 +1,7 @@
 package com.solarnet.demo.activity.payment
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.icu.text.UnicodeSetSpanner
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -13,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.solarnet.demo.R
@@ -22,10 +25,15 @@ import com.solarnet.demo.view.BorderFrameLayout
 
 import kotlinx.android.synthetic.main.activity_top_up.*
 import kotlinx.android.synthetic.main.fragment_bill.*
+import com.solarnet.demo.R.mipmap.ic_launcher
+import android.view.Gravity
+import android.widget.EditText
+import com.solarnet.demo.data.util.Utils
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
-
-
     val BANK_ICON = arrayOf(
             R.drawable.ic_bank_bca,
             R.drawable.ic_bank_mandiri,
@@ -42,6 +50,12 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
             TopUpListAdapter.TYPE_MANUAL_TRANSFER,
             TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT,
             TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT
+    )
+
+    val BANK_ACCOUNT = arrayOf(
+            R.string.hint_bank_acc_bca,
+            R.string.hint_bank_acc_dummy,
+            R.string.hint_bank_acc_dummy
     )
 
     val HINT_ATM = arrayListOf<Int>(
@@ -66,6 +80,51 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
         }
     }
 
+    private fun showManualAmountDialog(position : Int) {
+        val dialog = Dialog(this, R.style.Dialog)
+        dialog.setContentView(R.layout.dialog_input_amount)
+        val window = dialog.window
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        window.setGravity(Gravity.CENTER)
+
+        dialog.setTitle(getString(R.string.manual_transfer))
+        val editAmount : EditText = dialog.findViewById(R.id.editAmount)
+        dialog.findViewById<Button>(R.id.buttonCancel).setOnClickListener { _ ->
+            dialog.dismiss()
+        }
+
+        val buttonOk : Button = dialog.findViewById(R.id.buttonOk)
+        // if button is clicked, close the custom dialog
+        buttonOk.setOnClickListener {_ ->
+            startManualFragment(position, editAmount.text.toString().toIntOrNull())
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun calculateExpired() : String {
+        var c = Calendar.getInstance()
+
+        c.add(Calendar.DATE, 3);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+        val sdf1 = SimpleDateFormat("dd-MM-yyyy")
+        val output = sdf1.format(c.time)
+        return "$output 23:59 WIB"
+    }
+
+    private fun startManualFragment(position : Int, amount : Int?) {
+        var amt = 0
+        if (amount != null) amt = amount
+        val unique  = Random().nextInt(100)
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment, ManualFragment.newInstance(
+                BANK_ICON[position],
+                BANK_NAME[position],
+                arrayListOf<Int>(BANK_ACCOUNT[position]), amt, unique,
+                    calculateExpired()))
+                commit()
+            }
+    }
     override fun onClick(position : Int) {
         when (BANK_TOPUP_TYPE[position]) {
             TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT -> {
@@ -76,6 +135,15 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
                             arrayListOf<Int>(HINT_ATM[position], HINT_MOBILE[position])))
                     commit()
                 }
+            }
+            TopUpListAdapter.TYPE_MANUAL_TRANSFER -> {
+//                supportFragmentManager.beginTransaction().apply {
+//                    replace(R.id.fragment, ManualFragment.newInstance(
+//                            BANK_ICON[position],
+//                            BANK_NAME[position],
+//                            arrayListOf<Int>(BANK_ACCOUNT[position])))
+//                    commit()
+                showManualAmountDialog(position)
             }
         }
     }
@@ -117,7 +185,7 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
         companion object {
             const val BANK : String = "bank"
             const val ICON : String = "icon"
-            const val HINTS : String = "hints"
+            const val HINTS : String = "hints" //0 for ATM, 1 for Mobile
 
             fun newInstance(iconId : Int, bank : String,
                             hintId : ArrayList<Int>) : VirtualFragment {
@@ -182,6 +250,60 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
             }
             return view
         }
+    }
 
+    class ManualFragment : Fragment() {
+        private var amount : Int = 0
+        private var unique : Int = 0
+        companion object {
+            const val BANK : String = "bank"
+            const val ICON : String = "icon"
+            const val HINTS : String = "hints" //0: account number
+            const val AMOUNT : String = "amount"
+            const val UNIQUE : String = "unique"
+            const val EXPIRED : String = "exp"
+
+            fun newInstance(iconId : Int, bank : String,
+                            hintId : ArrayList<Int>,
+                            amount : Int, unique : Int,
+                            expired : String) : ManualFragment {
+                val f = ManualFragment()
+                val args = Bundle().apply {
+                    putInt(ICON, iconId)
+                    putString(BANK, bank)
+                    putIntegerArrayList(HINTS, hintId)
+                    putInt(AMOUNT, amount)
+                    putInt(UNIQUE, unique)
+                    putString(EXPIRED, expired)
+                }
+                f.arguments = args
+                return f
+            }
+        }
+
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
+            val view = inflater.inflate(R.layout.fragment_topup2, container, false)
+            val textTitle : TextView = view.findViewById(R.id.textTitle)
+            val bank =  arguments?.getString(VirtualFragment.BANK)
+            amount = arguments?.getInt(AMOUNT, 0)!!
+            unique = arguments?.getInt(UNIQUE, 0)!!
+
+            textTitle.text = context!!.resources.getString(R.string.manual_transfer) + " " +
+                    bank
+            view.findViewById<ImageView>(R.id.imageIcon).setImageResource(
+                    arguments?.getInt(VirtualFragment.ICON, R.drawable.ic_bank)!!)
+            var manual1 = context!!.getString(R.string.hint_manual1)
+            manual1 = manual1.replace("%var1%", Utils.currencyString(unique))
+            view.findViewById<TextView>(R.id.textHint1).text = Html.fromHtml(
+                    manual1)
+            view.findViewById<TextView>(R.id.textHint2).text = Html.fromHtml(
+                    context!!.getString(R.string.hint_manual2))
+            view.findViewById<TextView>(R.id.textExpired).text =
+                    context!!.resources.getString(R.string.before) +
+                    " : " + arguments?.getString(EXPIRED)
+            view.findViewById<TextView>(R.id.textAmount).text = Utils.currencyString(amount + unique)
+            return view
+        }
     }
 }
