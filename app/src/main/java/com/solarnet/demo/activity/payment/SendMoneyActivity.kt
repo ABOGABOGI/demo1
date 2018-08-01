@@ -25,13 +25,31 @@ import com.solarnet.demo.data.trx.TrxRepository
 import android.app.Application
 import android.content.Intent
 import android.view.View
+import android.view.Window
 import com.google.gson.Gson
+import com.solarnet.demo.MyApp
 import com.solarnet.demo.activity.ContactActivity
+import com.solarnet.demo.data.trx.Trx
+import com.solarnet.demo.network.PostTrx
+import okhttp3.Call
+import okhttp3.OkHttpClient
 
-class SendMoneyActivity : AppCompatActivity(), NumPadAdapter.OnNumPadListener {
+
+
+class SendMoneyActivity : BaseActivity(), NumPadAdapter.OnNumPadListener, PostTrx.TrxListener {
+    override fun onErrorResponse(msg: String) {
+        showProgress(false)
+    }
+
+    override fun onResponse(trx: Trx?) {
+        showProgress(false)
+    }
+
+    override fun onFailure(call: Call?, exception: Exception?) {
+        showProgress(false)
+    }
 
     private lateinit var mViewModel : AppViewModel
-    private var menu : Menu? = null
     private val INITIAL_BALANCE = 2500000 //test only
     private val ACTIVITY_CONTACT = 1212
 
@@ -43,6 +61,26 @@ class SendMoneyActivity : AppCompatActivity(), NumPadAdapter.OnNumPadListener {
         }
 
         updateViews()
+    }
+
+    private fun showProgress(show : Boolean) {
+        runOnUiThread {
+            if (show) {
+                progressBar.visibility = View.VISIBLE
+                overlay.visibility = View.VISIBLE
+                menuNext?.isEnabled = false
+            } else {
+                progressBar.visibility = View.GONE
+                overlay.visibility = View.GONE
+                menuNext?.isEnabled = true
+            }
+        }
+    }
+    override fun next() {
+        showProgress(true)
+        val postTrx = PostTrx().apply { listener = this@SendMoneyActivity }
+        postTrx.postSendMoney(MyApp.instance.userToken, mViewModel.contact!!,
+                mViewModel.amount.toInt())
     }
 
     private fun updateViews() {
@@ -72,7 +110,7 @@ class SendMoneyActivity : AppCompatActivity(), NumPadAdapter.OnNumPadListener {
     }
 
     private fun updateMenuStatus(amount : Int) {
-        menu?.findItem(R.id.action_next)?.isEnabled = mViewModel.newBalance >= 0 && amount > 0 &&
+        menuNext?.isEnabled = mViewModel.newBalance >= 0 && amount > 0 &&
                 mViewModel.contact != null
     }
 
@@ -134,27 +172,6 @@ class SendMoneyActivity : AppCompatActivity(), NumPadAdapter.OnNumPadListener {
         var amount = mViewModel.amount.toIntOrNull()
         if (amount == null) amount = 0
         updateMenuStatus(amount)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.send_payment, menu)
-        menu.findItem(R.id.action_next).isEnabled = false
-        this.menu = menu
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_next -> {
-                //proceed send money
-                true
-            }
-            android.R.id.home -> {
-                super.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

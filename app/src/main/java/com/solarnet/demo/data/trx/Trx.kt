@@ -2,6 +2,7 @@ package com.solarnet.demo.data.trx
 import android.arch.persistence.room.*
 import java.util.Date
 import com.solarnet.demo.data.converter.TimestampConverter
+import com.solarnet.demo.R
 
 @Entity(tableName = "trx")
 class Trx (
@@ -13,14 +14,17 @@ class Trx (
     @ColumnInfo(name = "message") var message : String,
     @ColumnInfo(name = "status") var status : Int,
     @ColumnInfo(name = "transaction_id") var transactionId : String,
-    @ColumnInfo(name = "created_date")  @TypeConverters(TimestampConverter::class) var createdDate: Date
+    @ColumnInfo(name = "created_date")  @TypeConverters(TimestampConverter::class) var createdDate: Date,
+    @ColumnInfo(name = "expired_date")  @TypeConverters(TimestampConverter::class) var expiredDate: Date?
 ) {
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
     companion object {
+        const val STATUS_FAILED: Int = 0
         const val STATUS_SUCCESS: Int = 1
+        const val STATUS_WAITING_FOR_TRANSFER: Int = 2
 
         const val ICON_TOP_UP: Int = 0
         const val ICON_SEND_MONEY: Int = 1
@@ -31,11 +35,17 @@ class Trx (
         const val ICON_QR_PAY: Int = 6
     }
 
+    fun getIconResource() : Int {
+        return when (iconId) {
+            ICON_TOP_UP -> R.drawable.ic_topup
+            else -> R.drawable.ic_launcher_foreground
+        }
+    }
+
     @Ignore
     constructor(iconId: Int, title : String, amount : Int, message : String, status : Int,
                 transactionId : String, createdDate : Date) :
             this(iconId, title, amount,"", "", message,
-                    status, transactionId, createdDate)
-
+                    status, transactionId, createdDate, null)
 
 }

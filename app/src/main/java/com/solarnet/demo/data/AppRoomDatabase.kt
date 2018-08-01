@@ -57,26 +57,26 @@ abstract class AppRoomDatabase : RoomDatabase() {
             private val mProductDao : ProductDao = db.productDao()
 
             override fun doInBackground(vararg params: Void): Void? {
-                mTrxDao.deleteAll()
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Top Up", 100000, "Top up berhasil!", Trx.STATUS_SUCCESS,
-                        "1111", Calendar.getInstance().time))
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 50000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
-                        "2222", Calendar.getInstance().time))
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 60000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
-                        "2222", Calendar.getInstance().time))
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 70000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
-                        "2222", Calendar.getInstance().time))
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 80000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
-                        "2222", Calendar.getInstance().time))
-                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 90000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
-                        "2222", Calendar.getInstance().time))
+//                mTrxDao.deleteAll()
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Top Up", 100000, "Top up berhasil!", Trx.STATUS_SUCCESS,
+//                        "1111", Calendar.getInstance().time))
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 50000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
+//                        "2222", Calendar.getInstance().time))
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 60000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
+//                        "2222", Calendar.getInstance().time))
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 70000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
+//                        "2222", Calendar.getInstance().time))
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 80000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
+//                        "2222", Calendar.getInstance().time))
+//                mTrxDao.insert(Trx(Trx.ICON_TOP_UP, "Solarnet", 90000, "Pembayaran berhasil!", Trx.STATUS_SUCCESS,
+//                        "2222", Calendar.getInstance().time))
 
 
                 mContactDao.deleteAll()
-                mContactDao.insert(Contact(null, "Nugroho Priambodo", "1"))
-                mContactDao.insert(Contact(null, "Crayon Sinchan", "2"))
-                mContactDao.insert(Contact(null, "Contact Name 1", "3"))
-                mContactDao.insert(Contact(null, "Contact Name 2", "4"))
+                mContactDao.insert(Contact(null, "Nugroho Priambodo", "NUG01"))
+                mContactDao.insert(Contact(null, "Crayon Sinchan", "CRA01"))
+                mContactDao.insert(Contact(null, "Contact Name 1", "CON01"))
+                mContactDao.insert(Contact(null, "Contact Name 2", "CON02"))
 
                 mProductDao.deleteAll()
                 mProductDao.insert(Product("BEK001", "Nasi Goreng Ayam", 20000,

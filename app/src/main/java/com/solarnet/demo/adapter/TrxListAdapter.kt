@@ -1,6 +1,7 @@
 package com.solarnet.demo.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.solarnet.demo.R
+import com.solarnet.demo.activity.TrxActivity
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.util.Utils
 import kotlinx.android.synthetic.main.item_trx_list.view.*
@@ -39,9 +41,13 @@ class TrxListAdapter(context : Context, data : List<Trx>) :
 //        }
 //        holder.text.text = item.contact
 //        holder.smallText.text = item.message
-//        holder.cardView.setOnClickListener{v ->
-//            Toast.makeText(mContext, "On click: $item.text", Toast.LENGTH_SHORT).show()
-//        }
+        holder.cardView.tag = position
+        holder.cardView.setOnClickListener{v ->
+            val pos = v.tag as Int
+            mContext.startActivity(Intent(mContext, TrxActivity::class.java).apply {
+                putExtra(TrxActivity.EXTRA_TRX_ID, mData[pos].id)
+            })
+        }
         val item = mData[position]
         holder.title.text = item.title
         holder.amount.text = Utils.currencyString(item.amount)

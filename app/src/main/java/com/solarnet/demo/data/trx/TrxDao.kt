@@ -27,5 +27,5 @@ interface TrxDao {
     fun deleteById(id : Long)
 
     @Query("SELECT * from trx WHERE id = :id")
-    fun getNoteById(id : Int): LiveData<List<Trx>>
+    fun getTrxById(id : Long): LiveData<List<Trx>>
 }

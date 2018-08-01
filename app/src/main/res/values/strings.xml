@@ -105,4 +105,10 @@
     <string name="currency">Rp</string>
     <string name="manual_transfer_amount">Amount (Manual Transfer)</string>
     <string name="hint_min_topup">Min Rp. 10.000</string>
+    <string name="title_activity_trx">Transaction</string>
+
+    <string name="message">Message</string>
+    <string name="status">Status</string>
+    <string name="transaction_id">Transaction Id</string>
+    <string name="date">Date</string>
 </resources>

@@ -4,7 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.LiveData
 import com.solarnet.demo.data.AppRoomDatabase
 
-class TrxRepository(application: Application, limit : Int) {
+class TrxRepository(application: Application, limit : Int = TrxViewModel.ALL_TRX) {
     private var mTrxDao : TrxDao
     private var mAllTrx : LiveData<List<Trx>>
 
@@ -21,6 +21,10 @@ class TrxRepository(application: Application, limit : Int) {
 
     fun getAllTrx() : LiveData<List<Trx>> {
         return mAllTrx
+    }
+
+    fun getTrx(id : Long) : LiveData<List<Trx>> {
+        return mTrxDao.getTrxById(id)
     }
 
 }
