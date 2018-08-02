@@ -49,6 +49,7 @@ class TrxListAdapter(context : Context, data : List<Trx>) :
             })
         }
         val item = mData[position]
+        holder.icon.setImageResource(item.getIconResource())
         holder.title.text = item.title
         holder.amount.text = Utils.currencyString(item.amount)
         holder.message.text = item.message

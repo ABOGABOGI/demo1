@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update
 @Dao
 interface TrxDao {
     @Insert
-    fun insert(trx: Trx)
+    fun insert(trx: Trx) : Long
 
     @Update
     fun updateNote(trx: Trx)

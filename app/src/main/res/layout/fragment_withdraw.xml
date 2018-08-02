@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_chevron_right_24dp"
+                app:srcCompat="@drawable/ic_chevron_right_24dp"
                 android:tint="@android:color/secondary_text_light"
                 />
             <TextView

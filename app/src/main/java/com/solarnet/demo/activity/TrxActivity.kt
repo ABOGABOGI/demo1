@@ -51,6 +51,8 @@ class TrxActivity : AppCompatActivity() {
                     textTitle.text = trx.title
                     textAmount.text = Utils.currencyString(trx.amount)
                     textMessage.text = trx.message
+                    textTransactionId.text = trx.transactionId
+                    textDate.text = Utils.generateDateString(trx.createdDate)
                 }
             }
         })

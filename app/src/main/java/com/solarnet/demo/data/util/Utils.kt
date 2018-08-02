@@ -86,6 +86,10 @@ class Utils {
             return null
         }
 
+        fun generateDateString(date : Date) : String {
+            return android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss a", java.util.Date()).toString()
+        }
+
         fun createQRCode(qrCodeData: String, charset: String, hintMap: Map<EncodeHintType, *>,
                          qrCodeheight: Int, qrCodewidth: Int): Bitmap? {
 

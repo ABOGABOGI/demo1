@@ -1,6 +1,8 @@
 package com.solarnet.demo.activity.payment
 
 import android.app.AlertDialog
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
@@ -18,11 +20,14 @@ import android.widget.EditText
 import android.widget.TextView
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
+import com.solarnet.demo.network.PostTrx
 
 import kotlinx.android.synthetic.main.activity_pln.*
 import kotlinx.android.synthetic.main.fragment_pln.*
+import kotlinx.android.synthetic.main.fragment_pln1.*
 
 class PLNActivity : BaseActivity() {
     var mViewModel : AppViewModel? = null
@@ -32,11 +37,13 @@ class PLNActivity : BaseActivity() {
     val PLN_PRODUCT: Array<Int>
         get() = arrayOf(20000, 50000, 100000, 200000, 500000, 1000000, 2000000)
 
-    class AppViewModel : ViewModel() {
+    class AppViewModel(application : Application) : AndroidViewModel(application) {
         var idPln : String = ""
         var initBalance : Int = 0
         var balance : Int = 0
         var indexProduct : Int = -1
+
+        val mRepository : TrxRepository = TrxRepository(application)
 
         fun resetBalance() {
             balance = initBalance
@@ -71,6 +78,10 @@ class PLNActivity : BaseActivity() {
         }
     }
 
+    override fun getTrxRepository() : TrxRepository {
+        return mViewModel!!.mRepository
+    }
+
     override fun next() {
         when (supportFragmentManager.findFragmentById(R.id.fragment)) {
             is InputFragment -> {
@@ -79,6 +90,11 @@ class PLNActivity : BaseActivity() {
                     commit()
                 }
                 menuNext?.isEnabled = true
+            }
+            is SelectFragment -> {
+                showProgress(true)
+                mPostTrx.postPln(textMeterNo.text.toString(),
+                        PLN_PRODUCT[mViewModel!!.indexProduct])
             }
         }
     }

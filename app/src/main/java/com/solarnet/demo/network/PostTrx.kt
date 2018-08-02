@@ -17,9 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class PostTrx(
-        var progressBar : ProgressBar? = null,
-        var overlay : View? = null,
-        var menuNext : MenuItem? = null) {
+        private var mToken : String = MyApp.instance.userToken) {
     val JSON = MediaType.parse("application/json; charset=utf-8")
     var isRunning = false
 
@@ -28,6 +26,7 @@ class PostTrx(
         fun onErrorResponse(msg : String)
         fun onFailure(call : Call?, exception : Exception?)
     }
+
     private var mClient : OkHttpClient = OkHttpClient.Builder()
             .cache(null)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -36,9 +35,79 @@ class PostTrx(
             .build()
 
     val URL_SEND_MONEY = "sendmoney"
-    var listener : TrxListener? = null
+    val URL_CELLULAR = "cellular"
+    val URL_PLN = "pln"
+    val URL_WITHDRAW = "withdraw"
 
-    fun postSendMoney(token : String, contact : Contact, amount : Int) : Boolean {
+    var listener : TrxListener? = null
+    val callback : Callback = object : Callback {
+        override fun onFailure(call: Call?, e: IOException?) {
+            listener?.onFailure(call, e)
+        }
+
+        override fun onResponse(call: Call?, response: Response?) {
+            try {
+                val jsonString = response?.body()?.string()
+                Log.i("Test", "onResponse: $jsonString")
+                val json = JSONObject(jsonString)
+                val trx = parseTrx(json)
+                listener?.onResponse(trx)
+            } catch (e : Exception) {
+                listener?.onErrorResponse(e.message.toString())
+            }
+        }
+
+    }
+
+    fun postPln(meterNo : String, amount : Int)
+            : Boolean {
+        val url = MyApp.URL + URL_PLN
+        val json = JSONObject().apply {
+            put("token", mToken)
+            put("meterNo", meterNo)
+            put("amount", amount)
+        }
+
+        sendRequest(url, json)
+        return true
+    }
+
+    fun postCellular(phone : String, type : String, product : String, productCode : String, amount : Int)
+            : Boolean {
+        val url = MyApp.URL + URL_CELLULAR
+        val json = JSONObject().apply {
+            put("token", mToken)
+            put("phone", phone)
+            put("type", type)
+            put("product", product)
+            put("productCode", productCode)
+            put("amount", amount)
+        }
+
+        sendRequest(url, json)
+
+        return true
+    }
+
+    fun postWithdraw(bankName : String, bankCode : String, bankAccount : String, amount : Int) : Boolean {
+        val url = MyApp.URL + URL_WITHDRAW
+
+        val jsonBank = JSONObject().apply {
+            put("name", bankName)
+            put("code", bankCode)
+            put("account", bankAccount)
+        }
+        val json = JSONObject().apply {
+            put("token", mToken)
+            put("bank", jsonBank)
+            put("amount", amount)
+        }
+        sendRequest(url, json)
+
+        return true
+    }
+
+    fun postSendMoney(contact : Contact, amount : Int) : Boolean {
         val url = MyApp.URL + URL_SEND_MONEY
 
         val jsonContact = JSONObject().apply {
@@ -46,10 +115,16 @@ class PostTrx(
             put("token", contact.token)
         }
         val json = JSONObject().apply {
-            put("token", token)
+            put("token", mToken)
             put("contact", jsonContact)
             put("amount", amount)
         }
+        sendRequest(url, json)
+
+        return true
+    }
+
+    private fun sendRequest(url : String, json : JSONObject) {
 
         val body = RequestBody.create(JSON, json.toString())
         val request = Request.Builder()
@@ -57,40 +132,23 @@ class PostTrx(
                 .post(body)
                 .build()
 
-        mClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call?, e: IOException?) {
-                listener?.onFailure(call, e)
-            }
-
-            override fun onResponse(call: Call?, response: Response?) {
-                val jsonString = response?.body()?.string()
-                Log.i("Test", "onResponse: $jsonString")
-                val json = JSONObject(jsonString)
-                val trx = parseTrx(json)
-                listener?.onResponse(trx)
-            }
-        })
-        return true
+        mClient.newCall(request).enqueue(callback)
     }
-
     private fun parseTrx(json : JSONObject) : Trx? {
-        val iconId = json.getInt("iconId")
-        val title = json.getString("title")
-        val message = json.getString("message")
-        val amount = json.getInt("amount")
-        val status = json.getInt("status")
-        val transactionId = json.getString("transactionId")
-        val createdDateString = json.getString("createdDate")
-        var createdDate : Date? = null
         try {
-            createdDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(createdDateString)
-            //System.out.println(date)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            return null
-        }
+            val iconId = json.getInt("iconId")
+            val title = json.getString("title")
+            val message = json.getString("message")
+            val amount = json.getInt("amount")
+            val status = json.getInt("status")
+            val transactionId = json.getString("transactionId")
+            val createdDateString = json.getString("createdDate")
+            val createdDate: Date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(createdDateString)
 
-        val trx = Trx(iconId, title, amount, message, status, transactionId, createdDate)
-        return trx
+            return Trx(iconId, title, amount, message, status, transactionId, createdDate)
+        } catch (e : Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 }

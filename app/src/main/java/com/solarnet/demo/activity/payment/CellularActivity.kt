@@ -30,16 +30,47 @@ import com.solarnet.demo.data.util.Utils
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.content.CursorLoader
 import android.content.DialogInterface
+import android.widget.ProgressBar
+import com.solarnet.demo.activity.TrxActivity
+import com.solarnet.demo.data.trx.Trx
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
+import com.solarnet.demo.network.PostTrx
+import okhttp3.Call
 
 
-class CellularActivity : AppCompatActivity() {
+class CellularActivity : BaseActivity(), PostTrx.TrxListener {
     private val ACTIVITY_CONTACT = 120
-    private var menu : Menu? = null
     private lateinit var mViewModel : AppViewModel
 
+    override fun getTrxRepository() : TrxRepository {
+        return mViewModel.mRepository
+    }
+
+    override fun next() {
+        var type : String = when(mViewModel.isTopUp) {
+            true -> getString(R.string.pulsa)
+            else -> getString(R.string.paket_data)
+        }
+
+         showProgress(true)
+        mPostTrx.postCellular(editPhone.text.toString(), type, textHint.text.toString(),
+                mViewModel.cellProduct.getProductCode(mViewModel.isTopUp,
+                        mViewModel.indexProduct),
+                mViewModel.cellProduct.getProductValue(mViewModel.isTopUp,
+                        mViewModel.indexProduct))
+
+    }
+
+    fun checkMenuNext() {
+        menuNext?.isEnabled = mViewModel.balance >= 0 &&
+                mViewModel.indexProduct >=0 &&
+                mViewModel.phoneNumber.length > 4
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_celullar)
@@ -50,14 +81,6 @@ class CellularActivity : AppCompatActivity() {
         mViewModel.initBalance = MyApp.instance.getBalance()
         mViewModel.balance = mViewModel.initBalance
 
-//        val filter = InputFilter { source, start, end, dest, dstart, dend ->
-//            for (i in start until end) {
-//                if (!Character.isDigit(source[i])) {
-//                    return@InputFilter ""
-//                }
-//            }
-//            null
-//        }
         editPhone.filters = arrayOf(DecimalDigitFilter())
         editPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -165,11 +188,11 @@ class CellularActivity : AppCompatActivity() {
         textBalance.text = Utils.currencyString(mViewModel.balance)
         if (mViewModel.balance < 0) {
             textBalance.setTextColor(Color.RED)
-            menu?.findItem(R.id.action_next)?.isEnabled = false
         } else {
             textBalance.setTextColor(Color.BLACK)
-            menu?.findItem(R.id.action_next)?.isEnabled = true
         }
+
+        checkMenuNext()
     }
 
     fun notifyPrefixUpdated() {
@@ -179,9 +202,7 @@ class CellularActivity : AppCompatActivity() {
             textBalance.visibility = View.INVISIBLE
             text_label1.visibility = View.INVISIBLE
             mViewModel.balance = mViewModel.initBalance
-            if (menu != null) {
-                menu!!.findItem(R.id.action_next).isEnabled = false
-            }
+            menuNext?.isEnabled = false
         } else {
             cardProduct.visibility = View.VISIBLE
             segmentedButtonGroup.visibility = View.VISIBLE
@@ -198,26 +219,6 @@ class CellularActivity : AppCompatActivity() {
         notifyBalanceUpdated()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.send_payment, menu)
-        menu.findItem(R.id.action_next).isEnabled = false
-        this.menu = menu
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_next -> {
-                //proceed topup
-                true
-            }
-            android.R.id.home -> {
-                super.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     class CellProduct(var prefix : String) {
         private var mProduct : Int = PRODUCT_UNKNOWN
@@ -430,12 +431,13 @@ class CellularActivity : AppCompatActivity() {
         }
     }
 
-    class AppViewModel : ViewModel() {
+    class AppViewModel(application: Application) : AndroidViewModel(application) {
         var cellProduct : CellProduct = CellProduct()
         var initBalance : Int = 0
         var balance : Int = 0
         var phoneNumber : String = ""
         var isTopUp = true
         var indexProduct : Int = -1
+        val mRepository : TrxRepository = TrxRepository(application)
     }
 }

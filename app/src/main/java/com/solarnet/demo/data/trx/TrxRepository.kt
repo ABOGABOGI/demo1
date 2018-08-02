@@ -2,6 +2,7 @@ package com.solarnet.demo.data.trx
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
+import android.os.AsyncTask
 import com.solarnet.demo.data.AppRoomDatabase
 
 class TrxRepository(application: Application, limit : Int = TrxViewModel.ALL_TRX) {
@@ -27,4 +28,24 @@ class TrxRepository(application: Application, limit : Int = TrxViewModel.ALL_TRX
         return mTrxDao.getTrxById(id)
     }
 
+
+    fun insert(trx: Trx, listener : OnInsertListener? = null) {
+        InsertAsyncTask(mTrxDao, listener).execute(trx)
+    }
+
+    interface OnInsertListener {
+        fun onInsert(id : Long)
+    }
+    private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: TrxDao,
+                                                       private val listener : OnInsertListener?)
+        : AsyncTask<Trx, Void, Long>() {
+
+        override fun doInBackground(vararg params: Trx): Long {
+            return mAsyncTaskDao.insert(params[0])
+        }
+
+        override fun onPostExecute(result: Long) {
+            listener?.onInsert(result)
+        }
+    }
 }

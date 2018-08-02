@@ -26,9 +26,12 @@ import android.app.Application
 import android.content.Intent
 import android.view.View
 import android.view.Window
+import android.widget.ProgressBar
+import android.widget.Toast
 import com.google.gson.Gson
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.activity.ContactActivity
+import com.solarnet.demo.activity.TrxActivity
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.network.PostTrx
 import okhttp3.Call
@@ -36,23 +39,16 @@ import okhttp3.OkHttpClient
 
 
 
-class SendMoneyActivity : BaseActivity(), NumPadAdapter.OnNumPadListener, PostTrx.TrxListener {
-    override fun onErrorResponse(msg: String) {
-        showProgress(false)
-    }
+class SendMoneyActivity : BaseActivity(), NumPadAdapter.OnNumPadListener {
 
-    override fun onResponse(trx: Trx?) {
-        showProgress(false)
-    }
-
-    override fun onFailure(call: Call?, exception: Exception?) {
-        showProgress(false)
-    }
 
     private lateinit var mViewModel : AppViewModel
     private val INITIAL_BALANCE = 2500000 //test only
     private val ACTIVITY_CONTACT = 1212
 
+    override fun getTrxRepository() : TrxRepository {
+        return mViewModel.mRepository
+    }
     override fun onNumPadKey(key: String) {
         if (mViewModel!!.amount!!.compareTo("0") != 0) {
             mViewModel!!.amount += key
@@ -63,23 +59,9 @@ class SendMoneyActivity : BaseActivity(), NumPadAdapter.OnNumPadListener, PostTr
         updateViews()
     }
 
-    private fun showProgress(show : Boolean) {
-        runOnUiThread {
-            if (show) {
-                progressBar.visibility = View.VISIBLE
-                overlay.visibility = View.VISIBLE
-                menuNext?.isEnabled = false
-            } else {
-                progressBar.visibility = View.GONE
-                overlay.visibility = View.GONE
-                menuNext?.isEnabled = true
-            }
-        }
-    }
     override fun next() {
         showProgress(true)
-        val postTrx = PostTrx().apply { listener = this@SendMoneyActivity }
-        postTrx.postSendMoney(MyApp.instance.userToken, mViewModel.contact!!,
+        mPostTrx.postSendMoney(mViewModel.contact!!,
                 mViewModel.amount.toInt())
     }
 
@@ -200,5 +182,7 @@ class SendMoneyActivity : BaseActivity(), NumPadAdapter.OnNumPadListener, PostTr
         var balance: Int = 0
         var newBalance: Int = 0
         var contact: Contact? = null
+        val mRepository : TrxRepository = TrxRepository(application)
+
     }
 }

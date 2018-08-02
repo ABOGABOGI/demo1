@@ -1,5 +1,7 @@
 package com.solarnet.demo.activity.payment
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
@@ -21,10 +23,12 @@ import android.widget.TextView
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.IconListAdapter
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
+import kotlinx.android.synthetic.main.fragment_withdraw.*
 
 class WithdrawActivity : BaseActivity() {
     var BANKS : Array<IconListAdapter.Item> =
@@ -36,20 +40,28 @@ class WithdrawActivity : BaseActivity() {
     lateinit var mBankAdapter : IconListAdapter<IconListAdapter.Item>
     lateinit var mViewModel : AppViewModel
 
-    class AppViewModel : ViewModel() {
+    class AppViewModel(application: Application) : AndroidViewModel(application) {
         var indexBank : Int = 0
         var amount : Int = 0
         var accNumber : String = ""
         var message : String = ""
         val initBalance : Int = MyApp.instance.getBalance()
         var balance : Int = 0
+        val mRepository : TrxRepository = TrxRepository(application)
         fun resetBalance() {
             balance = initBalance
         }
     }
 
-    override fun next() {
+    override fun getTrxRepository(): TrxRepository? {
+        return mViewModel?.mRepository
+    }
 
+    override fun next() {
+        showProgress(true)
+        val banks = BANKS[mViewModel.indexBank]
+        mPostTrx.postWithdraw(banks.text, banks.code, editAccNumber.text.toString(),
+                mViewModel.amount)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

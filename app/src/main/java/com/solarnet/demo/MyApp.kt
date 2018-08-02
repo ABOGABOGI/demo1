@@ -8,8 +8,8 @@ class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
     private lateinit var mPref: SharedPreferences
     companion object {
-        const val URL = "http://10.0.2.2:8000/"
-//        const val URL = "http://demo.sistemonline.biz.id/public/"
+//        const val URL = "http://10.0.2.2:8000/api/"
+        const val URL = "http://demo.sistemonline.biz.id/public/api/"
         const val DIR = "demo"
         private lateinit var sInstance: MyApp
         val instance: MyApp get() = sInstance

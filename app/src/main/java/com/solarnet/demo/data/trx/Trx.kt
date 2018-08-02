@@ -38,6 +38,12 @@ class Trx (
     fun getIconResource() : Int {
         return when (iconId) {
             ICON_TOP_UP -> R.drawable.ic_topup
+            ICON_SEND_MONEY -> R.drawable.ic_send_money
+            ICON_CELULLAR -> R.drawable.ic_cellular
+            ICON_PLN -> R.drawable.ic_pln
+            ICON_INVOICE -> R.drawable.ic_invoice
+            ICON_TO_BANK -> R.drawable.ic_bank
+            ICON_QR_PAY -> R.drawable.ic_qr
             else -> R.drawable.ic_launcher_foreground
         }
     }
