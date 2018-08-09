@@ -1,19 +1,29 @@
 package com.solarnet.demo.activity
 
 import android.arch.lifecycle.Observer
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.text.Html
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.solarnet.demo.R
+import com.solarnet.demo.activity.payment.TopUpActivity
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.Utils
 
 import kotlinx.android.synthetic.main.activity_trx.*
+import org.json.JSONObject
+import java.util.ArrayList
 
 class TrxActivity : AppCompatActivity() {
     companion object {
@@ -38,13 +48,13 @@ class TrxActivity : AppCompatActivity() {
         textMessage = findViewById(R.id.textMessage)
         textTransactionId = findViewById(R.id.textTransactionId)
         textDate = findViewById(R.id.textDate)
-        trxId = intent.getLongExtra(EXTRA_TRX_ID, 11L) //testing
+        trxId = intent.getLongExtra(EXTRA_TRX_ID, 14L) //testing
         Log.i("Test", "trxId : $trxId")
 
         val repository : TrxRepository = TrxRepository(application)
         repository.getTrx(trxId).observe(this, Observer<List<Trx>> {trxs ->
             if (trxs != null) {
-                if (trxs.size > 0) {
+                if (trxs.isNotEmpty()) {
                     val trx = trxs[0]
                     Log.i("Test", "amount: ${trx.amount}")
                     imageIcon.setImageResource(trx.getIconResource())
@@ -53,10 +63,35 @@ class TrxActivity : AppCompatActivity() {
                     textMessage.text = trx.message
                     textTransactionId.text = trx.transactionId
                     textDate.text = Utils.generateDateString(trx.createdDate)
+                    if (!trx.data.isNullOrBlank()) {
+                        setFragment(trx)
+                    }
                 }
             }
         })
+    }
 
+    private fun setFragment(trx : Trx) {
+        var fragment : Fragment? =
+        when (trx.getIconResource()) {
+            R.drawable.ic_topup -> {
+                val jsonData = JSONObject(trx.data)
+                TopUpActivity.ManualFragment.newInstance(
+                        TopUpActivity.getBankIcon(jsonData.getString("bankName")),
+                        jsonData.getString("bankName"),
+                        jsonData.getString("bankAccount"),
+                        trx.amount,
+                        jsonData.getInt("unique"),
+                        Utils.formatDate(trx.expiredDate!!))
+            }
+            else -> null
+        }
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.fragment, fragment)
+                commit()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -15,7 +15,8 @@ class Trx (
     @ColumnInfo(name = "status") var status : Int,
     @ColumnInfo(name = "transaction_id") var transactionId : String,
     @ColumnInfo(name = "created_date")  @TypeConverters(TimestampConverter::class) var createdDate: Date,
-    @ColumnInfo(name = "expired_date")  @TypeConverters(TimestampConverter::class) var expiredDate: Date?
+    @ColumnInfo(name = "expired_date")  @TypeConverters(TimestampConverter::class) var expiredDate: Date?,
+    @ColumnInfo(name = "data") var data: String?
 ) {
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
@@ -52,6 +53,6 @@ class Trx (
     constructor(iconId: Int, title : String, amount : Int, message : String, status : Int,
                 transactionId : String, createdDate : Date) :
             this(iconId, title, amount,"", "", message,
-                    status, transactionId, createdDate, null)
+                    status, transactionId, createdDate, null, null)
 
 }

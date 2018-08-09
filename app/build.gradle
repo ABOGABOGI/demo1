@@ -54,6 +54,7 @@ dependencies {
     implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.1.7'
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
     //database
     implementation 'android.arch.persistence.room:runtime:1.1.1'

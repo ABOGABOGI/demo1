@@ -1,5 +1,6 @@
 package com.solarnet.demo.activity.payment
 
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -17,17 +18,27 @@ import com.google.zxing.integration.android.IntentResult
 import android.content.Intent
 import android.graphics.Color
 import android.view.Menu
+import android.view.View
+import android.widget.ProgressBar
 import com.solarnet.demo.MyApp
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.Utils
+import com.solarnet.demo.network.PostTrx
 import kotlinx.android.synthetic.main.content_qr.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
+import android.app.Application
 
 class QrActivity : BaseActivity() {
-    class AppViewModel : ViewModel() {
+    class AppViewModel(application : Application) : AndroidViewModel(application) {
         var code : String = ""
         var desc : String = ""
         var price : Int = -1
         var initBalance = MyApp.instance.getBalance()
         var balance : Int = 0
+        val mRepository : TrxRepository = TrxRepository(application)
         init {
             balance = initBalance
         }
@@ -38,27 +49,67 @@ class QrActivity : BaseActivity() {
     lateinit var mViewModel : AppViewModel
 
     override fun next() {
+        showProgress(true)
+        mPostTrx.postPaymentQr(mViewModel.code, mViewModel.desc, mViewModel.price)
+    }
 
+    override fun getProgressBar(): ProgressBar? {
+        return progressBar
+    }
+
+    override fun getOverlay(): View? {
+        return overlay
+    }
+
+    override fun getTrxRepository(): TrxRepository? {
+        return mViewModel.mRepository
+    }
+
+    fun showProgressQr(show : Boolean) {
+        showProgress(show)
+        runOnUiThread{
+            if (show) {
+                layoutContent.visibility = View.INVISIBLE
+            } else {
+                layoutContent.visibility = View.VISIBLE
+                textDescription.text = mViewModel.desc
+                textPrice.text = Utils.currencyString(mViewModel.price)
+                textBalance.text = Utils.currencyString(mViewModel.balance)
+
+                if (mViewModel.balance < 0) {
+                    textBalance.setTextColor(Color.RED)
+                } else {
+                    textBalance.setTextColor(Color.BLACK)
+                }
+            }
+        }
     }
 
     private fun getPrice(code : String, desc : String) {
         mViewModel.code = code
         mViewModel.desc = desc
 
-        //hardcode for now
-        mViewModel.price = 25000
+        showProgressQr(true)
+        mPostTrx.getPrice(code, object : Callback {
+            override fun onFailure(call: Call?, e: IOException?) {
+                showProgressQr(false)
+                showToast("Error : " + e?.message)
+            }
 
-        mViewModel.balance = mViewModel.initBalance - mViewModel.price
+            override fun onResponse(call: Call?, response: Response?) {
+                try {
+                    showProgressQr(false)
+                    val jsonString = response?.body()?.string()
+                    val json = JSONObject(jsonString)
+                    mViewModel.price = json.getInt("price")
+                    mViewModel.balance = mViewModel.initBalance - mViewModel.price
 
-        textDescription.text = mViewModel.desc
-        textPrice.text = Utils.currencyString(mViewModel.price)
-        textBalance.text = Utils.currencyString(mViewModel.balance)
+                } catch (e : Exception) {
+                    showToast("Error : " + e?.message)
+                }
+            }
 
-        if (mViewModel.balance < 0) {
-            textBalance.setTextColor(Color.RED)
-        } else {
-            textBalance.setTextColor(Color.BLACK)
-        }
+        })
     }
 
     private fun updateMenuNext() {
@@ -104,6 +155,7 @@ class QrActivity : BaseActivity() {
         mViewModel = ViewModelProviders.of(this).get(AppViewModel::class.java)
 
         startCamera()
+        //getPrice("ABC","Nasi Goreng")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -99,7 +99,6 @@ class PLNActivity : BaseActivity() {
         }
     }
 
-
     class SelectFragment : Fragment() {
         private val plnActivity : PLNActivity get() = (activity as PLNActivity)
         private lateinit var textBalance : TextView

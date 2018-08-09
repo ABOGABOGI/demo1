@@ -167,7 +167,7 @@ class ProductActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        if (id == R.id.home) {
+        if (id == android.R.id.home) {
             super.onBackPressed()
             return true
         }

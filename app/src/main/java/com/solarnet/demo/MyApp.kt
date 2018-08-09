@@ -8,11 +8,16 @@ class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
     private lateinit var mPref: SharedPreferences
     companion object {
-//        const val URL = "http://10.0.2.2:8000/api/"
+        //const val URL = "http://10.0.2.2:8000/api/"
         const val URL = "http://demo.sistemonline.biz.id/public/api/"
         const val DIR = "demo"
         private lateinit var sInstance: MyApp
-        val instance: MyApp get() = sInstance
+        val instance: MyApp get() {
+            return when (sInstance) {
+                null -> MyApp()
+                else -> sInstance
+            }
+        }
 
     }
 
@@ -28,13 +33,13 @@ class MyApp : Application() {
 
 
     private fun initializeInstance() {
-
         // set application wise preference
         mPref = this.applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
     }
 
     fun getBalance() : Int {
-        return mPref.getInt(PREF_BALANCE, 1200000)
+        val balance = mPref.getInt(PREF_BALANCE, 1200000)
+        return balance
     }
 
     fun setBalance(balance : Int) {

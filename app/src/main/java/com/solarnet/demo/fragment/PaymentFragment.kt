@@ -1,6 +1,7 @@
 package com.solarnet.demo.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v4.app.Fragment
@@ -14,7 +15,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.GridView
+import android.widget.TextView
 import com.solarnet.demo.MainActivity
+import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
 import com.solarnet.demo.activity.payment.TopUpActivity
 import com.solarnet.demo.adapter.PaymentGridViewAdapter
@@ -23,7 +26,9 @@ import com.solarnet.demo.data.GridItem
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.trx.TrxViewModel
 import com.solarnet.demo.data.trx.TrxViewModelFactory
+import com.solarnet.demo.data.util.Utils
 import com.solarnet.demo.design.NoScrollLinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_payment.*
 import java.util.*
 
 
@@ -34,6 +39,7 @@ class PaymentFragment : Fragment() {
     private var mOnScrollListener : MainActivity.OnScrollListener? = null
     private var mTrxViewModel : TrxViewModel? = null
     private lateinit var mTrxListAdapter : TrxListAdapter
+    private lateinit var textBalance : TextView
 
     // Store instance variables based on arguments passed
     // newInstance constructor for creating fragment with arguments
@@ -93,6 +99,9 @@ class PaymentFragment : Fragment() {
         mTrxViewModel?.getAllTransactions()?.observe(this, Observer<List<Trx>> {allTrx ->
             if (allTrx != null) {
                 mTrxListAdapter.setItems(allTrx)
+                if (allTrx.isEmpty()) {
+                    cardViewAll.visibility = View.GONE
+                }
             } else {
                 mTrxListAdapter.setItems(ArrayList<Trx>())
             }
@@ -103,6 +112,9 @@ class PaymentFragment : Fragment() {
         buttonTopUp.setOnClickListener{_ ->
             startActivity(Intent(context, TopUpActivity::class.java))
         }
+
+        textBalance = view.findViewById<TextView>(R.id.textBalance)
+        textBalance.text = Utils.currencyString(MyApp.instance.getBalance())
 
         return view
     }

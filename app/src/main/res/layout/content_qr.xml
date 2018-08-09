@@ -9,6 +9,7 @@
     tools:showIn="@layout/activity_qr"
     android:padding="@dimen/activity_padding"
     android:layout_centerHorizontal="true"
+    android:id="@+id/layoutContent"
     >
     <TextView
         android:layout_width="0dp"

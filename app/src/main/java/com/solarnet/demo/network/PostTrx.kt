@@ -34,13 +34,16 @@ class PostTrx(
             .connectTimeout(20, TimeUnit.SECONDS)
             .build()
 
-    val URL_SEND_MONEY = "sendmoney"
-    val URL_CELLULAR = "cellular"
-    val URL_PLN = "pln"
-    val URL_WITHDRAW = "withdraw"
+    private val URL_SEND_MONEY = "sendmoney"
+    private val URL_CELLULAR = "cellular"
+    private val URL_PLN = "pln"
+    private val URL_WITHDRAW = "withdraw"
+    private val URL_TOPUP_1 = "topup1"
+    private val URL_PRICE = "price"
+    private val URL_PAYMENTQR = "payment"
 
     var listener : TrxListener? = null
-    val callback : Callback = object : Callback {
+    private val callback : Callback = object : Callback {
         override fun onFailure(call: Call?, e: IOException?) {
             listener?.onFailure(call, e)
         }
@@ -56,7 +59,39 @@ class PostTrx(
                 listener?.onErrorResponse(e.message.toString())
             }
         }
+    }
 
+    fun postPaymentQr(code : String, product : String, amount : Int) : Boolean {
+        val url = MyApp.URL + URL_PAYMENTQR
+        try {
+            val json = JSONObject().apply {
+                put("token", mToken)
+                put("amount", amount)
+                put("code", code)
+                put("product", product)
+            }
+
+            sendRequest(url, json)
+        } catch (e : Exception) {
+            listener?.onErrorResponse(e.message.toString())
+        }
+        return true
+    }
+
+    fun postManualTopUp1(amount : Int, bankCode : String, bankName : String) : Boolean {
+        val url = MyApp.URL + URL_TOPUP_1
+        val jsonBank = JSONObject().apply {
+            put("name", bankName)
+            put("code", bankCode)
+        }
+        val json = JSONObject().apply {
+            put("token", mToken)
+            put("amount", amount)
+            put("bank", jsonBank)
+        }
+
+        sendRequest(url, json)
+        return true
     }
 
     fun postPln(meterNo : String, amount : Int)
@@ -107,6 +142,14 @@ class PostTrx(
         return true
     }
 
+    fun getPrice(code : String, callback : Callback) {
+        var url = MyApp.URL + URL_PRICE
+        val json = JSONObject().apply {
+            put("code", code)
+        }
+        sendRequest(url, json, callback)
+    }
+
     fun postSendMoney(contact : Contact, amount : Int) : Boolean {
         val url = MyApp.URL + URL_SEND_MONEY
 
@@ -124,7 +167,11 @@ class PostTrx(
         return true
     }
 
-    private fun sendRequest(url : String, json : JSONObject) {
+    private fun sendRequest(url : String, json : JSONObject, cback : Callback? = null) {
+        val cb : Callback = when (cback) {
+            null -> callback
+            else -> cback
+        }
 
         val body = RequestBody.create(JSON, json.toString())
         val request = Request.Builder()
@@ -132,8 +179,9 @@ class PostTrx(
                 .post(body)
                 .build()
 
-        mClient.newCall(request).enqueue(callback)
+        mClient.newCall(request).enqueue(cb)
     }
+
     private fun parseTrx(json : JSONObject) : Trx? {
         try {
             val iconId = json.getInt("iconId")
@@ -144,8 +192,29 @@ class PostTrx(
             val transactionId = json.getString("transactionId")
             val createdDateString = json.getString("createdDate")
             val createdDate: Date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(createdDateString)
-
-            return Trx(iconId, title, amount, message, status, transactionId, createdDate)
+            val trx = Trx(iconId, title, amount, message, status, transactionId, createdDate)
+            if (json.has("expiredDate")) {
+                val expiredDateString = json.getString("expiredDate")
+                if (expiredDateString != null || expiredDateString?.compareTo("null", true) != 0) {
+                    try {
+                        trx.expiredDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(expiredDateString)
+                    } catch (pe : ParseException) {
+                        ;
+                    }
+                }
+            }
+            if (json.has("data")) {
+                val data = json.getString("data")
+                if (data.compareTo("null", true) != 0 || !data.isNullOrBlank()) {
+                    try {
+                        JSONObject(data) //try to parse
+                        trx.data = data
+                    } catch (pe : Exception) {
+                        ;
+                    }
+                }
+            }
+            return trx
         } catch (e : Exception) {
             e.printStackTrace()
         }

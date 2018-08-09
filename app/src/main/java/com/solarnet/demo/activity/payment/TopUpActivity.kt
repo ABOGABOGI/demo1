@@ -1,6 +1,9 @@
 package com.solarnet.demo.activity.payment
 
+import android.app.Application
 import android.app.Dialog
+import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
 import android.icu.text.UnicodeSetSpanner
 import android.os.Bundle
@@ -11,13 +14,8 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.TopUpListAdapter
 import com.solarnet.demo.data.contact.Contact
@@ -26,54 +24,84 @@ import com.solarnet.demo.view.BorderFrameLayout
 import kotlinx.android.synthetic.main.activity_top_up.*
 import kotlinx.android.synthetic.main.fragment_bill.*
 import com.solarnet.demo.R.mipmap.ic_launcher
-import android.view.Gravity
-import android.widget.EditText
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.Utils
+import com.solarnet.demo.network.PostTrx
+import okhttp3.Call
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
-    val BANK_ICON = arrayOf(
-            R.drawable.ic_bank_bca,
-            R.drawable.ic_bank_mandiri,
-            R.drawable.ic_bank_bni
-    )
+class TopUpActivity : BaseActivity(), TopUpListAdapter.OnClickListener {
+    class AppViewModel(application: Application) : AndroidViewModel(application) {
+        var mSelectedPosition : Int = 0
+        val mRepository : TrxRepository = TrxRepository(application)
+    }
 
-    val BANK_NAME = arrayOf(
-            "Bank Central Asia",
-            "Bank Mandiri",
-            "BNI"
-    )
+    lateinit var mViewModel : AppViewModel
+    companion object {
+        val BANK_ICON = arrayOf(
+                R.drawable.ic_bank_bca,
+                R.drawable.ic_bank_mandiri,
+                R.drawable.ic_bank_bni
+        )
 
-    val BANK_TOPUP_TYPE = arrayOf(
-            TopUpListAdapter.TYPE_MANUAL_TRANSFER,
-            TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT,
-            TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT
-    )
+        fun getBankIcon(bankName : String) : Int {
+            var loop = 0
+            BANK_NAME.forEach {name ->
+                if (name.compareTo(bankName) == 0) {
+                    return BANK_ICON[loop]
+                }
+                loop++
+            }
+            return 0
+        }
 
-    val BANK_ACCOUNT = arrayOf(
-            R.string.hint_bank_acc_bca,
-            R.string.hint_bank_acc_dummy,
-            R.string.hint_bank_acc_dummy
-    )
+        val BANK_NAME = arrayOf(
+                "Bank Central Asia",
+                "Bank Mandiri",
+                "BNI"
+        )
 
-    val HINT_ATM = arrayListOf<Int>(
-            -1,
-            R.string.hint_atm1_mandiri,
-            R.string.hint_atm1_bni
-    )
-    val HINT_MOBILE = arrayListOf<Int>(
-            -1,
-            R.string.hint_atm1_mandiri,
-            R.string.hint_atm1_bni
-    )
+        val BANK_CODE = arrayOf(
+                "BBCA",
+                "BMRI",
+                "BBNI"
+        )
+
+        val BANK_TOPUP_TYPE = arrayOf(
+                TopUpListAdapter.TYPE_MANUAL_TRANSFER,
+                TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT,
+                TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT
+        )
+
+        val BANK_ACCOUNT = arrayOf(
+                R.string.hint_bank_acc_bca,
+                R.string.hint_bank_acc_dummy,
+                R.string.hint_bank_acc_dummy
+        )
+
+        val HINT_ATM = arrayListOf<Int>(
+                -1,
+                R.string.hint_atm1_mandiri,
+                R.string.hint_atm1_bni
+        )
+        val HINT_MOBILE = arrayListOf<Int>(
+                -1,
+                R.string.hint_atm1_mandiri,
+                R.string.hint_atm1_bni
+        )
+    }
+
+    override fun getTrxRepository(): TrxRepository? {
+        return mViewModel.mRepository
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top_up)
         setSupportActionBar(toolbar)
-
+        mViewModel = ViewModelProviders.of(this).get(TopUpActivity.AppViewModel::class.java)
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragment, BankListFragment())
             commit()
@@ -81,6 +109,7 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
     }
 
     private fun showManualAmountDialog(position : Int) {
+        mViewModel.mSelectedPosition = position
         val dialog = Dialog(this, R.style.Dialog)
         dialog.setContentView(R.layout.dialog_input_amount)
         val window = dialog.window
@@ -96,35 +125,23 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
         val buttonOk : Button = dialog.findViewById(R.id.buttonOk)
         // if button is clicked, close the custom dialog
         buttonOk.setOnClickListener {_ ->
-            startManualFragment(position, editAmount.text.toString().toIntOrNull())
-            dialog.dismiss()
+            val amount = editAmount.text.toString().toIntOrNull()
+            if (amount != null) {
+                dialog.dismiss()
+                showProgress(true)
+                mPostTrx.postManualTopUp1(amount, BANK_CODE[mViewModel.mSelectedPosition],
+                        BANK_NAME[mViewModel.mSelectedPosition])
+            } else {
+                showToast(getString(R.string.invalid_amount))
+            }
+//            startManualFragment(position, editAmount.text.toString().toIntOrNull())
+//            dialog.dismiss()
         }
 
         dialog.show()
     }
 
-    private fun calculateExpired() : String {
-        var c = Calendar.getInstance()
 
-        c.add(Calendar.DATE, 3);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
-        val sdf1 = SimpleDateFormat("dd-MM-yyyy")
-        val output = sdf1.format(c.time)
-        return "$output 23:59 WIB"
-    }
-
-    private fun startManualFragment(position : Int, amount : Int?) {
-        var amt = 0
-        if (amount != null) amt = amount
-        val unique  = Random().nextInt(100)
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment, ManualFragment.newInstance(
-                BANK_ICON[position],
-                BANK_NAME[position],
-                arrayListOf<Int>(BANK_ACCOUNT[position]), amt, unique,
-                    calculateExpired()))
-                commit()
-            }
-    }
     override fun onClick(position : Int) {
         when (BANK_TOPUP_TYPE[position]) {
             TopUpListAdapter.TYPE_VIRTUAL_ACCOUNT -> {
@@ -148,15 +165,23 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            android.R.id.home -> {
-                super.onBackPressed()
-                return true
-            }
-        }
+    override fun getProgressBar(): ProgressBar? {
+        return progressBar
+    }
 
-        return super.onOptionsItemSelected(item)
+    override fun getOverlay(): View? {
+        return overlay
+    }
+
+    override fun next() {
+        //do nothing
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.send_payment, menu)
+        menu.removeItem(R.id.action_next)
+        menuNext = null
+        return true
     }
 
     class BankListFragment : Fragment() {
@@ -169,9 +194,9 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
             recyclerView = view.findViewById(R.id.recyclerView)
             recyclerView.layoutManager = LinearLayoutManager(context)
             val items = ArrayList<TopUpListAdapter.Item>()
-            for (i in 0 until parent.BANK_ICON.size) {
-                items.add(TopUpListAdapter.Item(parent.BANK_ICON[i], parent.BANK_NAME[i],
-                        parent.BANK_TOPUP_TYPE[i]))
+            for (i in 0 until TopUpActivity.BANK_ICON.size) {
+                items.add(TopUpListAdapter.Item(TopUpActivity.BANK_ICON[i], TopUpActivity.BANK_NAME[i],
+                        TopUpActivity.BANK_TOPUP_TYPE[i]))
             }
             mAdapter = TopUpListAdapter(context!!, items)
             mAdapter.listener = parent
@@ -258,20 +283,20 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
         companion object {
             const val BANK : String = "bank"
             const val ICON : String = "icon"
-            const val HINTS : String = "hints" //0: account number
+            const val ACCOUNT : String = "acc" //0: account number
             const val AMOUNT : String = "amount"
             const val UNIQUE : String = "unique"
             const val EXPIRED : String = "exp"
 
             fun newInstance(iconId : Int, bank : String,
-                            hintId : ArrayList<Int>,
+                            bankAccount : String,
                             amount : Int, unique : Int,
                             expired : String) : ManualFragment {
                 val f = ManualFragment()
                 val args = Bundle().apply {
                     putInt(ICON, iconId)
                     putString(BANK, bank)
-                    putIntegerArrayList(HINTS, hintId)
+                    putString(ACCOUNT, bankAccount)
                     putInt(AMOUNT, amount)
                     putInt(UNIQUE, unique)
                     putString(EXPIRED, expired)
@@ -302,7 +327,8 @@ class TopUpActivity : AppCompatActivity(), TopUpListAdapter.OnClickListener {
             view.findViewById<TextView>(R.id.textExpired).text =
                     context!!.resources.getString(R.string.before) +
                     " : " + arguments?.getString(EXPIRED)
-            view.findViewById<TextView>(R.id.textAmount).text = Utils.currencyString(amount + unique)
+            view.findViewById<TextView>(R.id.textAmount).text = Utils.currencyString(amount)
+            view.findViewById<TextView>(R.id.textBankAccount).text = arguments?.getString(ACCOUNT)
             return view
         }
     }

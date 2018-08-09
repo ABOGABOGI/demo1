@@ -14,6 +14,8 @@ import com.solarnet.demo.activity.TrxActivity
 import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.util.Utils
 import kotlinx.android.synthetic.main.item_trx_list.view.*
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.*
 
 class TrxListAdapter(context : Context, data : List<Trx>) :
         RecyclerView.Adapter<TrxListAdapter.ViewHolder>() {
@@ -53,7 +55,7 @@ class TrxListAdapter(context : Context, data : List<Trx>) :
         holder.title.text = item.title
         holder.amount.text = Utils.currencyString(item.amount)
         holder.message.text = item.message
-        holder.date.text = "Today"
+        holder.date.text = PrettyTime(Locale.getDefault()).format(item.createdDate)
     }
 
     fun setItems(data : List<Trx>) {

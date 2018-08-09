@@ -81,6 +81,14 @@
         app:layout_constraintTop_toBottomOf="@id/text_label1"
         />
 
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textMessage"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:background="@drawable/rec_box_content"
+        />
 
     <TextView
         android:paddingTop="@dimen/activity_view_double_vspacing"
@@ -90,7 +98,7 @@
         android:text="@string/status"
         android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textMessage"
+        app:layout_constraintTop_toBottomOf="@id/fragment"
         />
     <TextView
         android:id="@+id/textStatus"

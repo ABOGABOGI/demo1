@@ -52,18 +52,27 @@
             />
         <TextView
             android:id="@+id/itemTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/itemIcon"
             android:layout_toRightOf="@id/itemIcon"
-            android:layout_toStartOf="@id/itemAmount"
-            android:layout_toLeftOf="@id/itemAmount"
             android:text="Top Up"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/item_margin_trxlist"
             />
-
+        <ImageView
+            android:id="@+id/itemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_alignTop="@id/itemTitle"
+            android:layout_alignBottom="@id/itemTitle"
+            android:layout_toRightOf="@id/itemTitle"
+            android:foregroundGravity="left"
+            app:srcCompat="@drawable/ic_check_circle"
+            android:tint="@color/green_800"
+            android:layout_marginLeft="@dimen/item_grid_vspacing"
+            />
         <TextView
             android:id="@+id/itemMessage"
             android:layout_width="match_parent"

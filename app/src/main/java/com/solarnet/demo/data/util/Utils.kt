@@ -18,6 +18,7 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.solarnet.demo.data.product.Product
 import java.nio.charset.Charset
+import java.text.SimpleDateFormat
 
 
 class Utils {
@@ -33,14 +34,10 @@ class Utils {
             return str.replace("[^\\d]".toRegex(), "").toIntOrNull()
         }
 
-        fun formatDate(date : Date, isCapitalize: Boolean = false) : String {
-            var res = "Today"
+        fun formatDate(date : Date) : String {
+            val sdf = SimpleDateFormat("dd-M-yyyy HH:mm:ss")
 
-            if (isCapitalize) {
-                res = res.toUpperCase()
-            }
-
-            return res
+            return sdf.format(date)
         }
 
         fun filterNonDigit(input : String) : String {

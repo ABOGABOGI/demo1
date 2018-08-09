@@ -77,12 +77,12 @@
                         />
                 </android.support.v7.widget.CardView>
                 <TextView
-                    android:id="@+id/textBallance"
+                    android:id="@+id/textBalance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:textColor="@color/colorAccent"
-                    android:text="Rp. 1.200.000"
+                    android:text="-"
                     android:layout_toLeftOf="@id/buttonTopUp"
                     android:layout_toRightOf="@id/textLabel1"
                     android:textSize="18sp"
