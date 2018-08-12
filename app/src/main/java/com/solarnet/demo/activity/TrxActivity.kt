@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -24,6 +25,9 @@ import com.solarnet.demo.data.util.Utils
 import kotlinx.android.synthetic.main.activity_trx.*
 import org.json.JSONObject
 import java.util.ArrayList
+import android.content.Intent
+import android.net.Uri
+
 
 class TrxActivity : AppCompatActivity() {
     companion object {
@@ -84,6 +88,10 @@ class TrxActivity : AppCompatActivity() {
                         jsonData.getInt("unique"),
                         Utils.formatDate(trx.expiredDate!!))
             }
+            R.drawable.ic_invoice -> {
+                val jsonData = JSONObject(trx.data)
+                InvoiceFragment.newInstance(jsonData.getString("url"))
+            }
             else -> null
         }
         if (fragment != null) {
@@ -104,4 +112,33 @@ class TrxActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
+    class InvoiceFragment : Fragment() {
+        companion object {
+            val URL = "url"
+            fun newInstance(url : String) : InvoiceFragment {
+                val f = InvoiceFragment()
+                val args = Bundle().apply {
+                    putString(URL, url)
+                }
+                f.arguments = args
+                return f
+            }
+        }
+
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
+            val view = inflater.inflate(R.layout.fragment_trxinvoice, container, false)
+            val buttonLink : Button = view.findViewById(R.id.buttonLink)
+            buttonLink.text = arguments?.getString(URL)
+            buttonLink.setOnClickListener { v ->
+                val url = (v as Button).text.toString()
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }
+            return view
+        }
+
+    }
 }

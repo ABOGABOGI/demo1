@@ -1,5 +1,7 @@
 package com.solarnet.demo.activity.payment
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,22 +12,21 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.solarnet.demo.R
 
 import kotlinx.android.synthetic.main.activity_invoice.*
-import android.widget.Toast
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.CardView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.EditText
+import android.widget.*
 import com.solarnet.demo.adapter.IconListAdapter
+import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
+import kotlinx.android.synthetic.main.fragment_invoice.*
 import java.util.*
 
 
@@ -34,16 +35,21 @@ class InvoiceActivity : BaseActivity() {
             arrayOf(
                     IconListAdapter.Item(R.drawable.ic_bank_bca, "Bank Central Asia", "BBCA"),
                     IconListAdapter.Item(R.drawable.ic_bank_mandiri, "Bank Mandiri", "BMRI"),
-                    IconListAdapter.Item(R.drawable.ic_bank_bca, "Bank Negara Indonesia", "BBNI")
+                    IconListAdapter.Item(R.drawable.ic_bank_bni, "BNI", "BBNI")
             )
     lateinit var mBankAdapter : IconListAdapter<IconListAdapter.Item>
     lateinit var mViewModel : AppViewModel
 
-    class AppViewModel : ViewModel() {
+    class AppViewModel(application : Application) : AndroidViewModel(application) {
         var indexBank : Int = 0
         var amount : Int = 0
         var accNumber : String = ""
         var message : String = ""
+        var mTrxRepository = TrxRepository(application)
+    }
+
+    override fun getTrxRepository(): TrxRepository? {
+        return mViewModel.mTrxRepository
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +67,10 @@ class InvoiceActivity : BaseActivity() {
     }
 
     override fun next() {
-
+        showProgress(true)
+        mPostTrx.postInvoice(Utils.fromCurrencyString(editAmount.text.toString())!!,
+                textBank.text.toString(), editAccNumber.text.toString(),
+                editMessage.text.toString())
     }
 
     class InputFragment : Fragment() {

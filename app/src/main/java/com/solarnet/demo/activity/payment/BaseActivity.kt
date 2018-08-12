@@ -21,8 +21,22 @@ abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
     var menuNext : MenuItem? = null
     var mPostTrx = PostTrx().apply { listener = this@BaseActivity }
     abstract fun next()
-    open fun getProgressBar() : ProgressBar? { return progressBar }
-    open fun getOverlay() : View? { return overlay }
+    open fun getProgressBar() : ProgressBar? {
+        try {
+            return findViewById(R.id.progressBar)
+        } catch (e : Exception) {}
+        return null
+    }
+
+    open fun getOverlay() : View? {
+
+        try {
+            val view : View = findViewById(R.id.overlay)
+            return view
+        } catch (e : Exception) {}
+        return null
+    }
+
     open fun back() {
         super.onBackPressed()
     }

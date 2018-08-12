@@ -41,6 +41,7 @@ class PostTrx(
     private val URL_TOPUP_1 = "topup1"
     private val URL_PRICE = "price"
     private val URL_PAYMENTQR = "payment"
+    private val URL_INVOICE = "invoice"
 
     var listener : TrxListener? = null
     private val callback : Callback = object : Callback {
@@ -148,6 +149,20 @@ class PostTrx(
             put("code", code)
         }
         sendRequest(url, json, callback)
+    }
+
+    fun postInvoice(amount : Int, bankName : String, bankAccount : String, message : String)
+            : Boolean {
+        val url = MyApp.URL + URL_INVOICE
+        val json = JSONObject().apply {
+            put("token", mToken)
+            put("amount", amount)
+            put("bankName", bankName)
+            put("bankAccount", bankAccount)
+            put("message", message)
+        }
+        sendRequest(url, json)
+        return true
     }
 
     fun postSendMoney(contact : Contact, amount : Int) : Boolean {
