@@ -28,12 +28,15 @@ import android.widget.ImageView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
+import android.widget.Toast
+
+
 
 
 
 
 class MainActivity : AppCompatActivity() {
-    private var mIsNavVisible = true
+    private var mIsNavVisible = false
     private var offsetScrollUp : Int = -1 //offset for animating navigation bar up
     private var offsetScrollDown : Int = -1 //offset for animating navigation bar down
 
@@ -228,6 +231,16 @@ class MainActivity : AppCompatActivity() {
             buttonStory.setColorFilter(Color.WHITE)
         } else {
             buttonStory.setColorFilter(resources.getColor(R.color.softPurple))
+        }
+    }
+
+    private var back_pressed: Long = 0
+    override fun onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, "Press once again to exit", Toast.LENGTH_SHORT).show()
+            back_pressed = System.currentTimeMillis()
         }
     }
 }
