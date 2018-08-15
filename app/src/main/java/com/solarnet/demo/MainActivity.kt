@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -29,10 +30,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
 import android.widget.Toast
-
-
-
-
+import com.solarnet.demo.activity.ProfileActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -122,6 +120,9 @@ class MainActivity : AppCompatActivity() {
         buttonPayment.setOnClickListener(onClickNavigationButton)
         buttonChat.setOnClickListener(onClickNavigationButton)
         buttonStory.setOnClickListener(onClickNavigationButton)
+
+//        cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
+        
 
         adapterViewPager = MainPagerAdapter(supportFragmentManager, mOnScrollListener)
         viewPager.adapter = adapterViewPager
