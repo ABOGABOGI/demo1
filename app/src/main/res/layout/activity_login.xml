@@ -12,13 +12,12 @@
         android:background="#444444"
         android:padding="25dp"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:textColor="#6dffbf"
-            android:padding="30dp"
-            android:text="Login"/>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo"/>
+        
         <EditText
             android:id="@+id/et_user_name"
             android:hint="User Name"
@@ -49,6 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/sign_up_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please Sign up if you dont have account"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/holo_blue_bright"
+            android:clickable="true"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

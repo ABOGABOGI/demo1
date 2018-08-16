@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
@@ -22,6 +23,7 @@ class LoginAcitivty : AppCompatActivity(){
         var et_user_name = findViewById(R.id.et_user_name) as EditText
         var et_password = findViewById(R.id.et_password) as EditText
         var btn_submit = findViewById(R.id.btn_submit) as Button
+        var txt_signup = findViewById(R.id.sign_up_edittext) as TextView
 
         // set on-click listener
         btn_submit.setOnClickListener {
@@ -33,6 +35,10 @@ class LoginAcitivty : AppCompatActivity(){
                 startActivity(Intent(this@LoginAcitivty, MainActivity::class.java))
             }else{
                 Toast.makeText(applicationContext, "Please check your username and password ", Toast.LENGTH_SHORT).show()
+            }
+
+            txt_signup.setOnClickListener {
+                Toast.makeText(this@LoginAcitivty, "Please Sign in our Website", Toast.LENGTH_LONG).show()
             }
         }
     }
