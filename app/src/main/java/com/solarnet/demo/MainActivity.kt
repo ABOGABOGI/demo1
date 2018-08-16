@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         buttonStory.setOnClickListener(onClickNavigationButton)
 
 //        cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
-        
+
 
         adapterViewPager = MainPagerAdapter(supportFragmentManager, mOnScrollListener)
         viewPager.adapter = adapterViewPager
