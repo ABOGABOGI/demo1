@@ -112,4 +112,5 @@
     <string name="transaction_id">Transaction Id</string>
     <string name="date">Date</string>
     <string name="invalid_amount">Invalid amount!</string>
+    <string name="storage_permission_denied_message">Storage</string>
 </resources>

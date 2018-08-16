@@ -3,18 +3,18 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="250dp"
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cardProfile"
+            android:id="@+id/ImageProfile"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:src="@drawable/profile_default"
-            android:layout_centerInParent="true" />
+            android:layout_marginTop="50dp"
+            android:src="@drawable/profile_default" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -22,18 +22,19 @@
             android:hint="Username"
             android:id="@+id/editview_profile"
             android:layout_below="@+id/cardProfile"
-            android:layout_centerInParent="true"/>
+            android:layout_gravity="center"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profile_button"
             android:layout_below="@+id/editview_profile"
-            android:layout_centerInParent="true"
-            android:text="Save"/>
+            android:text="Save"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

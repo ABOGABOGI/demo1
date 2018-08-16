@@ -121,8 +121,7 @@ class MainActivity : AppCompatActivity() {
         buttonChat.setOnClickListener(onClickNavigationButton)
         buttonStory.setOnClickListener(onClickNavigationButton)
 
-//        cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
-
+        cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
 
         adapterViewPager = MainPagerAdapter(supportFragmentManager, mOnScrollListener)
         viewPager.adapter = adapterViewPager
