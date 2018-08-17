@@ -23,5 +23,6 @@
         android:id="@+id/peopleName"
         app:layout_constraintTop_toBottomOf="@id/peopleImage"
         android:text="abc"
+        android:maxLines="2"
         />
 </android.support.constraint.ConstraintLayout>

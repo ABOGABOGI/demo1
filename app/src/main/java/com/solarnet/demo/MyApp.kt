@@ -3,6 +3,7 @@ package com.solarnet.demo
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.solarnet.demo.data.story.People
 
 class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
@@ -46,6 +47,11 @@ class MyApp : Application() {
         val edit = mPref.edit()
         edit.putInt(PREF_BALANCE, balance)
         edit.apply()
+    }
+
+    fun getMyProfile() : People {
+        return People("opt01", "Optimus Prime",
+                "http://demo.sistemonline.biz.id/public/people/images/mypic.jpg")
     }
 
 }

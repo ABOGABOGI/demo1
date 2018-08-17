@@ -30,6 +30,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.solarnet.demo.activity.ProfileActivity
 
 
@@ -162,6 +163,8 @@ class MainActivity : AppCompatActivity() {
             fab.collapse()
         }
 
+        val me = MyApp.instance.getMyProfile()
+        Glide.with(this).load(me.picture).into(cardProfile)
     }
 
     private fun showPopUp(sourceView : View, show : Boolean) {

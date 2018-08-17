@@ -4,7 +4,7 @@ import android.arch.persistence.room.Ignore
 import java.util.Date
 
 class Story(
-    var people : People,
+    var people : People?,
     var quote : String?,
     var mediaType : Int = MEDIA_TYPE_NONE,
     var media : String?,

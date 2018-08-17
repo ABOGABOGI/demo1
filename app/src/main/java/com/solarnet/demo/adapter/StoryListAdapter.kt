@@ -27,11 +27,12 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.target.Target
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
-
+import com.solarnet.demo.data.story.People
 
 class StoryListAdapter(
         val mContext : Context,
         val mVideoPlayerManager: VideoPlayerManager<*>,
+        val mTopUsers : List<People>,
         var mData : List<Story> = ArrayList<Story>()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -78,17 +79,19 @@ class StoryListAdapter(
             }
 
             h.submitted.text = PrettyTime(Locale.getDefault()).format(data.submitted)
-            h.peopleName.text = data.people.name
-            if (data.people.picture != null) {
-                Glide.with(mContext).load(data.people.picture).apply(RequestOptions().apply {
-                    placeholder(R.drawable.profile_default)
-                    error(R.drawable.profile_default)
-                }).into(h.peopleImage)
-            } else {
-                // make sure Glide doesn't load anything into this view until told otherwise
-                Glide.with(mContext).clear(holder.thumbnail)
-                // remove the placeholder (optional); read comments below
-                h.thumbnail.setImageResource(R.drawable.profile_default)
+            if (data.people != null) {
+                h.peopleName.text = data.people!!.name
+                if (data.people!!.picture != null) {
+                    Glide.with(mContext).load(data.people!!.picture).apply(RequestOptions().apply {
+                        placeholder(R.drawable.profile_default)
+                        error(R.drawable.profile_default)
+                    }).into(h.peopleImage)
+                } else {
+                    // make sure Glide doesn't load anything into this view until told otherwise
+                    Glide.with(mContext).clear(holder.thumbnail)
+                    // remove the placeholder (optional); read comments below
+                    h.thumbnail.setImageResource(R.drawable.profile_default)
+                }
             }
             if (data.mediaType == Story.MEDIA_TYPE_NONE) {
                 h.thumbnail.visibility = View.GONE
@@ -139,11 +142,11 @@ class StoryListAdapter(
             val h = holder as ViewHolder2
             h.recyclerView.layoutManager = LinearLayoutManager(mContext,
                     LinearLayoutManager.HORIZONTAL, false)
-            h.recyclerView.adapter = TopUserAdapter(mContext)
+            h.recyclerView.adapter = TopUserAdapter(mContext, mTopUsers)
         }
     }
 
-    inner class ViewHolder1(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder1(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val thumbnail : ImageView = itemView.findViewById(R.id.imageThumbnail)
         val play : ImageView = itemView.findViewById(R.id.imagePlay)
         val progressBar  : ProgressBar = itemView.findViewById(R.id.progressBar)
@@ -158,7 +161,7 @@ class StoryListAdapter(
         val recyclerView : RecyclerView = itemView.findViewById(R.id.recyclerView)
     }
 
-    inner class ThumbnailListener(
+    class ThumbnailListener(
             val url : String
     ) : RequestListener<Drawable> {
         init {
@@ -175,7 +178,8 @@ class StoryListAdapter(
         }
 
     }
-    inner class MediaListener(
+
+    class MediaListener(
             val videoPlayerManager: VideoPlayerManager<*>,
             val videoPlayerView : VideoPlayerView,
             val imagePlay : ImageView?,
@@ -199,6 +203,7 @@ class StoryListAdapter(
 
         override fun onErrorMainThread(what: Int, extra: Int) {
             //Toast.makeText(mContext, "Failed streaming!", Toast.LENGTH_SHORT).show()
+
             videoPlayerView.visibility = View.INVISIBLE
             imagePlay?.visibility = View.VISIBLE
             progressPlay?.visibility = View.INVISIBLE

@@ -73,9 +73,8 @@ class StoryFragment : Fragment() {
         val suneo = People("sun01", "Suneo", "http://demo.sistemonline.biz.id/public/people/images/suneo.jpg")
         val godzilla = People("god01", "Blue Godzilla", "http://demo.sistemonline.biz.id/public/people/images/godzilla.jpg")
         val minions = People("min01", "Yellow Minions", "http://demo.sistemonline.biz.id/public/people/images/minions.jpg")
-        val cal = Calendar.getInstance();
+        val cal = Calendar.getInstance()
         //cal.add(Calendar.DATE, -30);
-        val dateBefore30Days = cal.time
         list.add(Story(suneo, "Listening to a story", Story.MEDIA_TYPE_PICTURE,
                 "http://demo.sistemonline.biz.id/public/stories/images/lion-sample.png",
                 "http://demo.sistemonline.biz.id/public/stories/images/lion-sample.png",
@@ -105,7 +104,8 @@ class StoryFragment : Fragment() {
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.addItemDecoration(ItemOffsetDecoration(context!!, R.dimen.nav_height))
         recyclerView.layoutManager = LinearLayoutManager(context)!!
-        recyclerView.adapter = StoryListAdapter(context!!, mVideoPlayerManager, list)
+        recyclerView.adapter = StoryListAdapter(context!!, mVideoPlayerManager, initTopUsers(),
+                list)
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -117,40 +117,20 @@ class StoryFragment : Fragment() {
         return view
     }
 
-//    class MediaListener(
-//            val videoPlayerView : VideoPlayerView,
-//            val imagePlay : ImageView?,
-//            val progressPlay : ProgressBar?
-//    ) : MediaPlayerWrapper.MainThreadMediaPlayerListener {
-//        override fun onVideoSizeChangedMainThread(width: Int, height: Int) {
-//
-//        }
-//
-//        override fun onVideoPreparedMainThread() {
-//            Log.i("Test", "Prepared")
-//            videoPlayerView.visibility = View.VISIBLE
-//            progressPlay?.visibility = View.INVISIBLE
-//        }
-//
-//        override fun onVideoCompletionMainThread() {
-//            Log.i("Test", "Completed")
-//            videoPlayerView.visibility = View.INVISIBLE
-//            imagePlay?.visibility = View.VISIBLE
-//        }
-//
-//        override fun onErrorMainThread(what: Int, extra: Int) {
-//
-//        }
-//
-//        override fun onBufferingUpdateMainThread(percent: Int) {
-//            Log.i("Test", "Buffering: $percent")
-//            progressPlay?.progress = percent
-//        }
-//
-//        override fun onVideoStoppedMainThread() {
-//            videoPlayerView.visibility = View.INVISIBLE
-//            imagePlay?.visibility = View.VISIBLE
-//        }
-//
-//    }
+    private fun initTopUsers() : List<People> {
+        val result = ArrayList<People>()
+        result.add(People("god01", "Blue Godzilla",
+                "http://demo.sistemonline.biz.id/public/people/images/godzilla.jpg"))
+        result.add(People("sun01", "Suneo",
+                "http://demo.sistemonline.biz.id/public/people/images/suneo.jpg"))
+        result.add(People("min01", "Yellow Minions",
+                "http://demo.sistemonline.biz.id/public/people/images/minions.jpg"))
+        result.add(People("ron01", "Ronaldo",
+                "http://demo.sistemonline.biz.id/public/people/images/ronaldo.jpg"))
+        result.add(People("bob01", "Bob Dog",
+                "http://demo.sistemonline.biz.id/public/people/images/bobdog.jpg"))
+        result.add(People("rin01", "Rinoa",
+                "http://demo.sistemonline.biz.id/public/people/images/rinoa.jpg"))
+        return result
+    }
 }
