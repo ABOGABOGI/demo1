@@ -114,4 +114,5 @@
     <string name="invalid_amount">Invalid amount!</string>
 
     <string name="top_user">Top Users</string>
+    <string name="storage_permission_denied_message">Storage</string>
 </resources>

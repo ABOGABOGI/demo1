@@ -70,4 +70,8 @@ dependencies {
     //network and stucture
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+
+    //photo
+    compile 'com.facebook.fresco:fresco:1.4.0'
+    compile 'com.karumi:dexter:4.1.0'
 }

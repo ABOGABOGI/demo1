@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -28,9 +29,13 @@ import android.widget.ImageView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
+import android.widget.Toast
+import com.solarnet.demo.activity.ProfileActivity
+
+
 
 class MainActivity : AppCompatActivity() {
-    private var mIsNavVisible = true
+    private var mIsNavVisible = false
     private var offsetScrollUp : Int = -1 //offset for animating navigation bar up
     private var offsetScrollDown : Int = -1 //offset for animating navigation bar down
 
@@ -116,6 +121,8 @@ class MainActivity : AppCompatActivity() {
         buttonPayment.setOnClickListener(onClickNavigationButton)
         buttonChat.setOnClickListener(onClickNavigationButton)
         buttonStory.setOnClickListener(onClickNavigationButton)
+
+        cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
 
         adapterViewPager = MainPagerAdapter(supportFragmentManager, mOnScrollListener)
         viewPager.adapter = adapterViewPager
@@ -228,5 +235,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         setNavigationLayout(true)
+    }
+
+    private var back_pressed: Long = 0
+    override fun onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, "Press once again to exit", Toast.LENGTH_SHORT).show()
+            back_pressed = System.currentTimeMillis()
+        }
     }
 }
