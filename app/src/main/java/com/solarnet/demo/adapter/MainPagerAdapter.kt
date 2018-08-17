@@ -30,18 +30,22 @@ class MainPagerAdapter(fragmentManager: FragmentManager,
         when (position) {
             PAGE_PAYMENT // Fragment # 0 - This will show FirstFragment
             -> {
-                var fragment = PaymentFragment.newInstance()
+                val fragment = PaymentFragment.newInstance()
                 fragment.setOnScrollListener(mOnScrollListener)
                 return fragment
             }
             PAGE_CHAT // Fragment # 0 - This will show SecondFragment
             -> {
-                var f = ChatFragment.newInstance()
+                val f = ChatFragment.newInstance()
                 f.setOnScrollListener(mOnScrollListener)
                 return f
             }
             PAGE_STORY // Fragment # 1 - This will show ThirdFragment
-            -> return StoryFragment.newInstance()
+            -> {
+                val f = StoryFragment.newInstance()
+                f.setOnScrollListener(mOnScrollListener)
+                return f
+            }
             else -> return null
         }
     }

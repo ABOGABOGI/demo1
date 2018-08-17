@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.1.7'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation ("com.github.bumptech.glide:glide:4.7.1")
 
     //database
     implementation 'android.arch.persistence.room:runtime:1.1.1'

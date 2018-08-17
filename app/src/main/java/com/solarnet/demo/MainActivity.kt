@@ -29,9 +29,6 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.solarnet.demo.data.trx.TrxViewModel
 import io.codetail.animation.ViewAnimationUtils
 
-
-
-
 class MainActivity : AppCompatActivity() {
     private var mIsNavVisible = true
     private var offsetScrollUp : Int = -1 //offset for animating navigation bar up
@@ -229,5 +226,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             buttonStory.setColorFilter(resources.getColor(R.color.softPurple))
         }
+
+        setNavigationLayout(true)
     }
 }

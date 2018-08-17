@@ -29,7 +29,7 @@ class ItemOffsetDecoration(private val mItemOffset: Int) : RecyclerView.ItemDeco
 
         // first item
         if (itemPosition == 0) {
-            outRect.set(view.paddingLeft, mItemOffset + view.paddingTop, view.paddingRight, view.paddingBottom);
+            outRect.set(0, mItemOffset + 0, 0, 0)
         }
     }
 
