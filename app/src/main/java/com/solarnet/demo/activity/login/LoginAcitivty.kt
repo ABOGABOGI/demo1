@@ -17,6 +17,9 @@ import com.google.android.gms.common.api.Status
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.R
 import kotlinx.android.synthetic.main.activity_login.*
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+
+
 
 class LoginAcitivty : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener{
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
@@ -45,7 +48,6 @@ class LoginAcitivty : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         btn_logins?.setOnClickListener(View.OnClickListener {
             val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(signInIntent, RC_SIGN_IN)
-//            startActivity(Intent(this@LoginAcitivty, MainActivity::class.java))
         })
     }
 
@@ -61,7 +63,13 @@ class LoginAcitivty : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
         private fun handleSignInResult(result: GoogleSignInResult) {
         if (result.isSuccess) {
-            startActivity(Intent(this@LoginAcitivty, MainActivity::class.java))
+            val acct = result.signInAccount
+
+            val personName = acct!!.displayName
+            val personPhotoUrl = acct.getPhotoUrl()!!.toString()
+            val email = acct.email
         }
     }
+
+
 }

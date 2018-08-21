@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.gson.Gson
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.IconListAdapter
@@ -29,13 +30,14 @@ import com.solarnet.demo.data.util.Utils
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*
+import java.util.HashMap
 
 class WithdrawActivity : BaseActivity() {
     var BANKS : Array<IconListAdapter.Item> =
             arrayOf(
                     IconListAdapter.Item(R.drawable.ic_bank_bca, "Bank Central Asia", "BBCA"),
                     IconListAdapter.Item(R.drawable.ic_bank_mandiri, "Bank Mandiri", "BMRI"),
-                    IconListAdapter.Item(R.drawable.ic_bank_bca, "Bank Negara Indonesia", "BBNI")
+                    IconListAdapter.Item(R.drawable.ic_bank_bni, "Bank Negara Indonesia", "BBNI")
             )
     lateinit var mBankAdapter : IconListAdapter<IconListAdapter.Item>
     lateinit var mViewModel : AppViewModel
@@ -105,8 +107,10 @@ class WithdrawActivity : BaseActivity() {
                 withdrawActivity.menuNext!!.isEnabled = withdrawActivity.mViewModel.accNumber.isNotEmpty() &&
                         withdrawActivity.mViewModel.amount > 0 &&
                         withdrawActivity.mViewModel.balance >= 0
+
             }
         }
+
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
@@ -179,5 +183,17 @@ class WithdrawActivity : BaseActivity() {
             imageIcon.setImageResource(item.iconRes)
         }
     }
+
+//    <fusindo>
+//    <cmd>inq_remit_c2a.ID.014.5750340981.100000.asep.jl bungur besar.Jakarta Timur.DKI Jakarta.KTP.3275010908800311.jajang.KTP.3275010809810322</cmd>
+//    <trxid>kode transaksi</trxid>
+//    <user>username</user>
+//    <password>md5(password)</password>
+//    </fusindo>
+
+    class RequestTrax(var cmd: String, var kode_transaksi: Int, var username: String, var password: String)
+
+
+
 
 }

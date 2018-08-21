@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.StringRequest
 import com.solarnet.demo.R
 import com.solarnet.demo.activity.TrxActivity
 import com.solarnet.demo.data.trx.Trx
@@ -18,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_send_money.*
 import okhttp3.Call
 
 abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
+
+    internal lateinit var requestQueue: RequestQueue
     var menuNext : MenuItem? = null
     var mPostTrx = PostTrx().apply { listener = this@BaseActivity }
     abstract fun next()
@@ -111,5 +115,10 @@ abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
     override fun onFailure(call: Call?, exception: Exception?) {
         showProgress(false)
         showToast("Failed : ${exception?.message?.toString()}")
+    }
+
+    protected fun doAPI(stringRequest: StringRequest) {
+        stringRequest.tag = this.javaClass.simpleName
+        requestQueue.add(stringRequest)
     }
 }
