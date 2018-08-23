@@ -107,8 +107,20 @@ class WithdrawActivity : BaseActivity() {
                 withdrawActivity.menuNext!!.isEnabled = withdrawActivity.mViewModel.accNumber.isNotEmpty() &&
                         withdrawActivity.mViewModel.amount > 0 &&
                         withdrawActivity.mViewModel.balance >= 0
-
             }
+
+//            val name = "13F000910"
+//            val password = "E10ADC3949BA59ABBE56E057F20F883E"
+//            val kodetrx = "51121"
+//            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
+//                fun onSuccess(response: String) {
+//
+//                }
+//
+//                fun onFail(error: String) {
+//
+//                }
+//            }))
         }
 
 

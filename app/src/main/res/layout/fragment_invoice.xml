@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_chevron_right_24dp"
+                app:srcCompat="@drawable/ic_chevron_right_24dp"
                 android:tint="@android:color/secondary_text_light"
                 />
             <TextView
@@ -55,59 +55,115 @@
                 />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-    <TextView
-        android:layout_marginTop="@dimen/activity_view_double_vspacing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cardBank"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/text_label1"
-        android:text="@string/bank_account_number"
-        android:textColor="@color/colorPrimary"
-        />
-    <EditText
-        android:id="@+id/editAccNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_label1"
-        android:hint="@string/hint_bank_account_number"
-        android:inputType="numberDecimal"
-        />
-    <TextView
-        android:layout_marginTop="@dimen/activity_view_double_vspacing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editAccNumber"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/text_label2"
-        android:text="@string/amount"
-        android:textColor="@color/colorPrimary"
-        />
-    <EditText
-        android:id="@+id/editAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_label2"
-        android:hint="@string/hint_amount"
-        android:inputType="numberDecimal"
-        />
 
-    <TextView
-        android:layout_marginTop="@dimen/activity_view_double_vspacing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editAmount"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/text_label3"
-        android:text="@string/optional_message"
-        android:textColor="@color/colorPrimary"
-        />
-    <EditText
-        android:id="@+id/editMessage"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_label3"
-        android:hint="@string/hint_optional_message"
-        android:inputType="text"
-        />
+        android:layout_below="@+id/cardBank">
+
+        <LinearLayout
+            android:id="@+id/linear_withdraw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_view_double_vspacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardBank"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/text_label1"
+                android:text="@string/bank_account_number"
+                android:textColor="@color/colorPrimary"
+                />
+            <EditText
+                android:id="@+id/editAccNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_label1"
+                android:hint="@string/hint_bank_account_number"
+                android:inputType="numberDecimal"
+                />
+            <TextView
+                android:layout_marginTop="@dimen/activity_view_double_vspacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editAccNumber"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/text_label2"
+                android:text="@string/amount"
+                android:textColor="@color/colorPrimary"
+                />
+            <EditText
+                android:id="@+id/editAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_label2"
+                android:hint="@string/hint_amount"
+                android:inputType="numberDecimal"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_view_double_vspacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editAmount"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/text_nama_tujuan"
+                android:text=" Nama tujuan"
+                android:textColor="@color/colorPrimary"
+                />
+
+            <EditText
+                android:id="@+id/edit_nama_tujuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_nama_tujuan"
+                android:hint="input nama tujuan"
+                />
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_view_double_vspacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_nama_tujuan"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/text_ktp_tujuan"
+                android:text="KTP tujuan"
+                android:textColor="@color/colorPrimary"
+                />
+
+            <EditText
+                android:id="@+id/edit_ktp_tujuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_ktp_tujuan"
+                android:hint="input ktp tujuan"
+                />
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_view_double_vspacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_ktp_tujuan"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/text_label3"
+                android:text="@string/optional_message"
+                android:textColor="@color/colorPrimary"
+                />
+            <EditText
+                android:id="@+id/editMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_label3"
+                android:hint="@string/hint_optional_message"
+                android:inputType="text"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </RelativeLayout>

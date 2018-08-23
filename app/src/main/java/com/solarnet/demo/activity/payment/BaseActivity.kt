@@ -117,7 +117,7 @@ abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
         showToast("Failed : ${exception?.message?.toString()}")
     }
 
-    protected fun doAPI(stringRequest: StringRequest) {
+    public fun doAPI(stringRequest: StringRequest) {
         stringRequest.tag = this.javaClass.simpleName
         requestQueue.add(stringRequest)
     }
