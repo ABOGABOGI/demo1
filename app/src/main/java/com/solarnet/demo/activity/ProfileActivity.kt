@@ -111,7 +111,6 @@ class ProfileActivity : AppCompatActivity() {
         Log.d("fee",wallpaperDirectory.toString())
         if (!wallpaperDirectory.exists())
         {
-
             wallpaperDirectory.mkdirs()
         }
         try
