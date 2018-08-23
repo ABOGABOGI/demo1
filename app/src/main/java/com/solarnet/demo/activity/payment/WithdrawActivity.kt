@@ -111,21 +111,21 @@ class WithdrawActivity : BaseActivity() {
                         withdrawActivity.mViewModel.balance >= 0
             }
 
-            val name = Savings.getUsername()
-            val password = Savings.getPassword()
-            val nama_pengirim = Savings.getAccountname()
-            val account_pengirim = Savings.getAccountnumber()
-            val kodetrx = "51121"
-            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
-                fun onSuccess(response: String) {
-
-                }
-
-                fun onFail(error: String) {
-
-                }
-            }))
-        }
+//            val name = Savings.getUsername()
+//            val password = Savings.getPassword()
+//            val nama_pengirim = Savings.getAccountname()
+//            val account_pengirim = Savings.getAccountnumber()
+//            val kodetrx = "51121"
+//            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
+//                fun onSuccess(response: String) {
+//
+//                }
+//
+//                fun onFail(error: String) {
+//
+//                }
+//            }))
+//        }
 
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
