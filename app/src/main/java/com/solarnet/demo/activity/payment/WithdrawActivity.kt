@@ -27,6 +27,7 @@ import com.solarnet.demo.adapter.IconListAdapter
 import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
+import com.solarnet.demo.util.Savings
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*
@@ -110,18 +111,20 @@ class WithdrawActivity : BaseActivity() {
                         withdrawActivity.mViewModel.balance >= 0
             }
 
-//            val name = "13F000910"
-//            val password = "E10ADC3949BA59ABBE56E057F20F883E"
-//            val kodetrx = "51121"
-//            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
-//                fun onSuccess(response: String) {
-//
-//                }
-//
-//                fun onFail(error: String) {
-//
-//                }
-//            }))
+            val name = Savings.getUsername()
+            val password = Savings.getPassword()
+            val nama_pengirim = Savings.getAccountname()
+            val account_pengirim = Savings.getAccountnumber()
+            val kodetrx = "51121"
+            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
+                fun onSuccess(response: String) {
+
+                }
+
+                fun onFail(error: String) {
+
+                }
+            }))
         }
 
 
@@ -211,19 +214,21 @@ class WithdrawActivity : BaseActivity() {
         }
 
         object Accounts {
-            var commands: String? = null
-            var kodenegara: String? = null
-            var kodebank: String? = null
-            var accountno: String? = null
+            var cmd: String? = null
+            var kode_negara: String? = null
+            var kode_bank: String? = null
+            var no_rekening: String? = null
             var nominal: String? = null
-            var nama: String? = null
-            var alamat: String? = null
-            var kota: String? = null
-            var provinsi: String? = null
-            var accounttujuan: String? = null
-            var nama_tujuan: String? = null
+            var nama_pengirim: String? = null
+            var alamat_pengirim: String? = null
+            var kota_pengirim: String? = null
+            var provinsi_pengirim: String? = null
+            var id_pengirim: String? = null
+            var id_num_pengirim: String? = null
+            var nama_penerima: String? = null
+            var id_penerima: String? = null
             var identitycard: String? = null
-            var account_tujuan: String? = null
+            var id_numpenerima: String? = null
         }
     }
 
