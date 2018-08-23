@@ -30,6 +30,7 @@ import com.solarnet.demo.data.util.Utils
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*
+import java.util.ArrayList
 import java.util.HashMap
 
 class WithdrawActivity : BaseActivity() {
@@ -203,7 +204,28 @@ class WithdrawActivity : BaseActivity() {
 //    <password>md5(password)</password>
 //    </fusindo>
 
-    class RequestTrax(var cmd: String, var kode_transaksi: Int, var username: String, var password: String)
+
+    class Requesttrax(var cmd: CMD, var trxid: Int, var user: String, var password: String) {
+        class CMD {
+            var accounts: ArrayList<Accounts>? = null
+        }
+
+        object Accounts {
+            var commands: String? = null
+            var kodenegara: String? = null
+            var kodebank: String? = null
+            var accountno: String? = null
+            var nominal: String? = null
+            var nama: String? = null
+            var alamat: String? = null
+            var kota: String? = null
+            var provinsi: String? = null
+            var accounttujuan: String? = null
+            var nama_tujuan: String? = null
+            var identitycard: String? = null
+            var account_tujuan: String? = null
+        }
+    }
 
 
 
