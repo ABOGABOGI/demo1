@@ -85,11 +85,11 @@ class WithdrawActivity : BaseActivity() {
 
 
     class InputFragment : Fragment() {
-        val withdrawActivity : WithdrawActivity get() = (activity as WithdrawActivity)!!
+        val withdrawActivity: WithdrawActivity get() = (activity as WithdrawActivity)!!
 
-        private lateinit var textBalance : TextView
-        private lateinit var textProduct : TextView
-        private lateinit var imageIcon : ImageView
+        private lateinit var textBalance: TextView
+        private lateinit var textProduct: TextView
+        private lateinit var imageIcon: ImageView
 
         fun updateBalance() {
             withdrawActivity.mViewModel.balance = withdrawActivity.mViewModel.initBalance -
@@ -128,111 +128,78 @@ class WithdrawActivity : BaseActivity() {
 //        }
 
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_withdraw, container, false)
-            textProduct = view.findViewById(R.id.textBank)
-            imageIcon = view.findViewById(R.id.imageIcon)
-            textBalance = view.findViewById(R.id.textBalance)
-            val cardBank : CardView = view.findViewById(R.id.cardBank)
-            cardBank.setOnClickListener { _ ->
-                showBankList()
-            }
-
-            val editAccNumber : EditText = view.findViewById(R.id.editAccNumber)
-            editAccNumber.filters = arrayOf(DecimalDigitFilter())
-            editAccNumber.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    withdrawActivity.mViewModel.accNumber = s.toString()
-                    validateNext()
+            override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                                      savedInstanceState: Bundle?): View? {
+                val view = inflater.inflate(R.layout.fragment_withdraw, container, false)
+                textProduct = view.findViewById(R.id.textBank)
+                imageIcon = view.findViewById(R.id.imageIcon)
+                textBalance = view.findViewById(R.id.textBalance)
+                val cardBank: CardView = view.findViewById(R.id.cardBank)
+                cardBank.setOnClickListener { _ ->
+                    showBankList()
                 }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            })
-
-            val editAmount : EditText = view.findViewById(R.id.editAmount)
-            editAmount.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    var amount : Int? = Utils.fromCurrencyString(editAmount.text.toString())
-                    if (amount == null) amount = 0
-                    if (withdrawActivity.mViewModel.amount != amount) { //prevent endless loop
-                        withdrawActivity.mViewModel.amount = amount
-                        val str = Utils.currencyString(withdrawActivity.mViewModel.amount)
-                        editAmount.setText(str)
-                        editAmount.setSelection(str.length)
+                val editAccNumber: EditText = view.findViewById(R.id.editAccNumber)
+                editAccNumber.filters = arrayOf(DecimalDigitFilter())
+                editAccNumber.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        withdrawActivity.mViewModel.accNumber = s.toString()
                         validateNext()
                     }
-                }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-            })
-            updateBalance()
-            notifyProductUpdated()
-            return view
+                })
+
+                val editAmount: EditText = view.findViewById(R.id.editAmount)
+                editAmount.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        var amount: Int? = Utils.fromCurrencyString(editAmount.text.toString())
+                        if (amount == null) amount = 0
+                        if (withdrawActivity.mViewModel.amount != amount) { //prevent endless loop
+                            withdrawActivity.mViewModel.amount = amount
+                            val str = Utils.currencyString(withdrawActivity.mViewModel.amount)
+                            editAmount.setText(str)
+                            editAmount.setSelection(str.length)
+                            validateNext()
+                        }
+                    }
+
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                })
+                updateBalance()
+                notifyProductUpdated()
+                return view
+            }
+
+
+            private fun showBankList() {
+                var builder = AlertDialog.Builder(activity!!)
+                builder.setTitle(resources.getString(R.string.select_bank))
+                builder.setAdapter(withdrawActivity.mBankAdapter,
+                        DialogInterface.OnClickListener { dialog, item ->
+
+                            withdrawActivity.mViewModel.indexBank = item
+                            notifyProductUpdated()
+                        })
+                builder.show()
+            }
+
+
+            private fun notifyProductUpdated() {
+                val index = withdrawActivity.mViewModel.indexBank
+                var item = withdrawActivity.BANKS[index]
+                textProduct.text = item.text
+                imageIcon.setImageResource(item.iconRes)
+            }
         }
 
 
-        private fun showBankList() {
-            var builder = AlertDialog.Builder(activity!!)
-            builder.setTitle(resources.getString(R.string.select_bank))
-            builder.setAdapter(withdrawActivity.mBankAdapter,
-                    DialogInterface.OnClickListener {
-                        dialog, item ->
-
-                        withdrawActivity.mViewModel.indexBank = item
-                        notifyProductUpdated()
-                    })
-            builder.show()
-        }
-
-
-        private fun notifyProductUpdated() {
-            val index = withdrawActivity.mViewModel.indexBank
-            var item = withdrawActivity.BANKS[index]
-            textProduct.text = item.text
-            imageIcon.setImageResource(item.iconRes)
-        }
     }
 
-//    <fusindo>
-//    <cmd>inq_remit_c2a.ID.014.5750340981.100000.asep.jl bungur besar.Jakarta Timur.DKI Jakarta.KTP.3275010908800311.jajang.KTP.3275010809810322</cmd>
-//    <trxid>kode transaksi</trxid>
-//    <user>username</user>
-//    <password>md5(password)</password>
-//    </fusindo>
-
-
-    class Requesttrax(var cmd: CMD, var trxid: Int, var user: String, var password: String) {
-        class CMD {
-            var accounts: ArrayList<Accounts>? = null
-        }
-
-        object Accounts {
-            var cmd: String? = null
-            var kode_negara: String? = null
-            var kode_bank: String? = null
-            var no_rekening: String? = null
-            var nominal: String? = null
-            var nama_pengirim: String? = null
-            var alamat_pengirim: String? = null
-            var kota_pengirim: String? = null
-            var provinsi_pengirim: String? = null
-            var id_pengirim: String? = null
-            var id_num_pengirim: String? = null
-            var nama_penerima: String? = null
-            var id_penerima: String? = null
-            var identitycard: String? = null
-            var id_numpenerima: String? = null
-        }
     }
-
-
-
-
-}
