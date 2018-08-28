@@ -2,35 +2,39 @@ package com.solarnet.demo.activity.payment
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
 import android.graphics.Color
+import android.net.UrlQuerySanitizer
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.CardView
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.gson.Gson
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.IconListAdapter
 import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
+//import com.solarnet.demo.util.DoApi
 import com.solarnet.demo.util.Savings
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -43,6 +47,9 @@ class WithdrawActivity : BaseActivity() {
             )
     lateinit var mBankAdapter : IconListAdapter<IconListAdapter.Item>
     lateinit var mViewModel : AppViewModel
+
+
+
 
     class AppViewModel(application: Application) : AndroidViewModel(application) {
         var indexBank : Int = 0
@@ -110,25 +117,43 @@ class WithdrawActivity : BaseActivity() {
                         withdrawActivity.mViewModel.amount > 0 &&
                         withdrawActivity.mViewModel.balance >= 0
             }
-
-//            val name = Savings.getUsername()
+////            lateinit var doAPI : DoApi
+//            val name = Requesttrax.Accounts.nama_pengirim
 //            val password = Savings.getPassword()
-//            val nama_pengirim = Savings.getAccountname()
-//            val account_pengirim = Savings.getAccountnumber()
+//            val nama_pengirim = Requesttrax.Accounts.nama_penerima
+//            val account_pengirim = Requesttrax.Accounts.id_num_pengirim
+//            val command = "/inq_remit_c2a"
 //            val kodetrx = "51121"
-//            doAPI(DoAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
-//                fun onSuccess(response: String) {
-//
+////            doAPI(doAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
+////                fun onSuccess(response: String) {
+////
+////                }
+////
+////                fun onFail(error: String) {
+////
+////                }
+////            }))
+//           var reqparam = {
+//               name
+//               password
+//           }
+//            val data = {
+//                nama_pengirim
+//                account_pengirim
+//            }
+//            val mUrl = URL("devil.fusindosoka.com/fush2h/fusindo.php" + command)
+//            with(mUrl.openConnection()as HttpURLConnection){
+//                requestMethod = "GET"
+//                Log.d("responsecode", "$responseCode")
+//                BufferedReader (InputStreamReader(inputStream)).use {
+//                    val response = StringBuffer()
+//                    Log.d("status", response.toString())
 //                }
-//
-//                fun onFail(error: String) {
-//
-//                }
-//            }))
-//        }
+//            }
 
+        }
 
-            override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                       savedInstanceState: Bundle?): View? {
                 val view = inflater.inflate(R.layout.fragment_withdraw, container, false)
                 textProduct = view.findViewById(R.id.textBank)
@@ -199,7 +224,29 @@ class WithdrawActivity : BaseActivity() {
             }
         }
 
+    class Requesttrax(var cmd: CMD, var trxid: Int, var user: String, var password: String) {
+        class CMD {
+            var accounts: ArrayList<Accounts>? = null
+        }
 
+        object Accounts {
+            var cmd: String? = null
+            var kode_negara: String? = null
+            var kode_bank: String? = null
+            var no_rekening: String? = null
+            var nominal: String? = null
+            var nama_pengirim: String? = null
+            var alamat_pengirim: String? = null
+            var kota_pengirim: String? = null
+            var provinsi_pengirim: String? = null
+            var id_pengirim: String? = null
+            var id_num_pengirim: String? = null
+            var nama_penerima: String? = null
+            var id_penerima: String? = null
+            var identitycard: String? = null
+            var id_numpenerima: String? = null
+        }
     }
+
 
     }

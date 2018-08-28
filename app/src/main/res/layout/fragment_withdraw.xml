@@ -101,52 +101,52 @@
         android:inputType="numberDecimal"
         />
 
-    <TextView
-    android:layout_marginTop="@dimen/activity_view_double_vspacing"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/editAmount"
-    android:layout_alignParentLeft="true"
-    android:id="@+id/text_nama_tujuan"
-    android:text=" Nama tujuan"
-    android:textColor="@color/colorPrimary"
-    />
+    <!--<TextView-->
+    <!--android:layout_marginTop="@dimen/activity_view_double_vspacing"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/editAmount"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:id="@+id/text_nama_tujuan"-->
+    <!--android:text=" Nama tujuan"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--/>-->
 
-    <EditText
-    android:id="@+id/edit_nama_tujuan"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/text_nama_tujuan"
-    android:hint="input nama tujuan"
-    />
+    <!--<EditText-->
+    <!--android:id="@+id/edit_nama_tujuan"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/text_nama_tujuan"-->
+    <!--android:hint="input nama tujuan"-->
+    <!--/>-->
 
-    <TextView
-    android:layout_marginTop="@dimen/activity_view_double_vspacing"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/edit_nama_tujuan"
-    android:layout_alignParentLeft="true"
-    android:id="@+id/text_ktp_tujuan"
-    android:text="KTP tujuan"
-    android:textColor="@color/colorPrimary"
-    />
+    <!--<TextView-->
+    <!--android:layout_marginTop="@dimen/activity_view_double_vspacing"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/edit_nama_tujuan"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:id="@+id/text_ktp_tujuan"-->
+    <!--android:text="KTP tujuan"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--/>-->
 
-    <EditText
-    android:id="@+id/edit_ktp_tujuan"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/text_ktp_tujuan"
-    android:hint="input ktp tujuan"
-    android:inputType="number"
-    android:maxLength="14"
-    />
+    <!--<EditText-->
+    <!--android:id="@+id/edit_ktp_tujuan"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/text_ktp_tujuan"-->
+    <!--android:hint="input ktp tujuan"-->
+    <!--android:inputType="numberDecimal"-->
+    <!--android:maxLength="14"-->
+    <!--/>-->
 
 
     <TextView
         android:layout_marginTop="@dimen/activity_view_double_vspacing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_ktp_tujuan"
+        android:layout_below="@id/editAmount"
         android:layout_alignParentLeft="true"
         android:id="@+id/text_label3"
         android:text="@string/remaining_balance"
