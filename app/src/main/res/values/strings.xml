@@ -206,4 +206,21 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
+
+    <!--resources for intro-->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome</string>
+    <string name="slide_1_desc">The easiest way to improve your enteurprenership</string>
+
+    <string name="slide_2_title">Multi Payment</string>
+    <string name="slide_2_desc">Easy to pay many biller all you needs</string>
+
+    <string name="slide_3_title">Smart Choice</string>
+    <string name="slide_3_desc">Easiest to transfer your money to another account</string>
+
 </resources>
