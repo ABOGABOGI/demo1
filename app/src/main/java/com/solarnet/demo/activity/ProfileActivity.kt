@@ -1,6 +1,7 @@
 package com.solarnet.demo.activity
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -12,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.solarnet.demo.R
+import com.solarnet.demo.util.Savings
 import kotlinx.android.synthetic.main.activity_profil.*
 import kotlinx.android.synthetic.main.icon_list_item.*
 import java.io.ByteArrayOutputStream
@@ -19,12 +21,18 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import android.content.SharedPreferences
+
+
 
 class ProfileActivity : AppCompatActivity() {
 
     private val GALLERY = 1
     private val CAMERA = 2
+    internal var savings: Savings? = null
 
+    private val SHARED_PREF_NAME = "mysharedpref"
+    private val KEY_NAME = "keyname"
 
 
     override fun  onCreate(savedInstanceState:Bundle?){
@@ -33,24 +41,24 @@ class ProfileActivity : AppCompatActivity() {
         ImageProfile.setOnClickListener{
             showdialog()
         }
+
+        val v = findViewById(R.id.input_profile) as View
         var editview_profile = findViewById(R.id.editview_profile) as EditText
         var textview_profile = findViewById(R.id.textview_profile) as TextView
-        var scrool_profile = findViewById(R.id.scroolview_edit_profile) as ScrollView
+        textview_profile.setText(Savings.getName())
         var save_profile = findViewById(R.id.save_button) as Button
         var btn_edit = findViewById(R.id.edit_profile) as ImageButton
         btn_edit.setOnClickListener{
-           editview_profile.visibility = View.VISIBLE
-           textview_profile.visibility = View.GONE
-            scrool_profile.visibility = View.VISIBLE
+            v.visibility = View.VISIBLE
             save_profile.visibility = View.VISIBLE
         }
 
         save_profile.setOnClickListener {
-            editview_profile.visibility = View.GONE
-            textview_profile.visibility = View.VISIBLE
-            scrool_profile.visibility = View.GONE
-            save_profile.visibility = View.GONE
+            v.visibility = View.GONE
+            save_profile.visibility = View.INVISIBLE
         }
+
+
     }
 
 

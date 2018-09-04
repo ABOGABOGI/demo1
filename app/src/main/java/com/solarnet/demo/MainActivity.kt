@@ -32,7 +32,7 @@ import io.codetail.animation.ViewAnimationUtils
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.solarnet.demo.activity.ProfileActivity
-
+import com.solarnet.demo.util.Savings
 
 
 class MainActivity : AppCompatActivity() {
@@ -122,7 +122,6 @@ class MainActivity : AppCompatActivity() {
         buttonPayment.setOnClickListener(onClickNavigationButton)
         buttonChat.setOnClickListener(onClickNavigationButton)
         buttonStory.setOnClickListener(onClickNavigationButton)
-
         cardProfile.setOnClickListener({v-> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))})
 
         adapterViewPager = MainPagerAdapter(supportFragmentManager, mOnScrollListener)

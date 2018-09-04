@@ -14,10 +14,10 @@ class SplashScreen : AppCompatActivity(){
     val runnable = Runnable {
         prefManager = PrefManager(this)
         if (!prefManager!!.isFirstTimeLaunch()) {
-            startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
+            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
             finish()
         }else{
-            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
             finish()
         }
 
@@ -38,7 +38,4 @@ class SplashScreen : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
     }
-
-
-
 }

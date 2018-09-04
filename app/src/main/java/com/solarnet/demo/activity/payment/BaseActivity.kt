@@ -9,8 +9,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.StringRequest
 import com.solarnet.demo.R
 import com.solarnet.demo.activity.TrxActivity
 import com.solarnet.demo.data.trx.Trx
@@ -21,7 +19,6 @@ import okhttp3.Call
 
 abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
 
-    internal lateinit var requestQueue: RequestQueue
     var menuNext : MenuItem? = null
     var mPostTrx = PostTrx().apply { listener = this@BaseActivity }
     abstract fun next()
@@ -117,8 +114,4 @@ abstract class BaseActivity : AppCompatActivity(), PostTrx.TrxListener {
         showToast("Failed : ${exception?.message?.toString()}")
     }
 
-    public fun doAPI(stringRequest: StringRequest) {
-        stringRequest.tag = this.javaClass.simpleName
-        requestQueue.add(stringRequest)
-    }
 }

@@ -25,8 +25,6 @@ import com.solarnet.demo.adapter.IconListAdapter
 import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
-//import com.solarnet.demo.util.DoApi
-import com.solarnet.demo.util.Savings
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*

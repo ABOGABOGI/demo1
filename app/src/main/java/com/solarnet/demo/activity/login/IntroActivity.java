@@ -85,7 +85,7 @@ public class IntroActivity extends AppCompatActivity{
     }
 
     private void launchloginpage() {
-        startActivity(new Intent(IntroActivity.this, LoginAcitivty.class));
+        startActivity(new Intent(IntroActivity.this, LoginActivity.class));
         finish();
     }
 
