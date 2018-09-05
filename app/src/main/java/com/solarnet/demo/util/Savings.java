@@ -39,4 +39,53 @@ public class Savings {
        Hawk.put(Constant.token,token);
     }
 
+    public static String getAccountName(){
+       return  Hawk.get(Constant.account_name);
+    }
+
+    public static void saveAccountName(String name){
+       Hawk.put(Constant.account_name,name);
+    }
+
+    public static String getAccountKtp(){
+       return Hawk.get(Constant.account_ktp);
+    }
+
+    public static void saveAccountKtp(String ktp){
+       Hawk.put(Constant.account_ktp,ktp);
+    }
+
+    public static String getAlamat(){
+       return Hawk.get(Constant.account_alamat);
+    }
+
+    public static void saveAlamat(String alamat){
+       Hawk.put(Constant.account_alamat,alamat);
+    }
+
+    public static String getKota(){
+        return Hawk.get(Constant.account_kota);
+    }
+
+    public static void saveKota(String kota){
+        Hawk.put(Constant.account_kota,kota);
+    }
+
+
+    public static String getProvinsi(){
+        return Hawk.get(Constant.account_provinsi);
+    }
+
+    public static void saveProvinsi(String provinsi){
+        Hawk.put(Constant.account_kota,provinsi);
+    }
+
+    public static String getAccountNumber(){
+        return Hawk.get(Constant.account_number);
+    }
+
+    public static void saveAccountNumber(String accNumber){
+        Hawk.put(Constant.account_number,accNumber);
+    }
+
 }

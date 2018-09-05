@@ -74,7 +74,7 @@
                     android:layout_weight="1"
                     android:text="Account Number" />
                 <TextView
-                    android:id="@+id/accountProfile"
+                    android:id="@+id/number_Profile"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
