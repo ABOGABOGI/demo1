@@ -3,6 +3,7 @@ package com.solarnet.demo
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.orhanobut.hawk.Hawk
 import com.solarnet.demo.data.story.People
 
 class MyApp : Application() {
@@ -28,8 +29,8 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         sInstance = this
-
         sInstance.initializeInstance()
+        Hawk.init(this).build()
     }
 
 

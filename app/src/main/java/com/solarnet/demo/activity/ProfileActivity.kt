@@ -22,7 +22,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 import android.content.SharedPreferences
-
+import com.solarnet.demo.MainActivity
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -42,24 +42,48 @@ class ProfileActivity : AppCompatActivity() {
             showdialog()
         }
 
-        val v = findViewById(R.id.input_profile) as View
-        var editview_profile = findViewById(R.id.editview_profile) as EditText
+
+        val listviewProfile = findViewById(R.id.listview_profile) as ListView
+//        val v = findViewById(R.id.input_profile) as View
+//        val v1 = findViewById(R.id.content_profile) as View
         var textview_profile = findViewById(R.id.textview_profile) as TextView
         textview_profile.setText(Savings.getName())
-        var save_profile = findViewById(R.id.save_button) as Button
-        var btn_edit = findViewById(R.id.edit_profile) as ImageButton
-        btn_edit.setOnClickListener{
-            v.visibility = View.VISIBLE
-            save_profile.visibility = View.VISIBLE
-        }
+//        var btn_save = findViewById(R.id.saveProfile) as Button
+//        var btn_edit = findViewById(R.id.edit_profile) as ImageButton
+//        btn_edit.setOnClickListener{
+//            v.visibility = View.VISIBLE
+//            v1.visibility = View.GONE
+//            linearProfile.visibility = View.GONE
+//        }
+//
+//        btn_save.setOnClickListener {
+//            v.visibility = View.GONE
+//            linearProfile.visibility = View.VISIBLE
+//
+//        }
 
-        save_profile.setOnClickListener {
-            v.visibility = View.GONE
-            save_profile.visibility = View.INVISIBLE
+        val values = arrayOf(
+                "Account",
+                "About",
+                "Settings",
+                "LogOut")
+
+        val adapter = ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,values)
+        listviewProfile.adapter = adapter
+
+        listviewProfile.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            when(position){
+                0 -> startActivity(Intent(this,AccountActivity::class.java))
+                1 -> startActivity(Intent(this,MainActivity::class.java))
+                2 -> startActivity(Intent(this,MainActivity::class.java))
+                3 -> startActivity(Intent(this,MainActivity::class.java))
+            }
+
         }
 
 
     }
+
 
 
     private fun showdialog() {

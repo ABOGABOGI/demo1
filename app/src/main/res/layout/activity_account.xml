@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light">
+
+    <LinearLayout
+        android:id="@+id/profile_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/edit_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/ic_setting" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/accountImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/lion_sample" />
+
+        <TextView
+            android:id="@+id/account_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demooo"
+            android:layout_below="@+id/cardProfile"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/content_input_profile"
+        android:visibility="gone"
+        android:id="@+id/input_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_linear1"/>
+
+    <include layout="@layout/content_profile"
+        android:id="@+id/content_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_linear1"
+        android:visibility="visible"/>
+
+
+
+
+</RelativeLayout>

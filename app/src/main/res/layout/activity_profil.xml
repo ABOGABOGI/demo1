@@ -6,35 +6,17 @@
     <LinearLayout
         android:id="@+id/profile_linear1"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/arrow_up_float"
-            android:clickable="true"
-            android:layout_margin="5dp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ImageProfile"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:src="@drawable/profile_default" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:id="@+id/editview_profile"
-            android:layout_below="@+id/cardProfile"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:src="@drawable/lion_sample" />
 
         <TextView
             android:id="@+id/textview_profile"
@@ -45,22 +27,24 @@
             android:layout_gravity="center"
             android:visibility="visible"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/save_button"
-            android:layout_below="@+id/editview_profile"
-            android:text="Save"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
 
     </LinearLayout>
 
-    <include layout="@layout/content_input_profile"
-        android:visibility="gone"
-        android:id="@+id/input_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_linear1"/>
+    <LinearLayout
+        android:id="@+id/profile_linear2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile_linear1"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_padding"
+        android:background="@android:color/white">
+
+        <ListView
+            android:id="@+id/listview_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

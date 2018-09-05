@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:text="Input Name" />
                 <EditText
-                    android:id="@+id/profile_name"
+                    android:id="@+id/account_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"/>
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="Input No.KTP" />
                 <EditText
-                    android:id="@+id/profile_ktp"
+                    android:id="@+id/account_ktp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ktp no"/>
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="Input account" />
                 <EditText
-                    android:id="@+id/profile_account"
+                    android:id="@+id/number_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="account no"/>
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="Input alamat" />
                 <EditText
-                    android:id="@+id/profile_alamat"
+                    android:id="@+id/account_alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Alamat"/>
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:text="Input Kota" />
                 <EditText
-                    android:id="@+id/profile_kota"
+                    android:id="@+id/account_kota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Kota"/>
@@ -108,12 +108,18 @@
                     android:layout_height="wrap_content"
                     android:text="Input Provinsi" />
                 <EditText
-                    android:id="@+id/profile_provinsi"
+                    android:id="@+id/account_provinsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Provinsi"/>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/save_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_margin="@dimen/activity_padding"/>
         </LinearLayout>
 
     </ScrollView>

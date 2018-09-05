@@ -42,11 +42,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String token;
 
 
+
     @Override
     protected void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_login);
-        Hawk.init(this).build();
         findViewById(R.id.btn_submit).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()

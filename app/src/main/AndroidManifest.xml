@@ -192,6 +192,10 @@
             android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".activity.AccountActivity"
+            android:label="Account"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activity.story.PeopleActivity"
             android:label="@string/title_activity_people"
             android:theme="@style/AppTheme.NoActionBar">
