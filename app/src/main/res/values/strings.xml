@@ -7,7 +7,6 @@
     <string name="title_story">Stories</string>
 
     <string name="send_money">Send Money</string>
-    <string name="cellular">Pulsa/Data Seluler</string>
     <string name="pln">PLN Token</string>
     <string name="invoice">Create Invoice</string>
     <string name="transfer_to_bank">Withdraw to Bank</string>
@@ -17,6 +16,14 @@
     <string name="new_agent">Agent Registration</string>
     <string name="top_up">Top Up</string>
     <string name="view_all">VIEW ALL " >"</string>
+    <string name="digital_payment">Digital Payment</string>
+    <string name="cellular">Pulsa Seluler</string>
+    <string name="data_package">Data Package</string>
+    <string name="postpaid">Postpaid</string>
+    <string name="bpjs">BPJS</string>
+    <string name="cable_tv">Cable TV</string>
+    <string name="insurance">Insurance</string>
+    <string name="donation">Donation</string>
 
     <string name="title_activity_send_money">Send Money</string>
     <string name="recipient">Send Money to</string>

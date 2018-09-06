@@ -60,13 +60,14 @@ class PaymentFragment : Fragment() {
 
         var data = ArrayList<GridItem>()
         data.add(GridItem(R.drawable.ic_send_money, context!!.resources.getString(R.string.send_money)))
-        data.add(GridItem(R.drawable.ic_cellular, context!!.resources.getString(R.string.cellular)))
-        data.add(GridItem(R.drawable.ic_pln, context!!.resources.getString(R.string.pln)))
+        data.add(GridItem(R.drawable.ic_digital, context!!.resources.getString(R.string.digital_payment)))
+//        data.add(GridItem(R.drawable.ic_pln, context!!.resources.getString(R.string.pln)))
         data.add(GridItem(R.drawable.ic_invoice, context!!.resources.getString(R.string.invoice)))
         data.add(GridItem(R.drawable.ic_bank, context!!.resources.getString(R.string.transfer_to_bank)))
         data.add(GridItem(R.drawable.ic_qr, context!!.resources.getString(R.string.scan_qr)))
         data.add(GridItem(R.drawable.ic_product, context!!.resources.getString(R.string.create_product)))
         data.add(GridItem(R.drawable.ic_agent, context!!.resources.getString(R.string.new_agent)))
+        data.add(GridItem(R.drawable.ic_topup, context!!.resources.getString(R.string.top_up)))
 
 //        recyclerView.adapter = PaymentGridAdapter(data)
         var adapter = PaymentGridViewAdapter(context!!, data)
@@ -108,10 +109,6 @@ class PaymentFragment : Fragment() {
             mTrxListAdapter.notifyDataSetChanged()
         })
 
-        val buttonTopUp : CardView = view.findViewById(R.id.buttonTopUp)
-        buttonTopUp.setOnClickListener{_ ->
-            startActivity(Intent(context, TopUpActivity::class.java))
-        }
 
         textBalance = view.findViewById<TextView>(R.id.textBalance)
         textBalance.text = Utils.currencyString(MyApp.instance.getBalance())
