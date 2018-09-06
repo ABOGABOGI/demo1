@@ -25,6 +25,8 @@ import com.solarnet.demo.adapter.IconListAdapter
 import com.solarnet.demo.data.trx.TrxRepository
 import com.solarnet.demo.data.util.DecimalDigitFilter
 import com.solarnet.demo.data.util.Utils
+import com.solarnet.demo.util.ApiClient
+import com.solarnet.demo.util.ApiInterface
 
 import kotlinx.android.synthetic.main.activity_withdraw.*
 import kotlinx.android.synthetic.main.fragment_withdraw.*
@@ -115,39 +117,7 @@ class WithdrawActivity : BaseActivity() {
                         withdrawActivity.mViewModel.amount > 0 &&
                         withdrawActivity.mViewModel.balance >= 0
             }
-////            lateinit var doAPI : DoApi
-//            val name = Requesttrax.Accounts.nama_pengirim
-//            val password = Savings.getPassword()
-//            val nama_pengirim = Requesttrax.Accounts.nama_penerima
-//            val account_pengirim = Requesttrax.Accounts.id_num_pengirim
-//            val command = "/inq_remit_c2a"
-//            val kodetrx = "51121"
-////            doAPI(doAPI.GET(this, "inq_remit_c2a", HashMap<String, String>(), name,password,kodetrx {
-////                fun onSuccess(response: String) {
-////
-////                }
-////
-////                fun onFail(error: String) {
-////
-////                }
-////            }))
-//           var reqparam = {
-//               name
-//               password
-//           }
-//            val data = {
-//                nama_pengirim
-//                account_pengirim
-//            }
-//            val mUrl = URL("devil.fusindosoka.com/fush2h/fusindo.php" + command)
-//            with(mUrl.openConnection()as HttpURLConnection){
-//                requestMethod = "GET"
-//                Log.d("responsecode", "$responseCode")
-//                BufferedReader (InputStreamReader(inputStream)).use {
-//                    val response = StringBuffer()
-//                    Log.d("status", response.toString())
-//                }
-//            }
+            val apiInterface = ApiClient.Unlink()
 
         }
 

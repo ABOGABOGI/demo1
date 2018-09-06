@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.orhanobut.hawk.Hawk
 import com.solarnet.demo.data.story.People
+import com.solarnet.demo.util.Savings
 
 class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
@@ -51,8 +52,8 @@ class MyApp : Application() {
     }
 
     fun getMyProfile() : People {
-        return People("opt01", "Optimus Prime",
-                "http://demo.sistemonline.biz.id/public/people/images/mypic.jpg")
+        return People("opt01", Savings.getAccountName(),
+                Savings.getProfilePicture())
     }
 
 }

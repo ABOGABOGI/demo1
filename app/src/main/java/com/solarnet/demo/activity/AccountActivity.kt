@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.bumptech.glide.Glide
 import com.solarnet.demo.R
 import com.solarnet.demo.util.Savings
 import kotlinx.android.synthetic.main.activity_account.*
@@ -38,6 +39,7 @@ class AccountActivity : AppCompatActivity (){
 
     private val GALLERY = 1
     private val CAMERA = 2
+    private var url: String? = null
 
 
     override fun  onCreate(savedInstanceState:Bundle?){
@@ -47,6 +49,17 @@ class AccountActivity : AppCompatActivity (){
         accountImage.setOnClickListener{
             showdialog()
         }
+
+        if(Savings.getProfilePicture() == null){
+            url = "http://demo.sistemonline.biz.id/public/people/images/mypic.jpg"
+        }else{
+            url = Savings.getProfilePicture()
+        }
+
+        Glide.with(this)
+                .load(url)
+                .into(accountImage);
+
 
         var textview_profile = findViewById(R.id.account_profile) as TextView
         textview_profile.setText(Savings.getName())
@@ -72,21 +85,43 @@ class AccountActivity : AppCompatActivity (){
         account_provinsis = findViewById(R.id.account_provinsi)
 
 
-        val profilename = findViewById(R.id.nameProfile) as TextView
+        var profilename = findViewById(R.id.nameProfile) as TextView
 //        profilename.setText(Savings.getName())
         if(Savings.getName() == null){
             profilename.setText("Demo")
+        }else{
+            profilename.setText(Savings.getName())
         }
-        val profilektp = findViewById(R.id.KtpProfile) as TextView
-        profilektp.setText(Savings.getAccountKtp())
-        val profilenumber = findViewById(R.id.number_Profile) as TextView
-        profilenumber.setText(Savings.getAccountNumber())
-        val profilealamat = findViewById(R.id.AlamatProfile) as TextView
-        profilealamat.setText(Savings.getAlamat())
-        val profilekota = findViewById(R.id.KotaProfile) as TextView
-        profilekota.setText(Savings.getKota())
-        val profileprovinsi = findViewById(R.id.provinsiProfile) as TextView
-        profileprovinsi.setText(Savings.getProvinsi())
+        var profilektp = findViewById(R.id.KtpProfile) as TextView
+        if(Savings.getAccountKtp() == null){
+            profilektp.setText("0001111001")
+        }else{
+            profilektp.setText(Savings.getEmail())
+        }
+        var profilenumber = findViewById(R.id.number_Profile) as TextView
+        if(Savings.getAccountKtp() == null){
+            profilenumber.setText("09909988999")
+        }else{
+            profilenumber.setText(Savings.getEmail())
+        }
+        var profilealamat = findViewById(R.id.AlamatProfile) as TextView
+        if(Savings.getAlamat() == null){
+            profilealamat.setText("Jl.Mawar Merah")
+        }else{
+            profilealamat.setText(Savings.getEmail())
+        }
+        var profilekota = findViewById(R.id.KotaProfile) as TextView
+        if(Savings.getKota() == null){
+            profilekota.setText("Jakarta")
+        }else{
+            profilekota.setText(Savings.getEmail())
+        }
+        var profileprovinsi = findViewById(R.id.provinsiProfile) as TextView
+        if (Savings.getProvinsi() == null){
+            profileprovinsi.setText("DKI Jakarta")
+        }else{
+            profileprovinsi.setText(Savings.getEmail())
+        }
 
 
     }

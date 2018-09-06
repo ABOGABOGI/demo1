@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
     @Override
     protected void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
+
     }
     @Override
     public void onClick(View v) {
@@ -109,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
             token = Util.md5(Util.md5(email)+ Constant.SALT);
+            Log.d("info",token);
             Savings.saveToken(token);
 
             navigateToHome();

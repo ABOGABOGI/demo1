@@ -22,7 +22,19 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 import android.content.SharedPreferences
+import com.bumptech.glide.Glide
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResultCallback
+import com.google.android.gms.common.api.Status
 import com.solarnet.demo.MainActivity
+import com.solarnet.demo.activity.login.LoginActivity
+import com.solarnet.demo.util.ApiClient
+import com.solarnet.demo.util.ApiInterface
+import de.hdodenhof.circleimageview.CircleImageView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -30,11 +42,18 @@ class ProfileActivity : AppCompatActivity() {
 
     private val SHARED_PREF_NAME = "mysharedpref"
     private val KEY_NAME = "keyname"
+    private var url: String? = null
+    private var email: String? = null
+    private var token: String? = null
+
 
 
     override fun  onCreate(savedInstanceState:Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
+
+        email = Savings.getEmail()
+        token = Savings.getToken()
 
 
         val listviewProfile = findViewById(R.id.listview_profile) as ListView
@@ -55,6 +74,15 @@ class ProfileActivity : AppCompatActivity() {
 //            linearProfile.visibility = View.VISIBLE
 //
 //        }
+        if (Savings.getProfilePicture() == null){
+            url = "http://demo.sistemonline.biz.id/public/people/images/mypic.jpg"
+        }else{
+            url = Savings.getProfilePicture()
+        }
+        val imageProfil = findViewById(R.id.ImageProfile) as CircleImageView
+        Glide.with(this)
+                .load(url)
+                .into(imageProfil);
 
         val values = arrayOf(
                 "Account",
@@ -70,7 +98,7 @@ class ProfileActivity : AppCompatActivity() {
                 0 -> startActivity(Intent(this,AccountActivity::class.java))
                 1 -> startActivity(Intent(this,MainActivity::class.java))
                 2 -> startActivity(Intent(this,MainActivity::class.java))
-                3 -> startActivity(Intent(this,MainActivity::class.java))
+                3 -> navigateToSignOut()
             }
 
         }
@@ -78,6 +106,29 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
+    private fun navigateToSignOut() {
+        val apiInterface = ApiClient.Unlink().create(ApiInterface::class.java)
+        val queryparams = HashMap<String, String>()
+        queryparams.put("email", email.toString())
+        queryparams.put("token", token.toString())
+
+        val call = apiInterface.Post(queryparams)
+        call.enqueue(object : Callback<Savings> {
+            override fun onResponse(call: Call<Savings>, response: Response<Savings>) {
+                Log.d("info", token)
+               closeApp()
+            }
+
+            override fun onFailure(call: Call<Savings>, t: Throwable) {
+                Toast.makeText(this@ProfileActivity,
+                        "Error is " + t.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun closeApp() {
+        finishAffinity()
+    }
 
 
 }
