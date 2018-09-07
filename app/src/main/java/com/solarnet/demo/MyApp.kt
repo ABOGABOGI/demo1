@@ -54,6 +54,8 @@ class MyApp : Application() {
     fun getMyProfile() : People {
         return People("opt01", Savings.getAccountName(),
                 Savings.getProfilePicture())
+//          return People("opt01", "Test",
+//                Savings.getProfilePicture())
     }
 
 }

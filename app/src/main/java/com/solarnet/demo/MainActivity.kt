@@ -129,6 +129,11 @@ class MainActivity : AppCompatActivity() {
         viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
+                if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                    fab.alpha = 0.3F
+                } else {
+                    fab.alpha = 1F
+                }
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -137,14 +142,17 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 when (position) {
                     MainPagerAdapter.PAGE_PAYMENT ->  {
+                        fab.visibility = View.GONE
                         textPage.setText(R.string.title_payment)
                         setNavigationButton(true, false, false)
                     }
                     MainPagerAdapter.PAGE_CHAT -> {
+                        fab.visibility = View.VISIBLE
                         textPage.setText(R.string.title_chat)
                         setNavigationButton(false, true, false)
                     }
                     MainPagerAdapter.PAGE_STORY -> {
+                        fab.visibility = View.VISIBLE
                         textPage.setText(R.string.title_story)
                         setNavigationButton(false, false, true)
                     }

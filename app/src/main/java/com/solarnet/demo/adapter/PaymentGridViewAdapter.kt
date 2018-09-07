@@ -50,11 +50,8 @@ class PaymentGridViewAdapter : BaseAdapter {
             R.drawable.ic_send_money -> {
                 mContext.startActivity(Intent(mContext, SendMoneyActivity::class.java))
             }
-            R.drawable.ic_cellular -> {
-                mContext.startActivity(Intent(mContext, CellularActivity::class.java))
-            }
-            R.drawable.ic_pln -> {
-                mContext.startActivity(Intent(mContext, PLNActivity::class.java))
+            R.drawable.ic_digital -> {
+                mContext.startActivity(Intent(mContext, DigitalPaymentActivity::class.java))
             }
             R.drawable.ic_invoice -> {
                 mContext.startActivity(Intent(mContext, InvoiceActivity::class.java))
@@ -67,6 +64,17 @@ class PaymentGridViewAdapter : BaseAdapter {
             }
             R.drawable.ic_product -> {
                 mContext.startActivity(Intent(mContext, ProductActivity::class.java))
+            }
+            R.drawable.ic_topup -> {
+                mContext.startActivity(Intent(mContext, TopUpActivity::class.java))
+            }
+
+            //digital payment part
+            R.drawable.ic_cellular -> {
+                mContext.startActivity(Intent(mContext, CellularActivity::class.java))
+            }
+            R.drawable.ic_pln -> {
+                mContext.startActivity(Intent(mContext, PLNActivity::class.java))
             }
         }
     }
