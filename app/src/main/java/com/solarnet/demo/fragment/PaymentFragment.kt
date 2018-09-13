@@ -3,6 +3,7 @@ package com.solarnet.demo.fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.os.Bundle
@@ -13,9 +14,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.GridView
-import android.widget.TextView
+import android.widget.*
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.R
@@ -27,6 +26,7 @@ import com.solarnet.demo.data.trx.Trx
 import com.solarnet.demo.data.trx.TrxViewModel
 import com.solarnet.demo.data.trx.TrxViewModelFactory
 import com.solarnet.demo.data.util.Utils
+import android.widget.Toast
 import com.solarnet.demo.design.NoScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_payment.*
 import java.util.*
@@ -35,11 +35,12 @@ import java.util.*
 class PaymentFragment : Fragment() {
     private val NUM_COLUMNS = 4
     private val LIMIT_TRX = 5
-    private lateinit var recyclerView : RecyclerView
-    private var mOnScrollListener : MainActivity.OnScrollListener? = null
-    private var mTrxViewModel : TrxViewModel? = null
-    private lateinit var mTrxListAdapter : TrxListAdapter
-    private lateinit var textBalance : TextView
+    private lateinit var recyclerView: RecyclerView
+    private var mOnScrollListener: MainActivity.OnScrollListener? = null
+    private var mTrxViewModel: TrxViewModel? = null
+    private lateinit var mTrxListAdapter: TrxListAdapter
+    private lateinit var textBalance: TextView
+    private lateinit var checkbalance: ImageButton
 
     // Store instance variables based on arguments passed
     // newInstance constructor for creating fragment with arguments
@@ -78,8 +79,7 @@ class PaymentFragment : Fragment() {
         setGridViewHeightBasedOnChildren(gridView, NUM_COLUMNS)
 
         var scrollView = view as NestedScrollView
-        scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
-            _, _, scrollY, _, oldScrollY ->
+        scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             mOnScrollListener?.onScrollChange(scrollY, scrollY - oldScrollY)
         })
 
@@ -94,10 +94,10 @@ class PaymentFragment : Fragment() {
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.adapter = mTrxListAdapter
 
-        mTrxViewModel =  ViewModelProviders.of(this,
+        mTrxViewModel = ViewModelProviders.of(this,
                 TrxViewModelFactory(activity!!.application, LIMIT_TRX))
                 .get(TrxViewModel::class.java)
-        mTrxViewModel?.getAllTransactions()?.observe(this, Observer<List<Trx>> {allTrx ->
+        mTrxViewModel?.getAllTransactions()?.observe(this, Observer<List<Trx>> { allTrx ->
             if (allTrx != null) {
                 mTrxListAdapter.setItems(allTrx)
                 if (allTrx.isEmpty()) {
@@ -110,8 +110,13 @@ class PaymentFragment : Fragment() {
         })
 
 
-        textBalance = view.findViewById<TextView>(R.id.textBalance)
+        textBalance = view.findViewById(R.id.textBalance)
         textBalance.text = Utils.currencyString(MyApp.instance.getBalance())
+
+        checkbalance = view.findViewById(R.id.checkbalance_button)
+        checkbalance.setOnClickListener {
+            Toast.makeText(activity, "Your Balance : " + MyApp.instance.getBalance(), Toast.LENGTH_LONG).show()
+        }
 
         return view
     }
@@ -135,4 +140,5 @@ class PaymentFragment : Fragment() {
         gridView.layoutParams = params
 
     }
+
 }
