@@ -1,6 +1,7 @@
 package com.solarnet.demo.activity
 
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,14 +9,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.solarnet.demo.R
 import com.solarnet.demo.activity.payment.TopUpActivity
 import com.solarnet.demo.data.trx.Trx
@@ -27,9 +20,15 @@ import org.json.JSONObject
 import java.util.ArrayList
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.view.*
+import android.widget.*
+import kotlinx.android.synthetic.main.content_trx.*
 
 
-class TrxActivity : AppCompatActivity() {
+class TrxActivity : AppCompatActivity()  {
     companion object {
         const val EXTRA_TRX_ID = "trxId"
     }
@@ -41,6 +40,8 @@ class TrxActivity : AppCompatActivity() {
     private lateinit var textMessage : TextView
     private lateinit var textTransactionId : TextView
     private lateinit var textDate : TextView
+    private lateinit var adminFee : EditText
+    private lateinit var confirmbutton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,8 @@ class TrxActivity : AppCompatActivity() {
         textMessage = findViewById(R.id.textMessage)
         textTransactionId = findViewById(R.id.textTransactionId)
         textDate = findViewById(R.id.textDate)
+        adminFee = findViewById(R.id.admin_edittext)
+        confirmbutton = findViewById(R.id.confirm_button)
         trxId = intent.getLongExtra(EXTRA_TRX_ID, 14L) //testing
         Log.i("Test", "trxId : $trxId")
 
@@ -73,6 +76,47 @@ class TrxActivity : AppCompatActivity() {
                 }
             }
         })
+
+        confirmbutton.setOnClickListener {
+
+            val inflater:LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view = inflater.inflate(R.layout.content_preview,null)
+            val popupWindow = PopupWindow(
+                    view,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
+                    LinearLayout.LayoutParams.WRAP_CONTENT // Window height
+            )
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                popupWindow.elevation = 10.0F
+            }
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                // Create a new slide animation for popup window enter transition
+                val slideIn = Slide()
+                slideIn.slideEdge = Gravity.TOP
+                popupWindow.enterTransition = slideIn
+
+                // Slide animation for popup window exit transition
+                val slideOut = Slide()
+                slideOut.slideEdge = Gravity.RIGHT
+                popupWindow.exitTransition = slideOut
+
+            }
+
+            val buttonclose = view.findViewById(R.id.btn_close) as Button
+            popupWindow.showAtLocation(
+                    content_layout,
+                    Gravity.CENTER,
+                    0,
+                    0
+            )
+
+            buttonclose.setOnClickListener{
+                super.onBackPressed()
+            }
+
+        }
     }
 
     private fun setFragment(trx : Trx) {

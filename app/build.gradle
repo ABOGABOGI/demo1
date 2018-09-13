@@ -83,4 +83,5 @@ dependencies {
     //photo
     implementation 'com.facebook.fresco:fresco:1.4.0'
     implementation 'com.karumi:dexter:4.1.0'
+    implementation 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
 }

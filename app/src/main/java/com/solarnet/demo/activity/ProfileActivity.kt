@@ -60,7 +60,12 @@ class ProfileActivity : AppCompatActivity() {
 //        val v = findViewById(R.id.input_profile) as View
 //        val v1 = findViewById(R.id.content_profile) as View
         var textview_profile = findViewById(R.id.textview_profile) as TextView
-        textview_profile.setText(Savings.getName())
+        if(Savings.getAccountName() != null){
+            textview_profile.setText(Savings.getAccountName())
+        } else{
+            textview_profile.setText("Demo11")
+        }
+
 //        var btn_save = findViewById(R.id.saveProfile) as Button
 //        var btn_edit = findViewById(R.id.edit_profile) as ImageButton
 //        btn_edit.setOnClickListener{

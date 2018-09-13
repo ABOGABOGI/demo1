@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/header_nav"
+            android:background="@drawable/gradient_drawable"
             android:paddingTop="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -113,14 +113,14 @@
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/nav_border_height"
-            android:layout_below="@id/buttonPayment"
-            android:background="@drawable/nav_border"
-            android:id="@+id/navigationBorder"
-            android:visibility="visible"
-            />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/nav_border_height"-->
+            <!--android:layout_below="@id/buttonPayment"-->
+            <!--android:background="@drawable/nav_border"-->
+            <!--android:id="@+id/navigationBorder"-->
+            <!--android:visibility="visible"-->
+            <!--/>-->
 
     </LinearLayout>
 

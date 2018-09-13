@@ -10,6 +10,7 @@
     tools:showIn="@layout/activity_trx"
 >
 <android.support.constraint.ConstraintLayout
+    android:id="@+id/content_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_padding"
@@ -150,5 +151,44 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_label4"
         />
+
+    <TextView
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:id="@+id/text_label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Fee"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDate"
+        />
+
+    <EditText
+        android:id="@+id/admin_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="fee"
+        android:inputType="numberDecimal"
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        app:layout_constraintTop_toBottomOf="@+id/text_label5"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <!--<TextView-->
+        <!--android:id="@+id/"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="12 Juni 2018 20:15:00 WIB"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/text_label5"-->
+        <!--/>-->
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_edittext"/>
 </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

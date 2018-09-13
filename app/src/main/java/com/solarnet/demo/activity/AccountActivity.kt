@@ -90,7 +90,7 @@ class AccountActivity : AppCompatActivity (){
         if(Savings.getName() == null){
             profilename.setText("Demo")
         }else{
-            profilename.setText(Savings.getName())
+            profilename.setText(Savings.getAccountName())
         }
         var profilektp = findViewById(R.id.KtpProfile) as TextView
         if(Savings.getAccountKtp() == null){

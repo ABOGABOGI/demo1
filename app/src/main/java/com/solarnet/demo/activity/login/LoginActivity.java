@@ -98,11 +98,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.d("Info", "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()){
             GoogleSignInAccount acct = result.getSignInAccount();
-            String personName = acct.getDisplayName();
+            String personName = acct.getGivenName();
+            String accountName = acct.getDisplayName();
             email = acct.getEmail();
             String PhotoProfile = acct.getPhotoUrl().toString();
             savings.saveEmail(email);
             savings.saveName(personName);
+            savings.saveAccountName(accountName);
             savings.saveProfilPicture(PhotoProfile);
 //            if (acct.getPhotoUrl() != null){
 //                Savings.saveProfilPicture(profilpic);
