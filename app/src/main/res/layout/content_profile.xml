@@ -30,7 +30,7 @@
                     android:layout_weight="1"
                     android:text="Name" />
                 <TextView
-                    android:id="@+id/nameProfile"
+                    android:id="@+id/content_name"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:text="KTP Number" />
                 <TextView
-                    android:id="@+id/KtpProfile"
+                    android:id="@+id/content_ktp_number"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -74,7 +74,7 @@
                     android:layout_weight="1"
                     android:text="Account Number" />
                 <TextView
-                    android:id="@+id/number_Profile"
+                    android:id="@+id/content_account_number"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -97,7 +97,7 @@
                     android:layout_weight="1"
                     android:text="Alamat" />
                 <TextView
-                    android:id="@+id/AlamatProfile"
+                    android:id="@+id/content_alamat"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -120,7 +120,7 @@
                     android:layout_weight="1"
                     android:text="Kota" />
                 <TextView
-                    android:id="@+id/KotaProfile"
+                    android:id="@+id/content_kota"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -142,7 +142,7 @@
                     android:layout_weight="1"
                     android:text="Provinsi" />
                 <TextView
-                    android:id="@+id/provinsiProfile"
+                    android:id="@+id/content_provinsi"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

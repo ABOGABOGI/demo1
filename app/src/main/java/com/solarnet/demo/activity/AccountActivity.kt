@@ -7,6 +7,7 @@ import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.service.autofill.SaveInfo
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -30,6 +31,8 @@ class AccountActivity : AppCompatActivity (){
     private var account_alamat: String? = null
     private var account_kota: String? = null
     private var account_provinsi: String? = null
+
+
     private var account_names: EditText? = null
     private var account_ktps: EditText? = null
     private var account_numbers: EditText? = null
@@ -37,9 +40,12 @@ class AccountActivity : AppCompatActivity (){
     private var account_kotas: EditText? = null
     private var account_provinsis: EditText? = null
 
+
+
     private val GALLERY = 1
     private val CAMERA = 2
     private var url: String? = null
+    internal var savings: Savings? = null
 
 
     override fun  onCreate(savedInstanceState:Bundle?){
@@ -77,67 +83,54 @@ class AccountActivity : AppCompatActivity (){
             savedataAccount()
         }
 
-        account_names = findViewById(R.id.account_name)
-        account_ktps = findViewById(R.id.account_ktp)
-        account_numbers = findViewById(R.id.number_account)
-        account_alamats = findViewById(R.id.account_alamat)
-        account_kotas = findViewById(R.id.account_kota)
-        account_provinsis = findViewById(R.id.account_provinsi)
+        account_names = findViewById(R.id.input_account_name)
+        account_ktps = findViewById(R.id.input_account_ktp)
+        account_numbers = findViewById(R.id.input_account_number)
+        account_alamats = findViewById(R.id.input_account_alamat)
+        account_kotas = findViewById(R.id.input_account_kota)
+        account_provinsis = findViewById(R.id.input_account_provinsi)
 
 
-        var profilename = findViewById(R.id.nameProfile) as TextView
-//        profilename.setText(Savings.getName())
-        if(Savings.getName() == null){
-            profilename.setText("Demo")
-        }else{
-            profilename.setText(Savings.getAccountName())
-        }
-        var profilektp = findViewById(R.id.KtpProfile) as TextView
-        if(Savings.getAccountKtp() == null){
-            profilektp.setText("0001111001")
-        }else{
-            profilektp.setText(Savings.getEmail())
-        }
-        var profilenumber = findViewById(R.id.number_Profile) as TextView
-        if(Savings.getAccountKtp() == null){
-            profilenumber.setText("09909988999")
-        }else{
-            profilenumber.setText(Savings.getEmail())
-        }
-        var profilealamat = findViewById(R.id.AlamatProfile) as TextView
-        if(Savings.getAlamat() == null){
-            profilealamat.setText("Jl.Mawar Merah")
-        }else{
-            profilealamat.setText(Savings.getEmail())
-        }
-        var profilekota = findViewById(R.id.KotaProfile) as TextView
-        if(Savings.getKota() == null){
-            profilekota.setText("Jakarta")
-        }else{
-            profilekota.setText(Savings.getEmail())
-        }
-        var profileprovinsi = findViewById(R.id.provinsiProfile) as TextView
-        if (Savings.getProvinsi() == null){
-            profileprovinsi.setText("DKI Jakarta")
-        }else{
-            profileprovinsi.setText(Savings.getEmail())
-        }
+        var content_name = findViewById(R.id.content_name) as TextView
+        content_name.setText(Savings.getAccountName())
+
+        var content_ktp = findViewById(R.id.content_ktp_number) as TextView
+        content_ktp.setText(Savings.getAccountKtp())
+
+        var content_account_number = findViewById(R.id.content_account_number) as TextView
+        content_account_number.setText(Savings.getAccountNumber())
+
+        var content_alamat = findViewById(R.id.content_alamat) as TextView
+        content_alamat.setText(Savings.getAlamat())
+
+        var content_kota = findViewById(R.id.content_kota) as TextView
+        content_kota.setText(Savings.getKota())
+
+        var content_provinsi = findViewById(R.id.content_provinsi) as TextView
+        content_provinsi.setText(Savings.getProvinsi())
+
+
 
 
     }
 
     private fun savedataAccount() {
         account_name = account_names.toString()
+        Savings.saveAccountName(account_name)
+
         account_ktp = account_ktps.toString()
-        account_number = account_numbers.toString()
-        account_alamat = account_alamats.toString()
-        account_kota = account_kotas.toString()
-        account_provinsi = account_provinsis.toString()
-        Savings.saveName(account_name)
         Savings.saveAccountKtp(account_ktp)
+
+        account_number = account_numbers.toString()
         Savings.saveAccountNumber(account_number)
+
+        account_alamat = account_alamats.toString()
         Savings.saveAlamat(account_alamat)
+
+        account_kota = account_kotas.toString()
         Savings.saveKota(account_kota)
+
+        account_provinsi = account_provinsis.toString()
         Savings.saveProvinsi(account_provinsi)
     }
 

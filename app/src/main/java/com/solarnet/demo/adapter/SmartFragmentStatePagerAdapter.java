@@ -6,7 +6,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import com.solarnet.demo.util.Savings;
+
 public abstract class SmartFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+
+
     // Sparse array to keep track of registered fragments in memory
     private SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
 
