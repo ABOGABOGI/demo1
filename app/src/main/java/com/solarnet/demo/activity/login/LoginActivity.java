@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn_submit).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken("841360253509-v0e4r5pbqsmpe6cp9e785jh2nu8phepa.apps.googleusercontent.com")
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -101,18 +102,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String personName = acct.getGivenName();
             String accountName = acct.getDisplayName();
             email = acct.getEmail();
-            String PhotoProfile = acct.getPhotoUrl().toString();
+            if(acct.getPhotoUrl()!=null){
+                String PhotoProfile = acct.getPhotoUrl().toString();
+                savings.saveProfilPicture(PhotoProfile);
+            }
             savings.saveEmail(email);
             savings.saveName(personName);
             savings.saveAccountName(accountName);
-            savings.saveProfilPicture(PhotoProfile);
 //            if (acct.getPhotoUrl() != null){
 //                Savings.saveProfilPicture(profilpic);
 //            }else{
 //                Log.d("Info","No Photo");
 //            }
 
-
+            Log.d("NP","TOKENGOOGLE:"+result.getSignInAccount().getIdToken());
             token = Util.md5(Util.md5(email)+ Constant.SALT);
             Log.d("info",token);
             Savings.saveToken(token);
