@@ -6,112 +6,112 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String Base_URL = Constant.URLAPI;
+//    public static final String Base_URL = Constant.URLAPI;
     private static Retrofit retrofit = null;
 
-    public static Retrofit User_Profile(){
+    public static Retrofit User_Profile(String baseUrl){
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "user/profile/")
+                    .baseUrl(baseUrl + "user/profile/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit PostAuth(){
+    public static Retrofit PostAuth(String baseUrl){
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "user/auth/")
+                    .baseUrl(baseUrl + "user/auth/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit Unlink(){
+    public static Retrofit Unlink(String baseUrl){
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "user/logout/")
+                    .baseUrl(baseUrl + "user/logout/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
-    public static Retrofit check_balance(){
+    public static Retrofit check_balance(String baseUrl){
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "user/balance")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
-
-    public static Retrofit inq_remit(){
-        if (retrofit==null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "transaction/inq/remit/c2a/")
+                    .baseUrl(baseUrl + "user/balance")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit req_remit(){
+    public static Retrofit inq_remit(String baseUrl){
+        if (retrofit==null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl + "transaction/inq/remit/c2a/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
+    public static Retrofit req_remit(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL+"transaction/pay/remit/c2a/")
+                    .baseUrl(baseUrl+"transaction/pay/remit/c2a/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit schedule_train(){
+    public static Retrofit schedule_train(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL+"product/list/kai/schedule/")
+                    .baseUrl(baseUrl+"product/list/kai/schedule/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit schedule_airplane(){
+    public static Retrofit schedule_airplane(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "product/list/airline/schedule/")
+                    .baseUrl(baseUrl + "product/list/airline/schedule/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit field_airplane(){
+    public static Retrofit field_airplane(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL+"product/list/airline/mandatoryfield/")
+                    .baseUrl(baseUrl+"product/list/airline/mandatoryfield/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return  retrofit;
     }
 
-    public static Retrofit reserve_train(){
+    public static Retrofit reserve_train(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL+"reserve/ka/")
+                    .baseUrl(baseUrl+"reserve/ka/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static Retrofit reserve_airplane(){
+    public static Retrofit reserve_airplane(String baseUrl){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Base_URL + "reserve/airline/")
+                    .baseUrl(baseUrl + "reserve/airline/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

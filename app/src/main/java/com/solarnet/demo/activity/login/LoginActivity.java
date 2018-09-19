@@ -18,12 +18,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.orhanobut.hawk.Hawk;
 import com.solarnet.demo.MainActivity;
 import com.solarnet.demo.R;
+import com.solarnet.demo.util.APIUtils;
 import com.solarnet.demo.util.ApiClient;
 import com.solarnet.demo.util.ApiInterface;
 import com.solarnet.demo.util.Constant;
+import com.solarnet.demo.util.ModelData;
 import com.solarnet.demo.util.Savings;
 import com.solarnet.demo.util.Util;
 
@@ -42,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String email;
     private String token;
     private EditText account_names;
+    private ApiInterface apiInterface;
 
 
 
@@ -50,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_login);
+        apiInterface = APIUtils.getAPIService();
         findViewById(R.id.btn_submit).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -87,8 +93,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
@@ -109,22 +113,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             savings.saveEmail(email);
             savings.saveName(personName);
             savings.saveAccountName(accountName);
-//            if (acct.getPhotoUrl() != null){
-//                Savings.saveProfilPicture(profilpic);
-//            }else{
-//                Log.d("Info","No Photo");
-//            }
+            token = result.getSignInAccount().getIdToken();
+            Log.d("NP","TOKENGOOGLE:"+ token);
+//            token = Util.md5(Util.md5(email)+ Constant.SALT);
+//            Log.d("info",token);
+//            Savings.saveToken(token);
 
-            Log.d("NP","TOKENGOOGLE:"+result.getSignInAccount().getIdToken());
-            token = Util.md5(Util.md5(email)+ Constant.SALT);
-            Log.d("info",token);
-            Savings.saveToken(token);
-
-            navigateToHome();
+//            navigateToHome();
+            sendRequest(email,token);
 
         }else{
             Log.d("Error","cant sign in");
         }
+    }
+
+    private void sendRequest(String email, String token) {
+        apiInterface.savePost(email,token).enqueue(new Callback<ModelData>() {
+            @Override
+            public void onResponse(Call<ModelData> call, Response<ModelData> response) {
+                Log.i("Info",response.body().toString());
+              int id = response.body().getId();
+              String tokens = response.body().getToken();
+              Savings.saveToken(tokens);
+              Log.i("token",tokens);
+              navigateToHome();
+            }
+
+            @Override
+            public void onFailure(Call<ModelData> call, Throwable t) {
+                    Log.i("Error", String.valueOf(t));
+            }
+        });
+
+
     }
 
     private void navigateToHome() {
@@ -133,11 +154,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         queryparams.put("email",email);
         queryparams.put("token",token);
 
-        Call<Savings> call = apiInterface.Post(queryparams);
+        Call<Savings> call = apiInterface.savePost(queryparams);
         call.enqueue(new Callback<Savings>() {
             @Override
             public void onResponse(Call<Savings> call, Response<Savings> response) {
                 Log.d("info",token);
+
                 openHome();
             }
 
@@ -153,5 +175,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void openHome() {
        startActivity(new Intent(this,MainActivity.class));
+    }
+
+
+    public static class Request{
+        public String token;
+        public Profile profile;
+        public Request(String token,Profile profile){
+            this.profile = profile;
+            this.token = token;
+        }
+        public static class Profile{
+            public String username;
+            public String name;
+            public int nik;
+            public int avatar;
+            public String address;
+            public int phone;
+            public Profile(String username,String name,int nik,int avatar,String address,int phone){
+                this.username = username;
+                this.name = name;
+                this.nik = nik;
+                this.avatar = avatar;
+                this.address = address;
+                this.phone = phone;
+
+            }
+        }
     }
 }

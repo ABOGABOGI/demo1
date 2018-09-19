@@ -117,7 +117,6 @@ class WithdrawActivity : BaseActivity() {
                         withdrawActivity.mViewModel.amount > 0 &&
                         withdrawActivity.mViewModel.balance >= 0
             }
-            val apiInterface = ApiClient.Unlink()
 
         }
 

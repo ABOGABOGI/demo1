@@ -112,23 +112,23 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun navigateToSignOut() {
-        val apiInterface = ApiClient.Unlink().create(ApiInterface::class.java)
-        val queryparams = HashMap<String, String>()
-        queryparams.put("email", email.toString())
-        queryparams.put("token", token.toString())
-
-        val call = apiInterface.Post(queryparams)
-        call.enqueue(object : Callback<Savings> {
-            override fun onResponse(call: Call<Savings>, response: Response<Savings>) {
-                Log.d("info", token)
-               closeApp()
-            }
-
-            override fun onFailure(call: Call<Savings>, t: Throwable) {
-                Toast.makeText(this@ProfileActivity,
-                        "Error is " + t.message, Toast.LENGTH_LONG).show()
-            }
-        })
+//        val apiInterface = ApiClient.Unlink().create(ApiInterface::class.java)
+//        val queryparams = HashMap<String, String>()
+//        queryparams.put("email", email.toString())
+//        queryparams.put("token", token.toString())
+//
+//        val call = apiInterface.Post(queryparams)
+//        call.enqueue(object : Callback<Savings> {
+//            override fun onResponse(call: Call<Savings>, response: Response<Savings>) {
+//                Log.d("info", token)
+//               closeApp()
+//            }
+//
+//            override fun onFailure(call: Call<Savings>, t: Throwable) {
+//                Toast.makeText(this@ProfileActivity,
+//                        "Error is " + t.message, Toast.LENGTH_LONG).show()
+//            }
+//        })
     }
 
     private fun closeApp() {
