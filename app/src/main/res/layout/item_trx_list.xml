@@ -28,7 +28,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_topup" />
+            app:srcCompat="@drawable/ic_top_up" />
         <TextView
             android:id="@+id/itemAmount"
             android:layout_width="wrap_content"

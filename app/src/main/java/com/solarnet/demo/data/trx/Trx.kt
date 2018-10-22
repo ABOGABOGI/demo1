@@ -38,7 +38,7 @@ class Trx (
 
     fun getIconResource() : Int {
         return when (iconId) {
-            ICON_TOP_UP -> R.drawable.ic_topup
+            ICON_TOP_UP -> R.drawable.ic_top_up
             ICON_SEND_MONEY -> R.drawable.ic_send_money
             ICON_CELULLAR -> R.drawable.ic_cellular
             ICON_PLN -> R.drawable.ic_pln

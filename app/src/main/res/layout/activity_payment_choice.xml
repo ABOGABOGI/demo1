@@ -38,7 +38,7 @@
                                 <ImageView
                                     android:adjustViewBounds="true"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_loan"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:id="@+id/txt_pbb"
@@ -74,14 +74,14 @@
                                 <ImageView
                                     android:adjustViewBounds="true"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_top_up"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:id="@+id/txt_pulsa"
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="@string/pulsa"
+                                    android:text="Top Up"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -110,14 +110,14 @@
                                 <ImageView
                                     android:adjustViewBounds="true"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_call"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:id="@+id/txt_telkom"
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="telkom"
+                                    android:text="Telkom"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -151,7 +151,7 @@
                                 <ImageView
                                     android:adjustViewBounds="true"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/pdam"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:adjustViewBounds="true"
-                                    android:src="@mipmap/ic_launcher" />
+                                    android:src="@drawable/ic_tokenpln" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -227,13 +227,13 @@
                                 <ImageView
                                     android:adjustViewBounds="true"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_plnpospaid"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="pln_pascabayar"
+                                    android:text="PLN pascabayar"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -268,13 +268,13 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_multifinance"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="multifinance"
+                                    android:text="Multifinance"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -304,13 +304,13 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_tvbayar"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="tv_berlangganan"
+                                    android:text="TV berlangganan"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -341,13 +341,13 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_pln_nontag"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="pln_nontaglis"
+                                    android:text="PLN nontaglis"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -382,13 +382,13 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_insurance"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="asuransi"
+                                    android:text="Asuransi"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -418,13 +418,13 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_multifinance"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
-                                    android:text="kartu_kredit"
+                                    android:text="kartu kredit"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -456,7 +456,7 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_loan"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -497,7 +497,7 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_loan"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -533,13 +533,14 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_loan"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textColor="@color/colorPrimary"
                                     android:layout_marginTop="5dp"
                                     android:text="remittance c2c cashout"
+                                    android:textAlignment="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -571,7 +572,7 @@
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop"
                                     android:layout_width="60dp"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/ic_call"
                                     android:layout_height="60dp" />
                                 <TextView
                                     android:layout_width="wrap_content"

@@ -122,7 +122,7 @@ class TrxActivity : AppCompatActivity()  {
     private fun setFragment(trx : Trx) {
         var fragment : Fragment? =
         when (trx.getIconResource()) {
-            R.drawable.ic_topup -> {
+            R.drawable.ic_top_up -> {
                 val jsonData = JSONObject(trx.data)
                 TopUpActivity.ManualFragment.newInstance(
                         TopUpActivity.getBankIcon(jsonData.getString("bankName")),

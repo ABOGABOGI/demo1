@@ -67,7 +67,7 @@ class PaymentGridViewAdapter : BaseAdapter {
             R.drawable.ic_product -> {
                 mContext.startActivity(Intent(mContext, ProductActivity::class.java))
             }
-            R.drawable.ic_topup -> {
+            R.drawable.ic_top_up -> {
                 mContext.startActivity(Intent(mContext, TopUpActivity::class.java))
             }
 

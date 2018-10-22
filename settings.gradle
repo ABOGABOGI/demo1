@@ -1,1 +1,1 @@
-include ':app', ':ppob-debug'
+include ':app', ':ppob-debug', ':ppobs-debug'

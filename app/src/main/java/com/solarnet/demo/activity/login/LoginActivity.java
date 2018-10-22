@@ -58,15 +58,15 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_login);
         findViewById(R.id.btn_submit).setOnClickListener(this);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestIdToken("841360253509-v0e4r5pbqsmpe6cp9e785jh2nu8phepa.apps.googleusercontent.com")
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .requestIdToken("841360253509-v0e4r5pbqsmpe6cp9e785jh2nu8phepa.apps.googleusercontent.com")
+//                .build();
+//
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this, this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
 
 
     }
@@ -75,7 +75,8 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
         int id = v.getId();
         switch (id){
             case R.id.btn_submit:
-                signIn();
+//                signIn();
+                openHome();
                 break;
         }
 

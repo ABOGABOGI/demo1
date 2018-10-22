@@ -68,7 +68,7 @@ class PaymentFragment : Fragment() {
         data.add(GridItem(R.drawable.ic_qr, context!!.resources.getString(R.string.scan_qr)))
         data.add(GridItem(R.drawable.ic_product, context!!.resources.getString(R.string.create_product)))
         data.add(GridItem(R.drawable.ic_agent, context!!.resources.getString(R.string.new_agent)))
-        data.add(GridItem(R.drawable.ic_topup, context!!.resources.getString(R.string.top_up)))
+        data.add(GridItem(R.drawable.ic_top_up, context!!.resources.getString(R.string.top_up)))
 
 //        recyclerView.adapter = PaymentGridAdapter(data)
         var adapter = PaymentGridViewAdapter(context!!, data)
