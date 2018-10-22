@@ -8,6 +8,6 @@ public class APIUtils {
 
     public static ApiInterface getAPIService() {
 
-        return ApiClient.PostAuth(BASE_URL).create(ApiInterface.class);
+        return ApiClient.postAuth(BASE_URL).create(ApiInterface.class);
     }
 }

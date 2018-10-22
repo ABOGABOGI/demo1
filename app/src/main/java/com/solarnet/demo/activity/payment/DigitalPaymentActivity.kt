@@ -5,6 +5,8 @@ import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import com.bumptech.glide.Glide
 import com.solarnet.demo.R
 import com.solarnet.demo.adapter.PaymentGridViewAdapter
@@ -44,7 +46,7 @@ class DigitalPaymentActivity : AppCompatActivity() {
         data.add(GridItem(R.drawable.ic_donation, resources.getString(R.string.donation)))
 
 //        recyclerView.adapter = PaymentGridAdapter(data)
-        var adapter = PaymentGridViewAdapter(this, data)
+        var adapter =PaymentGridViewAdapter(this, data)
         gridView.numColumns = 2
         gridView.adapter = adapter
 

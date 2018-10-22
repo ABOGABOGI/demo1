@@ -39,6 +39,10 @@ public class Savings {
        Hawk.put(Constant.token,token);
     }
 
+    public static void clearToken(){
+       Hawk.delete(Constant.token);
+    }
+
     public static String getAccountName(){
        return  Hawk.get(Constant.account_name);
     }

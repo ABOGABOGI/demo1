@@ -11,11 +11,13 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import com.solarnet.demo.R
 import com.solarnet.demo.activity.payment.*
+import xbizvej.vg.id.ppob.PPOBController
 
 
 class PaymentGridViewAdapter : BaseAdapter {
     private var mData: List<GridItem>
     private var mContext : Context
+    internal lateinit var ppobController: PPOBController
 
     constructor(context : Context, mData: List<GridItem>) : super() {
         this.mData = mData
@@ -51,7 +53,7 @@ class PaymentGridViewAdapter : BaseAdapter {
                 mContext.startActivity(Intent(mContext, SendMoneyActivity::class.java))
             }
             R.drawable.ic_digital -> {
-                mContext.startActivity(Intent(mContext, DigitalPaymentActivity::class.java))
+                mContext.startActivity(Intent(mContext, PaymentChoiceActivity::class.java))
             }
             R.drawable.ic_invoice -> {
                 mContext.startActivity(Intent(mContext, InvoiceActivity::class.java))
@@ -90,4 +92,6 @@ class PaymentGridViewAdapter : BaseAdapter {
     override fun getCount(): Int {
         return mData.size
     }
+
+    //mContext.startActivity(Intent(mContext, PPOBController.PAGE_REMITTANCE_C2A ::class.java))
 }

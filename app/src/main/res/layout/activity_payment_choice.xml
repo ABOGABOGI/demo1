@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_pbb"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:id="@+id/txt_pbb"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="PBB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_pulsa"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:id="@+id/txt_pulsa"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/pulsa"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:id="@+id/btn_telkom"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:id="@+id/txt_telkom"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="telkom"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_pdam"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="PDAM"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:mrl_rippleDelayClick="false">
+
+                        <RelativeLayout
+                            android:id="@+id/btn_pln_prepaid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@mipmap/ic_launcher" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Pln Prepaid"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textColor="@color/colorPrimary" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_pln_pascabayar"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="pln_pascabayar"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_multifinance"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="multifinance"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_tv"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="tv_berlangganan"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:id="@+id/btn_pln_nontaglis"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="pln_nontaglis"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_asuransi"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="asuransi"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_kartu_kredit"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="kartu_kredit"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:id="@+id/btn_remittance_c2a"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Remitance C2A"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_remittance_c2c"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="remittance c2c"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_remittance_c2c_cashout"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="remittance c2c cashout"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="match_parent"
+                        app:mrl_rippleDelayClick="false"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:id="@+id/btn_pulsa_prepaid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop"
+                                    android:layout_width="60dp"
+                                    android:src="@mipmap/ic_launcher"
+                                    android:layout_height="60dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="5dp"
+                                    android:text="pulsa prepaid"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

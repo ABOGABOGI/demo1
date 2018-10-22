@@ -11,8 +11,8 @@ class MyApp : Application() {
     private val PREF_BALANCE = "BALANCE"
     private lateinit var mPref: SharedPreferences
     companion object {
-        //const val URL = "http://10.0.2.2:8000/api/"
-        const val URL = "http://demo.sistemonline.biz.id/public/api/"
+        const val URL = "http://192.168.88.127:10016/"
+//        const val URL = "http://demo.sistemonline.biz.id/public/api/"
         const val DIR = "demo"
         private lateinit var sInstance: MyApp
         val instance: MyApp get() {
@@ -24,8 +24,8 @@ class MyApp : Application() {
 
     }
 
-    val user : String get() = "Demo User"
-    val userToken : String get() = "DEMO01"
+    val user : String get() = Savings.getAccountName()
+    val userToken : String get() = Savings.getToken()
 
     override fun onCreate() {
         super.onCreate()

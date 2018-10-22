@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.auth.api.Auth;
@@ -21,12 +22,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.orhanobut.hawk.Hawk;
+import com.solarnet.demo.AcitivityBase;
 import com.solarnet.demo.MainActivity;
 import com.solarnet.demo.R;
 import com.solarnet.demo.util.APIUtils;
 import com.solarnet.demo.util.ApiClient;
 import com.solarnet.demo.util.ApiInterface;
 import com.solarnet.demo.util.Constant;
+import com.solarnet.demo.util.DoApi;
 import com.solarnet.demo.util.ModelData;
 import com.solarnet.demo.util.Savings;
 import com.solarnet.demo.util.Util;
@@ -38,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AcitivityBase implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener{
 
     private static final int RC_SIGN_IN = 007;
     private GoogleApiClient mGoogleApiClient;
@@ -46,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String email;
     private String token;
     private EditText account_names;
-    private ApiInterface apiInterface;
 
 
 
@@ -55,7 +57,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_login);
-        apiInterface = APIUtils.getAPIService();
         findViewById(R.id.btn_submit).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -117,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.d("NP","TOKENGOOGLE:"+ token);
 //            token = Util.md5(Util.md5(email)+ Constant.SALT);
 //            Log.d("info",token);
-//            Savings.saveToken(token);
+            Savings.saveToken(token);
 
 //            navigateToHome();
             sendRequest(email,token);
@@ -127,50 +128,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void sendRequest(String email, String token) {
-        apiInterface.savePost(email,token).enqueue(new Callback<ModelData>() {
-            @Override
-            public void onResponse(Call<ModelData> call, Response<ModelData> response) {
-                Log.i("Info",response.body().toString());
-              int id = response.body().getId();
-              String tokens = response.body().getToken();
-              Savings.saveToken(tokens);
-              Log.i("token",tokens);
-              navigateToHome();
-            }
 
-            @Override
-            public void onFailure(Call<ModelData> call, Throwable t) {
-                    Log.i("Error", String.valueOf(t));
-            }
-        });
-
-
+    public class ModelLogin{
+        public String email;
+        public String token;
+        public ModelLogin(String email,String token){
+            this.email = email;
+            this.token = token;
+        }
     }
 
-    private void navigateToHome() {
-        ApiInterface apiInterface = ApiClient.PostAuth().create(ApiInterface.class);
-        Map<String,String> queryparams = new HashMap<>();
-        queryparams.put("email",email);
-        queryparams.put("token",token);
-
-        Call<Savings> call = apiInterface.savePost(queryparams);
-        call.enqueue(new Callback<Savings>() {
+    private void sendRequest(String email, final String token) {
+        doApi(DoApi.JSONPOSTOverrideResponse(this, "/user/auth", new ModelLogin(email, token), new DoApi.Listener() {
             @Override
-            public void onResponse(Call<Savings> call, Response<Savings> response) {
-                Log.d("info",token);
-
+            public void onSuccess(String response) {
+                Log.d("Login", response);
+                ResponseLogin responseLogin = new Gson().fromJson(response,ResponseLogin.class);
+                String tokens = responseLogin.token;
+                Log.i("info",tokens);
+                Savings.saveToken(tokens);
                 openHome();
             }
 
             @Override
-            public void onFailure(Call<Savings> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,
-                        "Error is " + t.getMessage()
-                        , Toast.LENGTH_LONG).show();
+            public void onFail(String error) {
+                Log.d("NP", error);
             }
-        });
-
+        },true));
     }
 
     private void openHome() {
@@ -178,10 +162,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    public static class Request{
+//    {"token":"OA==",
+//            "profile":{"username":"dhanangwicaksono6@gmail.com","name":null,"nik":null,"avatar":null,"address":null,"phone":null}}
+
+
+    public static class ResponseLogin{
         public String token;
         public Profile profile;
-        public Request(String token,Profile profile){
+        public ResponseLogin(String token,Profile profile){
             this.profile = profile;
             this.token = token;
         }
@@ -199,7 +187,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 this.avatar = avatar;
                 this.address = address;
                 this.phone = phone;
-
             }
         }
     }

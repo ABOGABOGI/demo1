@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.solarnet.demo.R
-import com.solarnet.demo.util.Savings
 import kotlinx.android.synthetic.main.activity_profil.*
 import kotlinx.android.synthetic.main.icon_list_item.*
 import java.io.ByteArrayOutputStream
@@ -27,17 +26,18 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
+import com.google.gson.Gson
+import com.solarnet.demo.AcitivityBase
 import com.solarnet.demo.MainActivity
 import com.solarnet.demo.activity.login.LoginActivity
-import com.solarnet.demo.util.ApiClient
-import com.solarnet.demo.util.ApiInterface
+import com.solarnet.demo.util.*
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AcitivityBase() {
 
 
     private val SHARED_PREF_NAME = "mysharedpref"
@@ -45,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
     private var url: String? = null
     private var email: String? = null
     private var token: String? = null
+    private var apiInterface: ApiInterface? = null
 
 
 
@@ -112,27 +113,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun navigateToSignOut() {
-//        val apiInterface = ApiClient.Unlink().create(ApiInterface::class.java)
-//        val queryparams = HashMap<String, String>()
-//        queryparams.put("email", email.toString())
-//        queryparams.put("token", token.toString())
-//
-//        val call = apiInterface.Post(queryparams)
-//        call.enqueue(object : Callback<Savings> {
-//            override fun onResponse(call: Call<Savings>, response: Response<Savings>) {
-//                Log.d("info", token)
-//               closeApp()
-//            }
-//
-//            override fun onFailure(call: Call<Savings>, t: Throwable) {
-//                Toast.makeText(this@ProfileActivity,
-//                        "Error is " + t.message, Toast.LENGTH_LONG).show()
-//            }
-//        })
+
     }
 
     private fun closeApp() {
-        finishAffinity()
+
     }
 
 

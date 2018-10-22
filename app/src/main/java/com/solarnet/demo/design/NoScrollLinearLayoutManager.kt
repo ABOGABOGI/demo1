@@ -18,8 +18,7 @@ class NoScrollLinearLayoutManager(context : Context,
     }
 
     @SuppressLint("SwitchIntDef")
-    override fun onMeasure(recycler: RecyclerView.Recycler?, state: RecyclerView.State?,
-                           widthSpec: Int, heightSpec: Int) {
+    override fun onMeasure(recycler: RecyclerView.Recycler, state: RecyclerView.State, widthSpec: Int, heightSpec: Int) {
         val widthMode = View.MeasureSpec.getMode(widthSpec)
         val heightMode = View.MeasureSpec.getMode(heightSpec)
         val widthSize = View.MeasureSpec.getSize(widthSpec)

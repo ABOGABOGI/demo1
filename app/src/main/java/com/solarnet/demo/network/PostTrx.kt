@@ -1,7 +1,6 @@
 package com.solarnet.demo.network
 
 import android.util.Log
-import android.widget.ProgressBar
 import com.solarnet.demo.MyApp
 import com.solarnet.demo.data.contact.Contact
 import com.solarnet.demo.data.trx.Trx
@@ -10,8 +9,6 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import okhttp3.RequestBody
-import android.view.View
-import android.view.MenuItem
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,6 +17,7 @@ class PostTrx(
         private var mToken : String = MyApp.instance.userToken) {
     val JSON = MediaType.parse("application/json; charset=utf-8")
     var isRunning = false
+
 
     interface TrxListener {
         fun onResponse(trx : Trx?)
@@ -42,6 +40,7 @@ class PostTrx(
     private val URL_PRICE = "price"
     private val URL_PAYMENTQR = "payment"
     private val URL_INVOICE = "invoice"
+    private val URL_AUTH = "user/auth/"
 
     var listener : TrxListener? = null
     private val callback : Callback = object : Callback {
@@ -61,6 +60,17 @@ class PostTrx(
             }
         }
     }
+
+//    fun postAuth(email: String?, token: String?, callback: javax.security.auth.callback.Callback) : Boolean{
+//        val url = MyApp.URL + URL_AUTH
+//        val json = JSONObject().apply {
+//            put("email",email)
+//            put("token",token)
+//        }
+//        sendRequest(url, json,callback)
+//        return true
+//
+//    }
 
     fun postPaymentQr(code : String, product : String, amount : Int) : Boolean {
         val url = MyApp.URL + URL_PAYMENTQR
@@ -103,7 +113,6 @@ class PostTrx(
             put("meterNo", meterNo)
             put("amount", amount)
         }
-
         sendRequest(url, json)
         return true
     }
