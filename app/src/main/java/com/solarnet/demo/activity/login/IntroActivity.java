@@ -91,6 +91,12 @@ public class IntroActivity extends AppCompatActivity{
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
+
     private void launchHomeScreen(){
         prefManager.setFirstTimeLaunch(false);
         startActivity(new Intent(IntroActivity.this, MainActivity.class));

@@ -16,12 +16,11 @@ class SplashScreen : AppCompatActivity(){
 
     val handler = Handler()
     val runnable = Runnable {
-//        if(Savings.getAccountName() != null){
-//            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
-//        }else{
-//            startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
-//        }
-        startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
+        if(Savings.getAccountName() != null){
+            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+        }else{
+            startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
+        }
     }
 
     override fun onResume() {

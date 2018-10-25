@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -50,23 +52,21 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
     private String token;
     private EditText account_names;
 
-
-
-
     @Override
     protected void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_login);
-        findViewById(R.id.btn_submit).setOnClickListener(this);
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .requestIdToken("841360253509-v0e4r5pbqsmpe6cp9e785jh2nu8phepa.apps.googleusercontent.com")
-//                .build();
-//
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .enableAutoManage(this, this)
-//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//                .build();
+        ImageButton signButton = findViewById(R.id.btn_submit);
+        signButton.setOnClickListener(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken("841360253509-v0e4r5pbqsmpe6cp9e785jh2nu8phepa.apps.googleusercontent.com")
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
 
     }
@@ -75,8 +75,8 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
         int id = v.getId();
         switch (id){
             case R.id.btn_submit:
-//                signIn();
-                openHome();
+           signIn();
+//                openHome();
                 break;
         }
 
@@ -122,7 +122,8 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
             Savings.saveToken(token);
 
 //            navigateToHome();
-            sendRequest(email,token);
+//            sendRequest(email,token);
+            LoginRequest(email,token);
 
         }else{
             Log.d("Error","cant sign in");
@@ -139,10 +140,22 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
         }
     }
 
-    private void sendRequest(String email, final String token) {
-        doApi(DoApi.JSONPOSTOverrideResponse(this, "/user/auth", new ModelLogin(email, token), new DoApi.Listener() {
+    private void openHome() {
+       startActivity(new Intent(this,MainActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    private void LoginRequest(String email,final String token){
+        if(isLoading)return;
+        showLoading(true);
+        doApi(DoApi.JSONPOST(this, "/user/auth", new ModelLogin(email, token), new DoApi.Listener() {
             @Override
             public void onSuccess(String response) {
+                showLoading(false);
                 Log.d("Login", response);
                 ResponseLogin responseLogin = new Gson().fromJson(response,ResponseLogin.class);
                 String tokens = responseLogin.token;
@@ -154,12 +167,10 @@ public class LoginActivity extends AcitivityBase implements View.OnClickListener
             @Override
             public void onFail(String error) {
                 Log.d("NP", error);
+                showLoading(false);
+                finish();
             }
-        },true));
-    }
-
-    private void openHome() {
-       startActivity(new Intent(this,MainActivity.class));
+        }));
     }
 
 

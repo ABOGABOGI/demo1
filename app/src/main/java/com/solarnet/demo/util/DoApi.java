@@ -31,14 +31,14 @@ public class DoApi {
     public static class Req {
         public Object req;
         //        public String trxid;
-//        public String token;
+        public String token;
         public Req(Object req){
             HashMap<String,String> hashMap = new Gson().fromJson(new Gson().toJson(req),new TypeToken<HashMap<String,String>>(){}.getType());
             hashMap.put("token",Savings.getToken());
 //            hashMap.put("trxid",Util.trxiIDGenerator());
             this.req = hashMap;
 //            this.trxid = Util.trxiIDGenerator();
-//            this.token = Savings.getToken();
+            this.token = Savings.getToken();
 //            this.token = "29cd7a264034a0d58f982274124f8596";
         }
     }

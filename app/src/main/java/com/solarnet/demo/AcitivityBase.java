@@ -7,16 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.solarnet.demo.util.DoApi;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import xbizvej.vg.id.ppob.util.Generic;
+
 public abstract class AcitivityBase extends AppCompatActivity {
 
 
     RequestQueue requestQueue;
+    protected boolean isLoading = false;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -63,6 +68,18 @@ public abstract class AcitivityBase extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         requestQueue.cancelAll(this.getClass().getSimpleName());
+    }
+
+    protected MaterialDialog loadingDialog;
+
+    protected void showLoading(boolean isShow) {
+        if(isShow){
+            isLoading = true;
+            loadingDialog = Generic.showLoading(this);
+        }else{
+            if(loadingDialog!=null&&loadingDialog.isShowing())loadingDialog.dismiss();
+            isLoading = false;
+        }
     }
 
 }
