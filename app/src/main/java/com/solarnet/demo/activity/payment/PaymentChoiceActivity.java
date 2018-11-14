@@ -1,5 +1,6 @@
 package com.solarnet.demo.activity.payment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.solarnet.demo.R;
+import com.solarnet.demo.activity.TrxActivity;
 import com.solarnet.demo.adapter.SlidingImage_Adapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -35,6 +37,9 @@ public class PaymentChoiceActivity extends AppCompatActivity implements View.OnC
     RelativeLayout btn_remittance_c2c;
     RelativeLayout btn_remittance_c2c_cashout;
     PPOBController ppobController;
+
+    String name;
+
 
     private static ViewPager mPager;
     private static int currentPage = 0;
@@ -79,6 +84,8 @@ public class PaymentChoiceActivity extends AppCompatActivity implements View.OnC
         btn_remittance_c2c.setOnClickListener(this);
         btn_remittance_c2c_cashout.setOnClickListener(this);
 
+
+
         init();
 
     }
@@ -91,6 +98,8 @@ public class PaymentChoiceActivity extends AppCompatActivity implements View.OnC
 
 
         mPager.setAdapter(new SlidingImage_Adapter(PaymentChoiceActivity.this,ImagesArray));
+
+
 
 
         CirclePageIndicator indicator =
@@ -197,4 +206,7 @@ public class PaymentChoiceActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
+
+
 }

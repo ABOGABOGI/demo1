@@ -72,14 +72,10 @@ class PaymentGridViewAdapter : BaseAdapter {
             R.drawable.ic_top_up -> {
                 mContext.startActivity(Intent(mContext, TopUpActivity::class.java))
             }
+            R.drawable.ic_agent->{
+                mContext.startActivity(Intent(mContext, LoanActivity::class.java))
+            }
 
-            //digital payment part
-            R.drawable.ic_cellular -> {
-                mContext.startActivity(Intent(mContext, CellularActivity::class.java))
-            }
-            R.drawable.ic_pln -> {
-                mContext.startActivity(Intent(mContext, PLNActivity::class.java))
-            }
         }
     }
 

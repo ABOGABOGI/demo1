@@ -32,14 +32,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Amount    :"
+            android:text="Biaya        :"
             android:textColor="@android:color/black"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Rp. 1000"
+            android:text="Rp. 50.000"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Amount    :"
+            android:text="Admin fee:"
             android:textColor="@android:color/black"/>
 
         <TextView
@@ -79,14 +79,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Amount    :"
+            android:text="Total Bayar:"
             android:textColor="@android:color/black"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Rp. 1000"
+            android:text="Rp. 51.000"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="close"/>
+            android:text="Confirm"/>
 
     </LinearLayout>
 

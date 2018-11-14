@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.TrxActivity"
+    tools:showIn="@layout/activity_trx"
+>
+<LinearLayout
+    android:id="@+id/content_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_send_money"
+        android:paddingBottom="@dimen/activity_view_vspacing"
+        />
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/imageIcon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Loan Success"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textAmounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Rp. 10.000"
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
+        android:paddingBottom="@dimen/activity_view_double_vspacing" />
+
+    <View
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/textAmount"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:id="@+id/text_label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message"
+        android:textColor="@color/colorPrimary"
+        />
+    <TextView
+        android:id="@+id/textMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transaksi berhasil dilakukan!"
+        android:textColor="@android:color/black"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rec_box_content"
+        />
+
+    <TextView
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:id="@+id/text_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/status"
+        android:textColor="@color/colorPrimary"
+        />
+    <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Successful"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:id="@+id/text_label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transaction_id"
+        android:textColor="@color/colorPrimary"
+        />
+    <TextView
+        android:id="@+id/textTransactionId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1234-1234-1234-1234"
+        android:textColor="@android:color/black"
+        />
+
+
+    <TextView
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:id="@+id/text_label4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textColor="@color/colorPrimary"
+        />
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12 Juni 2018 20:15:00 WIB"
+        android:textColor="@android:color/black"
+        />
+
+    <Button
+        android:id="@+id/confirm_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:paddingTop="@dimen/activity_view_double_vspacing"
+        android:layout_marginTop="50dp"/>
+
+</LinearLayout>
+</LinearLayout>

@@ -219,6 +219,14 @@
             android:label="@string/digital_payment"
             android:theme="@style/AppTheme"></activity>
 
+        <activity android:name=".activity.payment.LoanActivity"
+            android:label="Loan"
+            android:theme="@style/AppTheme"></activity>
+
+        <activity android:name=".activity.payment.LoanConfirm"
+            android:label="Loan"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
