@@ -87,8 +87,7 @@
             app:cardBackgroundColor="@color/backgroundPayment"
             app:cardElevation="0dp"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            >
+            android:foreground="?android:attr/selectableItemBackground">
             <TextView
                 android:id="@+id/textViewAll"
                 android:layout_width="match_parent"

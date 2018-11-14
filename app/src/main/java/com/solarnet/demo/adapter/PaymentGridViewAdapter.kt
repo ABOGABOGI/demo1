@@ -1,5 +1,6 @@
 package com.solarnet.demo.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -17,6 +18,7 @@ import xbizvej.vg.id.ppob.PPOBController
 class PaymentGridViewAdapter : BaseAdapter {
     private var mData: List<GridItem>
     private var mContext : Context
+    private lateinit var actiivity : Activity
     internal lateinit var ppobController: PPOBController
 
     constructor(context : Context, mData: List<GridItem>) : super() {

@@ -29,6 +29,7 @@ import com.solarnet.demo.data.util.Utils
 import android.widget.Toast
 import com.solarnet.demo.design.NoScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_payment.*
+import xbizvej.vg.id.ppob.PPOBController
 import java.util.*
 
 
@@ -41,6 +42,7 @@ class PaymentFragment : Fragment() {
     private lateinit var mTrxListAdapter: TrxListAdapter
     private lateinit var textBalance: TextView
     private lateinit var checkbalance: ImageButton
+    internal lateinit var ppobController: PPOBController;
 
     // Store instance variables based on arguments passed
     // newInstance constructor for creating fragment with arguments
@@ -58,6 +60,7 @@ class PaymentFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_payment, container, false)
+        ppobController = PPOBController()
 
         var data = ArrayList<GridItem>()
         data.add(GridItem(R.drawable.ic_send_money, context!!.resources.getString(R.string.send_money)))

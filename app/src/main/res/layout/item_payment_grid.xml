@@ -24,13 +24,14 @@
     android:clickable="true"
         >
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_send_money"
             android:id="@+id/itemIcon"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="false"
             android:focusable="false"
+            android:scaleType="fitXY"
             android:focusableInTouchMode="false"
             />
         <TextView
