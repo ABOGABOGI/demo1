@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.solarnet.demo">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name=".util.Wiko"
+            android:noHistory="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -29,6 +31,18 @@
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
+        <activity android:name=".SplashScreen"/>
+        <!--<activity-->
+            <!--android:name=".SplashScreen"-->
+            <!--android:label="@string/app_name"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme.NoActionBar">-->
+
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
+        <!--</activity>-->
 
         <activity android:name="xbizvej.vg.id.ppob.ActivityPPOBTransaction" android:screenOrientation="portrait"/>
 
